@@ -36,6 +36,8 @@ export type Dictionary = {
     latestPosts: string;
     allPosts: string;
     email: string;
+    sectionsAriaLabel: string;
+    sections: { about: string; posts: string; skills: string };
     skills: Record<"languages" | "platform" | "devsecops" | "cloud" | "data_ai", string>;
   };
   blog: {
@@ -74,6 +76,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       latestPosts: "Latest posts",
       allPosts: "all posts",
       email: "Email",
+      sectionsAriaLabel: "Page sections",
+      sections: { about: "About", posts: "Posts", skills: "Skills" },
       skills: {
         languages: "Languages",
         platform: "Platform",
@@ -146,6 +150,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       latestPosts: "Últimos posts",
       allPosts: "todos os posts",
       email: "E-mail",
+      sectionsAriaLabel: "Seções da página",
+      sections: { about: "Sobre", posts: "Posts", skills: "Competências" },
       skills: {
         languages: "Linguagens",
         platform: "Plataforma",
