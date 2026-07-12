@@ -17,11 +17,21 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           {new Date().getFullYear()} {about.name}. {t.footer.rightsReserved}
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <a href={about.links.github} className={LINK_CLASS}>
+          <a
+            href={about.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={LINK_CLASS}
+          >
             <FaGithub aria-hidden className={ICON_CLASS} />
             GitHub
           </a>
-          <a href={about.links.linkedin} className={LINK_CLASS}>
+          <a
+            href={about.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={LINK_CLASS}
+          >
             <FaLinkedin aria-hidden className={ICON_CLASS} />
             LinkedIn
           </a>

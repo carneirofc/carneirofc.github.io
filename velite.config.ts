@@ -4,6 +4,34 @@ import { defineCollection, defineConfig, s } from "velite";
 // is Brazilian Portuguese. Translations share the same base slug.
 const LOCALE_SUFFIX = /\.pt-br$/;
 
+const EXTERNAL_HREF = /^https?:\/\//;
+
+type HastNode = {
+  type: string;
+  tagName?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+};
+
+// External links in MDX content open in a new tab.
+function rehypeExternalLinksNewTab() {
+  return (tree: HastNode) => {
+    const visit = (node: HastNode) => {
+      if (
+        node.type === "element" &&
+        node.tagName === "a" &&
+        typeof node.properties?.href === "string" &&
+        EXTERNAL_HREF.test(node.properties.href)
+      ) {
+        node.properties.target = "_blank";
+        node.properties.rel = ["noopener", "noreferrer"];
+      }
+      node.children?.forEach(visit);
+    };
+    visit(tree);
+  };
+}
+
 const posts = defineCollection({
   name: "Post",
   pattern: "blog/**/*.mdx",
@@ -70,5 +98,5 @@ export default defineConfig({
   },
   collections: { posts, abouts },
   // Links in MDX are site routes, not files to copy into public/static.
-  mdx: { copyLinkedFiles: false },
+  mdx: { copyLinkedFiles: false, rehypePlugins: [rehypeExternalLinksNewTab] },
 });
