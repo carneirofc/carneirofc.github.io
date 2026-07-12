@@ -1,5 +1,9 @@
 import { defineCollection, defineConfig, s } from "velite";
 
+// Locale is derived from the filename: `foo.mdx` is English, `foo.pt-br.mdx`
+// is Brazilian Portuguese. Translations share the same base slug.
+const LOCALE_SUFFIX = /\.pt-br$/;
+
 const posts = defineCollection({
   name: "Post",
   pattern: "blog/**/*.mdx",
@@ -16,36 +20,44 @@ const posts = defineCollection({
       content: s.mdx(),
     })
     .transform((data) => {
-      const slug = data.path.replace(/^blog\//, "");
-      return { ...data, slug, permalink: `/blog/${slug}/` };
+      const raw = data.path.replace(/^blog\//, "");
+      const locale = LOCALE_SUFFIX.test(raw) ? ("pt-br" as const) : ("en" as const);
+      const slug = raw.replace(LOCALE_SUFFIX, "");
+      const permalink = locale === "en" ? `/blog/${slug}/` : `/pt-br/blog/${slug}/`;
+      return { ...data, locale, slug, permalink };
     }),
 });
 
-const about = defineCollection({
+const abouts = defineCollection({
   name: "About",
-  pattern: "about.mdx",
-  single: true,
-  schema: s.object({
-    title: s.string(),
-    name: s.string(),
-    role: s.string(),
-    headline: s.string(),
-    location: s.string(),
-    email: s.string(),
-    links: s.object({
-      github: s.string().url(),
-      linkedin: s.string().url(),
-      projects: s.string().url(),
-    }),
-    skills: s.object({
-      languages: s.array(s.string()),
-      platform: s.array(s.string()),
-      devsecops: s.array(s.string()),
-      cloud: s.array(s.string()),
-      data_ai: s.array(s.string()),
-    }),
-    content: s.mdx(),
-  }),
+  pattern: "about*.mdx",
+  schema: s
+    .object({
+      title: s.string(),
+      name: s.string(),
+      role: s.string(),
+      headline: s.string(),
+      location: s.string(),
+      email: s.string(),
+      links: s.object({
+        github: s.string().url(),
+        linkedin: s.string().url(),
+        projects: s.string().url(),
+      }),
+      skills: s.object({
+        languages: s.array(s.string()),
+        platform: s.array(s.string()),
+        devsecops: s.array(s.string()),
+        cloud: s.array(s.string()),
+        data_ai: s.array(s.string()),
+      }),
+      path: s.path(),
+      content: s.mdx(),
+    })
+    .transform((data) => ({
+      ...data,
+      locale: LOCALE_SUFFIX.test(data.path) ? ("pt-br" as const) : ("en" as const),
+    })),
 });
 
 export default defineConfig({
@@ -57,7 +69,7 @@ export default defineConfig({
     name: "[name]-[hash:6].[ext]",
     clean: true,
   },
-  collections: { posts, about },
+  collections: { posts, abouts },
   // Links in MDX are site routes, not files to copy into public/static.
   mdx: { copyLinkedFiles: false },
 });
