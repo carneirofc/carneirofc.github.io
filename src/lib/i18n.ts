@@ -102,8 +102,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           name: "deedlit.dev",
           description:
             "Personal creative space — AI-generated art gallery, book library, and hobby projects. Next.js, self-hosted, powered by the same design system as this site.",
-          href: "https://deedlit.dev",
-          linkLabel: "Visit deedlit.dev",
+          href: "https://github.com/carneirofc/deedlit.dev",
+          linkLabel: "Source on GitHub",
         },
         {
           name: "@carneirofc/ui",
@@ -175,8 +175,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
           name: "deedlit.dev",
           description:
             "Espaço criativo pessoal — galeria de arte gerada por IA, biblioteca de livros e projetos de hobby. Next.js, self-hosted, com o mesmo design system deste site.",
-          href: "https://deedlit.dev",
-          linkLabel: "Visitar deedlit.dev",
+          href: "https://github.com/carneirofc/deedlit.dev",
+          linkLabel: "Código no GitHub",
         },
         {
           name: "@carneirofc/ui",
