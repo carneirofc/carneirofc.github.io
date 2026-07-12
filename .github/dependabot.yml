@@ -1,13 +1,9 @@
+# npm updates are intentionally absent: Dependabot cannot resolve the
+# file:../deedlit.dev/deedlit.dev.ui dependency (the sibling repo is not
+# available in its environment), so npm update jobs always fail. npm deps are
+# updated manually; GitHub security alerts still fire for the lockfile.
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: "/"
-    schedule:
-      interval: weekly
-    groups:
-      minor-and-patch:
-        update-types: ["minor", "patch"]
-
   - package-ecosystem: github-actions
     directory: "/"
     schedule:

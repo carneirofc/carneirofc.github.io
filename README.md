@@ -77,7 +77,9 @@ sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev`, run
 `npm install` here (refreshes `package-lock.json`), update `DEEDLIT_REF` to the
 new sha, and commit both.
 
-`codeql.yml` (SAST) and Dependabot round out the security tooling.
+`codeql.yml` (SAST) and Dependabot (GitHub Actions updates only — Dependabot
+cannot resolve the sibling `file:` dependency, so npm bumps are manual;
+security _alerts_ for npm still fire) round out the security tooling.
 
 ### One-time repo setup
 

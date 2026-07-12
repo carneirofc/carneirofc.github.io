@@ -84,6 +84,13 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
+      # The UI sources resolve their runtime deps (radix-ui, cva, …) from
+      # their own tree, exactly as in local development. React stays a single
+      # copy via the aliases in next.config.ts. --legacy-peer-deps skips
+      # installing the react peer so no second copy exists at all.
+      - name: Install @carneirofc/ui runtime dependencies
+        run: npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
+        working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
