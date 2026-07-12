@@ -43,10 +43,10 @@ jobs:
       - run: npm ci
       # npm does not install dependencies of linked (file:) packages, so the
       # UI's runtime deps must exist in its own tree for tsc/next to resolve.
-      # --legacy-peer-deps skips the react peer — react stays a single copy
-      # pinned to this repo via next.config.ts aliases + tsconfig paths.
+      # React identity is unaffected: Next's App Router uses its vendored
+      # React, and next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
-        run: npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
+        run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run velite
       - run: npx prettier --check .
@@ -92,11 +92,11 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - run: npm ci
       # The UI sources resolve their runtime deps (radix-ui, cva, …) from
-      # their own tree, exactly as in local development. React stays a single
-      # copy via the aliases in next.config.ts. --legacy-peer-deps skips
-      # installing the react peer so no second copy exists at all.
+      # their own tree, exactly as in local development. React identity is
+      # unaffected: Next's App Router uses its vendored React, and
+      # next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
-        run: npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
+        run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run build
       - uses: actions/configure-pages@v5
