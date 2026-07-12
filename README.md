@@ -56,6 +56,16 @@ npm run format     # prettier --write
 - **The about/home page** is driven by `content/about.mdx` (bio, role, links,
   skills).
 
+### Languages (en / pt-BR)
+
+English lives at the site root; Brazilian Portuguese mirrors every route under
+`/pt-br/`. Locale is derived from the filename: `foo.mdx` is English,
+`foo.pt-br.mdx` is Portuguese, and translations share the base slug
+(`hello-world.mdx` + `hello-world.pt-br.mdx` become `/blog/hello-world/` and
+`/pt-br/blog/hello-world/`, cross-linked via hreflang). UI strings live in
+`src/lib/i18n.ts`. Publish every post in **both** languages — the header
+language switch maps paths 1:1, so a missing translation lands on a 404.
+
 ## Git hooks (Lefthook)
 
 `pre-commit` runs Prettier, ESLint, `tsc`, a gitleaks scan, and **strips all

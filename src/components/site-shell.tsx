@@ -1,10 +1,9 @@
-import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Sora } from "next/font/google";
-import { about } from "#site/content";
+import { htmlLang, type Locale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
-import "./globals.css";
+import "@/app/globals.css";
 
 const themeInitScript = `
 (() => {
@@ -31,51 +30,9 @@ const mono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://carneirofc.github.io"),
-  title: {
-    default: `${about.name} | carneirofc`,
-    template: "%s | carneirofc",
-  },
-  description: about.headline,
-  authors: [{ name: about.name, url: about.links.github }],
-  creator: about.name,
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    type: "website",
-    url: "https://carneirofc.github.io",
-    title: `${about.name} — ${about.role}`,
-    description: about.headline,
-    siteName: "carneirofc.github.io",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary",
-    title: `${about.name} — ${about.role}`,
-    description: about.headline,
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7fa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0c13" },
-  ],
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export function SiteShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={htmlLang[locale]} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
@@ -83,11 +40,11 @@ export default function RootLayout({
         className={`${display.variable} ${mono.variable} font-[var(--font-display)] antialiased`}
       >
         <ThemeToggle />
-        <SiteHeader />
+        <SiteHeader locale={locale} />
         <main className="mx-auto w-full max-w-4xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
           {children}
         </main>
-        <SiteFooter />
+        <SiteFooter locale={locale} />
       </body>
     </html>
   );

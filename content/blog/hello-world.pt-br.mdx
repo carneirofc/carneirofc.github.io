@@ -1,0 +1,50 @@
+---
+title: Olá, mundo
+date: 2026-07-12
+tags: [meta, nextjs, velite]
+excerpt: >-
+  O obrigatório primeiro post — o que é este site, o que o move por baixo dos
+  panos e por que o pipeline remove os dados EXIF de toda imagem antes que ela
+  possa sequer ser commitada.
+---
+
+Todo blog precisa de um primeiro post, e este é sobre o próprio blog.
+
+## A stack
+
+Este site é intencionalmente "sem graça", no melhor sentido:
+
+- **Next.js** com `output: "export"` — tudo é pré-renderizado em HTML/CSS/JS
+  puro no momento do build. Sem servidores, sem runtime, nada para corrigir às
+  3 da manhã.
+- **[Velite](https://velite.js.org)** transforma `content/blog/*.mdx` em um
+  índice de posts tipado e validado com Zod. Um campo malformado no frontmatter
+  quebra o build em vez de publicar uma página quebrada.
+- **`@carneirofc/ui`** — o mesmo design system que move o
+  [deedlit.dev](https://deedlit.dev), então os dois sites compartilham uma única
+  linguagem visual.
+- **GitHub Pages** via GitHub Actions: um job de checks (ESLint, Prettier,
+  `tsc`, Gitleaks, auditoria de metadados de mídia) bloqueia o job de deploy.
+  Check vermelho, sem deploy.
+
+## A parte paranoica
+
+A parte com que eu realmente me importo: **nenhuma imagem ou vídeo é commitado
+com seus metadados intactos.** Um hook de pre-commit executa
+
+```sh
+exiftool -all= -overwrite_original <mídia em stage>
+```
+
+e refaz o stage do arquivo limpo, de modo que coordenadas de GPS, seriais de
+dispositivo e timestamps nunca cheguem ao histórico do git. Como hooks podem ser
+contornados com `--no-verify`, a CI roda um script de segurança que quebra o
+build se qualquer mídia rastreada ainda carregar tags sensíveis. Defesa em
+profundidade, mesmo para um blog.
+
+## O que vem por aí
+
+Notas sobre engenharia de plataforma, DevSecOps e o que eu estiver construindo —
+sistemas de controle no passado, Backstage e pipelines de CI/CD no presente,
+ferramentas aumentadas por IA no futuro. Veja a [página sobre](/pt-br/) para a
+história completa.
