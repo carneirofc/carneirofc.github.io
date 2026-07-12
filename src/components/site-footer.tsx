@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { LuGlobe, LuMail } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
@@ -24,10 +24,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
           <a href={about.links.linkedin} className={LINK_CLASS}>
             <FaLinkedin aria-hidden className={ICON_CLASS} />
             LinkedIn
-          </a>
-          <a href={about.links.projects} className={LINK_CLASS}>
-            <LuGlobe aria-hidden className={ICON_CLASS} />
-            deedlit.dev
           </a>
           <a href={`mailto:${about.email}`} className={LINK_CLASS}>
             <LuMail aria-hidden className={ICON_CLASS} />

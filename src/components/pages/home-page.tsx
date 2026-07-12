@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { LuGlobe, LuMail } from "react-icons/lu";
+import { LuMail } from "react-icons/lu";
 import {
   ChevronRightIcon,
   InfoChip,
@@ -47,12 +47,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           <a href={about.links.linkedin}>
             <FaLinkedin aria-hidden className={BUTTON_ICON} />
             LinkedIn
-          </a>
-        </OutlineButton>
-        <OutlineButton asChild controlSize="md">
-          <a href={about.links.projects}>
-            <LuGlobe aria-hidden className={BUTTON_ICON} />
-            deedlit.dev
           </a>
         </OutlineButton>
         <OutlineButton asChild variant="ghost" controlSize="md">

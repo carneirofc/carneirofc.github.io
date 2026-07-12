@@ -42,7 +42,6 @@ const abouts = defineCollection({
       links: s.object({
         github: s.string().url(),
         linkedin: s.string().url(),
-        projects: s.string().url(),
       }),
       skills: s.object({
         languages: s.array(s.string()),
