@@ -1,0 +1,44 @@
+---
+title: Hello, world
+date: 2026-07-12
+tags: [meta, nextjs, velite]
+excerpt: >-
+  The obligatory first post — what this site is, what powers it, and why the
+  pipeline scrubs EXIF data off every image before it can ever be committed.
+---
+
+Every blog needs a first post, and this one is about the blog itself.
+
+## The stack
+
+This site is intentionally boring in the best way:
+
+- **Next.js** with `output: "export"` — everything is prerendered to plain
+  HTML/CSS/JS at build time. No servers, no runtime, nothing to patch at 3am.
+- **[Velite](https://velite.js.org)** turns `content/blog/*.mdx` into a typed,
+  Zod-validated post index. A malformed frontmatter field fails the build
+  instead of shipping a broken page.
+- **`@carneirofc/ui`** — the same design system that powers
+  [deedlit.dev](https://deedlit.dev), so both sites share one visual language.
+- **GitHub Pages** via GitHub Actions: a checks job (ESLint, Prettier, `tsc`,
+  Gitleaks, a media-metadata audit) gates the deploy job. Red check, no deploy.
+
+## The paranoid part
+
+The part I actually care about: **no image or video gets committed with its
+metadata intact.** A pre-commit hook runs
+
+```sh
+exiftool -all= -overwrite_original <staged media>
+```
+
+and re-stages the stripped file, so GPS coordinates, device serials, and
+timestamps never make it into git history. Because hooks can be bypassed with
+`--no-verify`, CI runs a safety-net script that fails the build if any tracked
+media still carries privacy-relevant tags. Defense in depth, even for a blog.
+
+## What's next
+
+Notes on platform engineering, DevSecOps, and whatever I'm building — control
+systems past, Backstage and CI/CD pipelines present, AI-augmented tooling
+future. See the [about page](/) for the longer story.
