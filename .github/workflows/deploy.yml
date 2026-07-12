@@ -41,6 +41,13 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
+      # npm does not install dependencies of linked (file:) packages, so the
+      # UI's runtime deps must exist in its own tree for tsc/next to resolve.
+      # --legacy-peer-deps skips the react peer — react stays a single copy
+      # pinned to this repo via next.config.ts aliases + tsconfig paths.
+      - name: Install @carneirofc/ui runtime dependencies
+        run: npm install --omit=dev --legacy-peer-deps --no-audit --no-fund
+        working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run velite
       - run: npx prettier --check .
       - run: npx eslint .

@@ -7,17 +7,11 @@ import type { NextConfig } from "next";
 const UI_SRC = "../deedlit.dev/deedlit.dev.ui/src/index.ts";
 const UI_STYLES = "../deedlit.dev/deedlit.dev.ui/styles/styles.css";
 
-// The UI sources live outside this repo, so their bare imports would resolve
-// against deedlit.dev's node_modules (or nothing, in CI). Pin every package
-// the UI imports to THIS repo's node_modules — one React copy, everywhere.
-const SHARED_PACKAGES = [
-  "react",
-  "react-dom",
-  "radix-ui",
-  "class-variance-authority",
-  "clsx",
-  "tailwind-merge",
-];
+// The UI sources live outside this repo, so their bare imports resolve
+// against the deedlit.dev tree (npm never installs dependencies of linked
+// packages here). That is fine for its stateless runtime deps (radix-ui,
+// cva, …), but React must be a single copy — pin it to THIS repo.
+const SHARED_PACKAGES = ["react", "react-dom"];
 
 const nextConfig: NextConfig = {
   output: "export",
