@@ -1,0 +1,7 @@
+node_modules
+.next
+out
+.velite
+public/static
+package-lock.json
+next-env.d.ts

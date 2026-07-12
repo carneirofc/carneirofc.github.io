@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# next.js
+/.next/
+/out/
+
+# velite
+/.velite/
+/public/static/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.env
+.env.*
+
+# typescript
+*.tsbuildinfo
