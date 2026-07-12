@@ -1,0 +1,35 @@
+# Local quality + privacy gates. CI re-runs all of these (deploy.yml), so
+# bypassing with --no-verify only delays the failure.
+pre-commit:
+  parallel: true
+  jobs:
+    - name: prettier
+      glob: "*.{ts,tsx,js,jsx,mjs,css,md,mdx,json,yml,yaml}"
+      exclude:
+        - package-lock.json
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+
+    - name: eslint
+      glob: "*.{ts,tsx,js,jsx,mjs}"
+      run: npx eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+
+    - name: typecheck
+      glob: "*.{ts,tsx}"
+      run: npx tsc --noEmit
+
+    # Strip ALL metadata (GPS, device, timestamps) from staged media, lossless,
+    # and re-stage the clean file. Requires exiftool (see README).
+    - name: strip-media-metadata
+      glob: "*.{jpg,jpeg,png,webp,heic,heif,tiff,gif,mp4,mov,m4v,mkv,avi,webm}"
+      run: exiftool -all= -overwrite_original {staged_files}
+      stage_fixed: true
+
+    - name: gitleaks
+      run: |
+        if command -v gitleaks >/dev/null 2>&1; then
+          gitleaks protect --staged --redact --no-banner
+        else
+          echo "warning: gitleaks not installed — skipping local secret scan (CI enforces it)"
+        fi
