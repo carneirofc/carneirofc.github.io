@@ -49,13 +49,13 @@ export function HomePage({ locale }: { locale: Locale }) {
 
         <div className="flex flex-wrap gap-3">
           <OutlineButton asChild variant="accent" controlSize="md">
-            <a href={about.links.github}>
+            <a href={about.links.github} target="_blank" rel="noopener noreferrer">
               <FaGithub aria-hidden className={BUTTON_ICON} />
               GitHub
             </a>
           </OutlineButton>
           <OutlineButton asChild controlSize="md">
-            <a href={about.links.linkedin}>
+            <a href={about.links.linkedin} target="_blank" rel="noopener noreferrer">
               <FaLinkedin aria-hidden className={BUTTON_ICON} />
               LinkedIn
             </a>

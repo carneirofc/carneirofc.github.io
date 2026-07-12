@@ -54,7 +54,14 @@ export function ContactPage({ locale }: { locale: Locale }) {
               </p>
               <div>
                 <OutlineButton asChild controlSize="sm">
-                  <a href={channel.href}>{channel.cta}</a>
+                  <a
+                    href={channel.href}
+                    {...(channel.href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {channel.cta}
+                  </a>
                 </OutlineButton>
               </div>
             </div>
