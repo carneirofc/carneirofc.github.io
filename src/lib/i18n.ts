@@ -39,6 +39,8 @@ export type Dictionary = {
     featuredProjects: string;
     allProjects: string;
     email: string;
+    sectionsAriaLabel: string;
+    sections: { intro: string; posts: string; projects: string };
   };
   about: {
     subtitle: string;
@@ -86,6 +88,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       featuredProjects: "Projects",
       allProjects: "all projects",
       email: "Email",
+      sectionsAriaLabel: "Page sections",
+      sections: { intro: "Intro", posts: "Posts", projects: "Projects" },
     },
     about: {
       subtitle: "carneirofc // about",
@@ -195,6 +199,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
       featuredProjects: "Projetos",
       allProjects: "todos os projetos",
       email: "E-mail",
+      sectionsAriaLabel: "Seções da página",
+      sections: { intro: "Introdução", posts: "Posts", projects: "Projetos" },
     },
     about: {
       subtitle: "carneirofc // sobre",

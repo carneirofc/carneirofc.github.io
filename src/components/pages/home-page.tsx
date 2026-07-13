@@ -6,6 +6,7 @@ import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAbout, getAllPosts } from "@/lib/posts";
 import { MetaDot, PostCard } from "@/components/post-card";
 import { ProjectCard } from "@/components/project-card";
+import { SectionNav, type SectionNavItem } from "@/components/section-nav";
 
 const BUTTON_ICON = "h-3.5 w-3.5 shrink-0";
 const SECTION_LINK =
@@ -20,9 +21,17 @@ export function HomePage({ locale }: { locale: Locale }) {
   const latestPosts = getAllPosts(locale).slice(0, 3);
   const featuredProjects = t.projects.entries.slice(0, FEATURED_PROJECTS);
 
+  const sections: SectionNavItem[] = [
+    { href: "#intro", label: t.home.sections.intro, icon: "home" },
+    { href: "#posts", label: t.home.sections.posts, icon: "posts" },
+    { href: "#projects", label: t.home.sections.projects, icon: "projects" },
+  ];
+
   return (
     <div className="flex flex-col gap-12">
-      <section className="flex flex-col gap-6">
+      <SectionNav items={sections} ariaLabel={t.home.sectionsAriaLabel} />
+
+      <section id="intro" className="section-anchor flex flex-col gap-6">
         <PageHeader subtitle={t.home.subtitle} title={about.name} description={about.headline} />
 
         <div className="cyber-muted flex flex-wrap items-center gap-2 text-ui-sm">
@@ -63,7 +72,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       </section>
 
       {latestPosts.length > 0 && (
-        <section className="flex flex-col gap-4">
+        <section id="posts" className="section-anchor flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <SectionLabel>{t.home.latestPosts}</SectionLabel>
             <Link href={localePath(locale, "/blog/")} className={SECTION_LINK}>
@@ -79,7 +88,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
       )}
 
-      <section className="flex flex-col gap-4">
+      <section id="projects" className="section-anchor flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <SectionLabel>{t.home.featuredProjects}</SectionLabel>
           <Link href={localePath(locale, "/projects/")} className={SECTION_LINK}>
