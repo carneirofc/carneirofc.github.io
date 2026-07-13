@@ -22,7 +22,7 @@ export function alternatePath(pathname: string): { locale: Locale; path: string 
   return { locale: "pt-br", path: `/pt-br${pathname === "/" ? "" : pathname}` || "/pt-br" };
 }
 
-type ProjectEntry = {
+export type ProjectEntry = {
   name: string;
   description: string;
   href: string;
@@ -30,14 +30,21 @@ type ProjectEntry = {
 };
 
 export type Dictionary = {
-  nav: { home: string; blog: string; projects: string; contact: string };
+  nav: { home: string; about: string; blog: string; projects: string; contact: string };
   home: {
     subtitle: string;
+    aboutMe: string;
     latestPosts: string;
     allPosts: string;
+    featuredProjects: string;
+    allProjects: string;
     email: string;
+  };
+  about: {
+    subtitle: string;
+    title: string;
     sectionsAriaLabel: string;
-    sections: { about: string; posts: string; skills: string };
+    sections: { bio: string; skills: string };
     skills: Record<"languages" | "platform" | "devsecops" | "cloud" | "data_ai", string>;
   };
   blog: {
@@ -70,14 +77,21 @@ export type Dictionary = {
 
 export const dictionaries: Record<Locale, Dictionary> = {
   en: {
-    nav: { home: "home", blog: "blog", projects: "projects", contact: "contact" },
+    nav: { home: "home", about: "about", blog: "blog", projects: "projects", contact: "contact" },
     home: {
-      subtitle: "carneirofc // about",
+      subtitle: "carneirofc // home",
+      aboutMe: "About me",
       latestPosts: "Latest posts",
       allPosts: "all posts",
+      featuredProjects: "Projects",
+      allProjects: "all projects",
       email: "Email",
+    },
+    about: {
+      subtitle: "carneirofc // about",
+      title: "About",
       sectionsAriaLabel: "Page sections",
-      sections: { about: "About", posts: "Posts", skills: "Skills" },
+      sections: { bio: "About", skills: "Skills" },
       skills: {
         languages: "Languages",
         platform: "Platform",
@@ -105,28 +119,56 @@ export const dictionaries: Record<Locale, Dictionary> = {
         {
           name: "deedlit.dev",
           description:
-            "Personal creative space — AI-generated art gallery, book library, and hobby projects. Next.js, self-hosted, powered by the same design system as this site.",
+            "My personal creative space — an AI-art gallery, a book library, and hobby projects. Next.js, self-hosted, running the same design system as this site.",
           href: "https://github.com/carneirofc/deedlit.dev",
           linkLabel: "Source on GitHub",
         },
         {
           name: "@carneirofc/ui",
           description:
-            "The shared React design system behind deedlit.dev and carneirofc.github.io — app-agnostic building blocks, dark/light theming, and a cyber-flavored visual language.",
+            "The React design system I share between deedlit.dev and this site — app-agnostic building blocks, dark/light theming, and a cyber-flavored look.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
           linkLabel: "Source on GitHub",
         },
         {
           name: "carneirofc.github.io",
           description:
-            "This site: Next.js static export, Velite-powered MDX blog, deployed to GitHub Pages with a checks-gated pipeline and privacy-scrubbing git hooks.",
+            "This very site. A Next.js static export with a Velite-powered MDX blog, deployed to GitHub Pages through a checks-gated pipeline and privacy-scrubbing git hooks.",
           href: "https://github.com/carneirofc/carneirofc.github.io",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "magi",
+          description:
+            "My personal AI assistant framework — one shared agent brain, many channels (Discord, an HTTP API, a desktop app), all driving the same stack. Model-agnostic, with memory it writes on purpose. Built on Agno, shipped to PyPI.",
+          href: "https://github.com/carneirofc/magi-ai-assistant",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "Alyssa",
+          description:
+            "My AI assistant, built on top of the magi framework. She's a persona with a point of view — dryly warm, leads with the answer, and tells you when she doesn't know something.",
+          href: "https://github.com/carneirofc/alyssa",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "Qt Task Manager",
+          description:
+            "A desktop task manager I built for Windows in PySide6 — live processes and connections, plus read-only scanners for disk cleanup, registry hygiene, and threat heuristics. It even exposes an optional MCP server so an AI can read the machine's live metrics.",
+          href: "https://github.com/carneirofc/qttaskmanager",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "2D game experiments",
+          description:
+            "Me learning game development from scratch — a C++23 sidescroller on raylib, no engine. A data-oriented world, generational entity handles, spatial-grid collision, and a lot of squash-&-stretch juice. Mostly for the fun of it.",
+          href: "https://github.com/carneirofc/raylib-2d-game-experiments",
           linkLabel: "Source on GitHub",
         },
         {
           name: "More on GitHub",
           description:
-            "Control-system software, CLIs, infrastructure tooling, and experiments in Go, TypeScript, Python, .NET, and C/C++.",
+            "The rest of what I tinker with — control-system software, CLIs, infra tooling, and experiments in Go, TypeScript, Python, .NET, and C/C++.",
           href: "https://github.com/carneirofc",
           linkLabel: "github.com/carneirofc",
         },
@@ -144,14 +186,21 @@ export const dictionaries: Record<Locale, Dictionary> = {
     footer: { rightsReserved: "All rights reserved." },
   },
   "pt-br": {
-    nav: { home: "início", blog: "blog", projects: "projetos", contact: "contato" },
+    nav: { home: "início", about: "sobre", blog: "blog", projects: "projetos", contact: "contato" },
     home: {
-      subtitle: "carneirofc // sobre",
+      subtitle: "carneirofc // início",
+      aboutMe: "Sobre mim",
       latestPosts: "Últimos posts",
       allPosts: "todos os posts",
+      featuredProjects: "Projetos",
+      allProjects: "todos os projetos",
       email: "E-mail",
+    },
+    about: {
+      subtitle: "carneirofc // sobre",
+      title: "Sobre",
       sectionsAriaLabel: "Seções da página",
-      sections: { about: "Sobre", posts: "Posts", skills: "Competências" },
+      sections: { bio: "Sobre", skills: "Competências" },
       skills: {
         languages: "Linguagens",
         platform: "Plataforma",
@@ -180,28 +229,56 @@ export const dictionaries: Record<Locale, Dictionary> = {
         {
           name: "deedlit.dev",
           description:
-            "Espaço criativo pessoal — galeria de arte gerada por IA, biblioteca de livros e projetos de hobby. Next.js, self-hosted, com o mesmo design system deste site.",
+            "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e projetos de hobby. Next.js, self-hosted, rodando o mesmo design system deste site.",
           href: "https://github.com/carneirofc/deedlit.dev",
           linkLabel: "Código no GitHub",
         },
         {
           name: "@carneirofc/ui",
           description:
-            "O design system React compartilhado por trás do deedlit.dev e do carneirofc.github.io — blocos de construção agnósticos de aplicação, temas claro/escuro e uma linguagem visual cyber.",
+            "O design system React que eu compartilho entre o deedlit.dev e este site — blocos agnósticos de aplicação, temas claro/escuro e um visual cyber.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
           linkLabel: "Código no GitHub",
         },
         {
           name: "carneirofc.github.io",
           description:
-            "Este site: export estático de Next.js, blog MDX com Velite, publicado no GitHub Pages com pipeline de checks obrigatórios e hooks de git que removem metadados de mídia.",
+            "Este site aqui mesmo. Um export estático de Next.js com blog MDX via Velite, publicado no GitHub Pages por um pipeline de checks obrigatórios e hooks de git que removem metadados de mídia.",
           href: "https://github.com/carneirofc/carneirofc.github.io",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "magi",
+          description:
+            "Meu framework de assistente de IA pessoal — um cérebro de agente compartilhado e vários canais (Discord, uma API HTTP, um app desktop), todos usando o mesmo stack. Agnóstico de modelo, com memória que ele escreve de propósito. Construído sobre o Agno, publicado no PyPI.",
+          href: "https://github.com/carneirofc/magi-ai-assistant",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Alyssa",
+          description:
+            "Minha assistente de IA, construída sobre o framework magi. Ela é uma persona com opinião própria — de humor seco e acolhedor, entrega a resposta primeiro e avisa quando não sabe de algo.",
+          href: "https://github.com/carneirofc/alyssa",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Qt Task Manager",
+          description:
+            "Um gerenciador de tarefas desktop que fiz para Windows em PySide6 — processos e conexões ao vivo, além de scanners somente-leitura para limpeza de disco, higiene do registro e heurística de ameaças. Ele ainda expõe um servidor MCP opcional para uma IA ler as métricas ao vivo da máquina.",
+          href: "https://github.com/carneirofc/qttaskmanager",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Experimentos de jogo 2D",
+          description:
+            "Eu aprendendo desenvolvimento de jogos do zero — um sidescroller em C++23 sobre raylib, sem engine. Um mundo orientado a dados, handles de entidade geracionais, colisão por grade espacial e bastante 'game feel' com squash & stretch. Mais pela diversão.",
+          href: "https://github.com/carneirofc/raylib-2d-game-experiments",
           linkLabel: "Código no GitHub",
         },
         {
           name: "Mais no GitHub",
           description:
-            "Software de sistemas de controle, CLIs, ferramentas de infraestrutura e experimentos em Go, TypeScript, Python, .NET e C/C++.",
+            "O resto do que eu fuço — software de sistemas de controle, CLIs, ferramentas de infra e experimentos em Go, TypeScript, Python, .NET e C/C++.",
           href: "https://github.com/carneirofc",
           linkLabel: "github.com/carneirofc",
         },

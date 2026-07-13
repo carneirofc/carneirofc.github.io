@@ -6,6 +6,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const nav = [
     { href: localePath(locale, "/"), label: t.nav.home },
+    { href: localePath(locale, "/about/"), label: t.nav.about },
     { href: localePath(locale, "/blog/"), label: t.nav.blog },
     { href: localePath(locale, "/projects/"), label: t.nav.projects },
     { href: localePath(locale, "/contact/"), label: t.nav.contact },
