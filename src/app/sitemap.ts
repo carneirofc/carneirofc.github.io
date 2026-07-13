@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    ["/", "/blog/", "/projects/", "/contact/"].map((route) => ({
+    ["/", "/about/", "/blog/", "/projects/", "/contact/"].map((route) => ({
       url: `${SITE_URL}${localePath(locale, route)}`,
       changeFrequency: "monthly" as const,
     })),
