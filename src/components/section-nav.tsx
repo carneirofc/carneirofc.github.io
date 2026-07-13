@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import type { IconType } from "react-icons";
-import { LuUser, LuWrench, LuNewspaper } from "react-icons/lu";
+import { LuFolderGit2, LuHouse, LuNewspaper, LuUser, LuWrench } from "react-icons/lu";
 
 const ICONS: Record<string, IconType> = {
+  home: LuHouse,
   about: LuUser,
   posts: LuNewspaper,
+  projects: LuFolderGit2,
   skills: LuWrench,
 };
 
