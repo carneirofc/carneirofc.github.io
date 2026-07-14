@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-14
+
+### Added
+
+- Documentation links on project cards for the projects that publish GitHub
+  Pages (`deedlit.dev` docs, `@carneirofc/ui` Storybook, Qt Task Manager docs),
+  rendered as a second accent button beside the source link.
+- New "Web & Frameworks" skill group on the about page (Next.js, React, Node.js,
+  Express, FastAPI).
+
+### Changed
+
+- Expanded the about-page skill tags: Docker Swarm, Ansible, Terraform, and
+  EPICS Control System (platform); GitHub Actions (DevSecOps); Azure Data
+  Factory and Confluent Kafka (data & AI).
+
 ## [0.2.0] - 2026-07-14
 
 ### Added
@@ -22,5 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Defined the previously no-op `.section-anchor` class so native `#hash` /
   `:target` navigation lands clear of the sticky header (`scroll-margin-top`).
 
-[Unreleased]: https://github.com/carneirofc/carneirofc.github.io/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/carneirofc/carneirofc.github.io/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/carneirofc/carneirofc.github.io/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/carneirofc/carneirofc.github.io/releases/tag/v0.2.0
