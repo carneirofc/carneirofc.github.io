@@ -73,6 +73,7 @@ const abouts = defineCollection({
       }),
       skills: s.object({
         languages: s.array(s.string()),
+        web: s.array(s.string()),
         platform: s.array(s.string()),
         devsecops: s.array(s.string()),
         cloud: s.array(s.string()),

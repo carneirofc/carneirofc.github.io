@@ -27,6 +27,8 @@ export type ProjectEntry = {
   description: string;
   href: string;
   linkLabel: string;
+  docsHref?: string;
+  docsLabel?: string;
 };
 
 export type Dictionary = {
@@ -47,7 +49,7 @@ export type Dictionary = {
     title: string;
     sectionsAriaLabel: string;
     sections: { bio: string; skills: string };
-    skills: Record<"languages" | "platform" | "devsecops" | "cloud" | "data_ai", string>;
+    skills: Record<"languages" | "web" | "platform" | "devsecops" | "cloud" | "data_ai", string>;
   };
   blog: {
     subtitle: string;
@@ -98,6 +100,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       sections: { bio: "About", skills: "Skills" },
       skills: {
         languages: "Languages",
+        web: "Web & Frameworks",
         platform: "Platform",
         devsecops: "DevSecOps",
         cloud: "Cloud",
@@ -126,6 +129,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "My personal creative space — an AI-art gallery, a book library, and hobby projects. Next.js, self-hosted, running the same design system as this site.",
           href: "https://github.com/carneirofc/deedlit.dev",
           linkLabel: "Source on GitHub",
+          docsHref: "https://carneirofc.github.io/deedlit.dev/",
+          docsLabel: "Docs",
         },
         {
           name: "@carneirofc/ui",
@@ -133,6 +138,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "The React design system I share between deedlit.dev and this site — app-agnostic building blocks, dark/light theming, and a cyber-flavored look.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
           linkLabel: "Source on GitHub",
+          docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
+          docsLabel: "Storybook",
         },
         {
           name: "carneirofc.github.io",
@@ -161,6 +168,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "A desktop task manager I built for Windows in PySide6 — live processes and connections, plus read-only scanners for disk cleanup, registry hygiene, and threat heuristics. It even exposes an optional MCP server so an AI can read the machine's live metrics.",
           href: "https://github.com/carneirofc/qttaskmanager",
           linkLabel: "Source on GitHub",
+          docsHref: "https://carneirofc.github.io/qttaskmanager/",
+          docsLabel: "Docs",
         },
         {
           name: "2D game experiments",
@@ -209,6 +218,7 @@ export const dictionaries: Record<Locale, Dictionary> = {
       sections: { bio: "Sobre", skills: "Competências" },
       skills: {
         languages: "Linguagens",
+        web: "Web & Frameworks",
         platform: "Plataforma",
         devsecops: "DevSecOps",
         cloud: "Cloud",
@@ -238,6 +248,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e projetos de hobby. Next.js, self-hosted, rodando o mesmo design system deste site.",
           href: "https://github.com/carneirofc/deedlit.dev",
           linkLabel: "Código no GitHub",
+          docsHref: "https://carneirofc.github.io/deedlit.dev/",
+          docsLabel: "Docs",
         },
         {
           name: "@carneirofc/ui",
@@ -245,6 +257,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "O design system React que eu compartilho entre o deedlit.dev e este site — blocos agnósticos de aplicação, temas claro/escuro e um visual cyber.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
           linkLabel: "Código no GitHub",
+          docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
+          docsLabel: "Storybook",
         },
         {
           name: "carneirofc.github.io",
@@ -273,6 +287,8 @@ export const dictionaries: Record<Locale, Dictionary> = {
             "Um gerenciador de tarefas desktop que fiz para Windows em PySide6 — processos e conexões ao vivo, além de scanners somente-leitura para limpeza de disco, higiene do registro e heurística de ameaças. Ele ainda expõe um servidor MCP opcional para uma IA ler as métricas ao vivo da máquina.",
           href: "https://github.com/carneirofc/qttaskmanager",
           linkLabel: "Código no GitHub",
+          docsHref: "https://carneirofc.github.io/qttaskmanager/",
+          docsLabel: "Documentação",
         },
         {
           name: "Experimentos de jogo 2D",

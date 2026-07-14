@@ -7,7 +7,7 @@ import { MDXContent } from "@/components/mdx-content";
 import { MetaDot } from "@/components/post-card";
 import { SectionNav, type SectionNavItem } from "@/components/section-nav";
 
-const SKILL_GROUPS = ["languages", "platform", "devsecops", "cloud", "data_ai"] as const;
+const SKILL_GROUPS = ["languages", "web", "platform", "devsecops", "cloud", "data_ai"] as const;
 const BUTTON_ICON = "h-3.5 w-3.5 shrink-0";
 // Roomier than the default chip so the skills read comfortably.
 const SKILL_CHIP = "px-3 py-1.5 text-ui-sm";
