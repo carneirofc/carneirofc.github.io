@@ -63,6 +63,60 @@ html {
   }
 }
 
+/* Page sections: clear the sticky header for native #hash / :target jumps
+   (mirrors html scroll-padding-top; the rail's JS scroll uses its own offset). */
+.section-anchor {
+  scroll-margin-top: 6rem;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rail-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Staggered entrance for the section-nav rail buttons; the per-item delay is
+   set inline. Neutralized under reduced-motion so the rail just appears. */
+.rail-item {
+  animation: rail-in 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-item {
+    animation: none;
+  }
+}
+
+/* Reveal sections as they scroll into view. Gated on scroll-driven timeline
+   support so unsupported browsers keep sections fully visible, and disabled
+   under reduced-motion. A section already in view at load resolves to the end
+   (visible) state. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .section-anchor {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+
 .focus-ring:focus-visible {
   outline: none;
   box-shadow:
