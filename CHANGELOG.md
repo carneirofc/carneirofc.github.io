@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Removed
+
+- The section-nav rail's custom JS island (rAF smooth-scroll, click
+  handling, `IntersectionObserver` active-section tracking, sliding
+  indicator bar): the active-item selection wasn't tracking scroll
+  position correctly. Links are now plain anchors relying on native
+  `scroll-behavior: smooth` and `scroll-margin-top`.
+
 ## [0.3.0] - 2026-07-14
 
 ### Added
