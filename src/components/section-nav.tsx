@@ -25,6 +25,33 @@ const SECTION_NAV_SCRIPT = `
     const ACTIVE = ["translate-x-0.5", "border-line/80", "bg-surface/80", "text-text", "backdrop-blur"];
     const INACTIVE = ["border-transparent", "text-muted"];
     const SCROLL_OFFSET = 100;
+    const SCROLL_DURATION = 450;
+
+    // Drives the scroll ourselves instead of relying on native
+    // behavior:"smooth": some managed browsers (e.g. corporate Microsoft Edge
+    // with the SmoothScrolling policy disabled) silently ignore it and jump
+    // instantly, so this rAF loop is the only way to get consistent motion.
+    let scrollRunId = 0;
+    function smoothScrollTo(targetY) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        window.scrollTo(0, targetY);
+        return;
+      }
+      const runId = ++scrollRunId;
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+
+      function step(now) {
+        if (runId !== scrollRunId) return;
+        const elapsed = now - startTime;
+        const t = Math.min(elapsed / SCROLL_DURATION, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        window.scrollTo(0, startY + distance * eased);
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
 
     function setup(nav) {
       const links = Array.from(nav.querySelectorAll("[data-section-nav-link]"));
@@ -59,7 +86,7 @@ const SECTION_NAV_SCRIPT = `
           if (!el) return;
           event.preventDefault();
           const top = el.getBoundingClientRect().top + window.pageYOffset - SCROLL_OFFSET;
-          window.scrollTo({ top, behavior: "smooth" });
+          smoothScrollTo(top);
           setActive(link);
         });
       });
