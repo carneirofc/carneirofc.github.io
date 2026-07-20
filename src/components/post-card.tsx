@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { InfoChip, SurfacePanel } from "@carneirofc/ui";
+import { InfoChip } from "@/components/info-chip";
+import { SurfacePanel } from "@/components/surface-panel";
 import { getDictionary, localePath } from "@/lib/i18n";
 import { formatDate, readingTimeMinutes, type Post } from "@/lib/posts";
 
@@ -11,7 +12,7 @@ export function PostCard({ post }: { post: Post }) {
   const t = getDictionary(post.locale);
 
   return (
-    <SurfacePanel tone="soft" padding="lg" className="transition-colors hover:border-ui-active">
+    <SurfacePanel className="transition-colors hover:border-ui-active">
       <article className="flex flex-col gap-2">
         <div className="cyber-muted flex flex-wrap items-center gap-2 text-ui-xs">
           <time dateTime={post.date}>{formatDate(post.date, post.locale)}</time>

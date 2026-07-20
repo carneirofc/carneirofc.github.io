@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeftIcon, InfoChip } from "@carneirofc/ui";
+import { ChevronLeftIcon } from "@/components/icons";
+import { InfoChip } from "@/components/info-chip";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import {
   formatDate,

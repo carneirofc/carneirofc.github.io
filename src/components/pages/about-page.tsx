@@ -1,6 +1,10 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { LuMail, LuMapPin } from "react-icons/lu";
-import { InfoChip, OutlineButton, PageHeader, SectionLabel, SurfacePanel } from "@carneirofc/ui";
+import { InfoChip } from "@/components/info-chip";
+import { PageHeader } from "@/components/page-header";
+import { SectionLabel } from "@/components/section-label";
+import { SurfacePanel } from "@/components/surface-panel";
+import { buttonClass } from "@/lib/ui";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 import { MDXContent } from "@/components/mdx-content";
@@ -38,24 +42,28 @@ export function AboutPage({ locale }: { locale: Locale }) {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <OutlineButton asChild variant="accent" controlSize="md">
-            <a href={about.links.github} target="_blank" rel="noopener noreferrer">
-              <FaGithub aria-hidden className={BUTTON_ICON} />
-              GitHub
-            </a>
-          </OutlineButton>
-          <OutlineButton asChild controlSize="md">
-            <a href={about.links.linkedin} target="_blank" rel="noopener noreferrer">
-              <FaLinkedin aria-hidden className={BUTTON_ICON} />
-              LinkedIn
-            </a>
-          </OutlineButton>
-          <OutlineButton asChild variant="ghost" controlSize="md">
-            <a href={`mailto:${about.email}`}>
-              <LuMail aria-hidden className={BUTTON_ICON} />
-              {t.home.email}
-            </a>
-          </OutlineButton>
+          <a
+            href={about.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("accent", "md")}
+          >
+            <FaGithub aria-hidden className={BUTTON_ICON} />
+            GitHub
+          </a>
+          <a
+            href={about.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("neutral", "md")}
+          >
+            <FaLinkedin aria-hidden className={BUTTON_ICON} />
+            LinkedIn
+          </a>
+          <a href={`mailto:${about.email}`} className={buttonClass("ghost", "md")}>
+            <LuMail aria-hidden className={BUTTON_ICON} />
+            {t.home.email}
+          </a>
         </div>
 
         <article className="prose max-w-none">
@@ -65,7 +73,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
 
       <section id="skills" className="section-anchor flex flex-col gap-4">
         <SectionLabel>{t.about.sections.skills}</SectionLabel>
-        <SurfacePanel tone="soft" padding="lg">
+        <SurfacePanel>
           <div className="flex flex-col gap-5">
             {SKILL_GROUPS.map((key) => (
               <div key={key} className="flex flex-col gap-2">

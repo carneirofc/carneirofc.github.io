@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { LuMail, LuMapPin, LuUser } from "react-icons/lu";
-import { ChevronRightIcon, OutlineButton, PageHeader, SectionLabel } from "@carneirofc/ui";
+import { ChevronRightIcon } from "@/components/icons";
+import { PageHeader } from "@/components/page-header";
+import { SectionLabel } from "@/components/section-label";
+import { buttonClass } from "@/lib/ui";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAbout, getAllPosts } from "@/lib/posts";
 import { MetaDot, PostCard } from "@/components/post-card";
@@ -44,30 +47,32 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <OutlineButton asChild variant="accent" controlSize="md">
-            <Link href={localePath(locale, "/about/")}>
-              <LuUser aria-hidden className={BUTTON_ICON} />
-              {t.home.aboutMe}
-            </Link>
-          </OutlineButton>
-          <OutlineButton asChild controlSize="md">
-            <a href={about.links.github} target="_blank" rel="noopener noreferrer">
-              <FaGithub aria-hidden className={BUTTON_ICON} />
-              GitHub
-            </a>
-          </OutlineButton>
-          <OutlineButton asChild controlSize="md">
-            <a href={about.links.linkedin} target="_blank" rel="noopener noreferrer">
-              <FaLinkedin aria-hidden className={BUTTON_ICON} />
-              LinkedIn
-            </a>
-          </OutlineButton>
-          <OutlineButton asChild variant="ghost" controlSize="md">
-            <a href={`mailto:${about.email}`}>
-              <LuMail aria-hidden className={BUTTON_ICON} />
-              {t.home.email}
-            </a>
-          </OutlineButton>
+          <Link href={localePath(locale, "/about/")} className={buttonClass("accent", "md")}>
+            <LuUser aria-hidden className={BUTTON_ICON} />
+            {t.home.aboutMe}
+          </Link>
+          <a
+            href={about.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("neutral", "md")}
+          >
+            <FaGithub aria-hidden className={BUTTON_ICON} />
+            GitHub
+          </a>
+          <a
+            href={about.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("neutral", "md")}
+          >
+            <FaLinkedin aria-hidden className={BUTTON_ICON} />
+            LinkedIn
+          </a>
+          <a href={`mailto:${about.email}`} className={buttonClass("ghost", "md")}>
+            <LuMail aria-hidden className={BUTTON_ICON} />
+            {t.home.email}
+          </a>
         </div>
       </section>
 

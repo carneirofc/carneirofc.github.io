@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { InfoChip, PageHeader } from "@carneirofc/ui";
+import { InfoChip } from "@/components/info-chip";
+import { PageHeader } from "@/components/page-header";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAllPosts, getAllTags } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";

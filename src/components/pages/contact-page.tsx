@@ -1,7 +1,10 @@
 import type { IconType } from "react-icons";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { LuMail } from "react-icons/lu";
-import { OutlineButton, PageHeader, SectionLabel, SurfacePanel } from "@carneirofc/ui";
+import { PageHeader } from "@/components/page-header";
+import { SectionLabel } from "@/components/section-label";
+import { SurfacePanel } from "@/components/surface-panel";
+import { buttonClass } from "@/lib/ui";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
@@ -43,7 +46,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
 
       <div className="grid gap-4 sm:grid-cols-3">
         {channels.map((channel) => (
-          <SurfacePanel key={channel.label} tone="soft" padding="lg">
+          <SurfacePanel key={channel.label}>
             <div className="flex h-full flex-col gap-3">
               <SectionLabel className="inline-flex items-center gap-1.5">
                 <channel.icon aria-hidden className="h-3.5 w-3.5 shrink-0" />
@@ -53,16 +56,15 @@ export function ContactPage({ locale }: { locale: Locale }) {
                 {channel.value}
               </p>
               <div>
-                <OutlineButton asChild controlSize="sm">
-                  <a
-                    href={channel.href}
-                    {...(channel.href.startsWith("http")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    {channel.cta}
-                  </a>
-                </OutlineButton>
+                <a
+                  href={channel.href}
+                  className={buttonClass("neutral", "sm")}
+                  {...(channel.href.startsWith("http")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {channel.cta}
+                </a>
               </div>
             </div>
           </SurfacePanel>

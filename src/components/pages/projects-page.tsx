@@ -1,4 +1,4 @@
-import { PageHeader } from "@carneirofc/ui";
+import { PageHeader } from "@/components/page-header";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { ProjectCard } from "@/components/project-card";
 

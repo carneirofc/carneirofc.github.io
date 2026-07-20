@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeftIcon, InfoChip, PageHeader } from "@carneirofc/ui";
+import { ChevronLeftIcon } from "@/components/icons";
+import { InfoChip } from "@/components/info-chip";
+import { PageHeader } from "@/components/page-header";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAllTags, getPostsByTag } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";
