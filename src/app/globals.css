@@ -54,7 +54,6 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -63,8 +62,7 @@ html {
   }
 }
 
-/* Page sections: clear the sticky header for native #hash / :target jumps
-   (mirrors html scroll-padding-top; the rail's JS scroll uses its own offset). */
+/* Page sections: clear the sticky header for native #hash / :target jumps. */
 .section-anchor {
   scroll-margin-top: 6rem;
 }
