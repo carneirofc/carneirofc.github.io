@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Two entries on the projects page (en and pt-br): `devops-utils` (with a link
+  to its docs) and Local LLM Translate (with a link to its Firefox add-on
+  listing).
+
 ### Removed
 
 - The section-nav rail's custom JS island (rAF smooth-scroll, click

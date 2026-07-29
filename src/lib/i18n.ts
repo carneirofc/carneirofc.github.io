@@ -172,6 +172,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
           docsLabel: "Docs",
         },
         {
+          name: "devops-utils",
+          description:
+            "A Python toolbox for the DevOps chores I keep repeating — Kubernetes secret sanitizing, Azure DevOps work items, and more. A dependency-free core wrapped in whichever surface fits: CLI, Textual TUI, PySide6 UI, MCP server, or a Claude Code plugin. Published on PyPI.",
+          href: "https://github.com/carneirofc/devops-utils",
+          linkLabel: "Source on GitHub",
+          docsHref: "https://carneirofc.github.io/devops-utils/",
+          docsLabel: "Docs",
+        },
+        {
+          name: "Local LLM Translate",
+          description:
+            "A browser extension that translates pages against a llama-server running on your own machine — nothing is sent to a cloud API. Visible text and headings go first, with an optional local cache. A hard fork of Eldoprano's offline-browser-translate, on my own roadmap.",
+          href: "https://github.com/carneirofc/offline-browser-translate",
+          linkLabel: "Source on GitHub",
+          docsHref: "https://addons.mozilla.org/en-GB/firefox/addon/local-llm-translator/",
+          docsLabel: "Firefox add-on",
+        },
+        {
           name: "2D game experiments",
           description:
             "Me learning game development from scratch — a C++23 sidescroller on raylib, no engine. A data-oriented world, generational entity handles, spatial-grid collision, and a lot of squash-&-stretch juice. Mostly for the fun of it.",
@@ -289,6 +307,24 @@ export const dictionaries: Record<Locale, Dictionary> = {
           linkLabel: "Código no GitHub",
           docsHref: "https://carneirofc.github.io/qttaskmanager/",
           docsLabel: "Documentação",
+        },
+        {
+          name: "devops-utils",
+          description:
+            "Uma caixa de ferramentas em Python para as tarefas de DevOps que eu repito sempre — sanitizar secrets de manifestos Kubernetes, work items do Azure DevOps e mais. Um núcleo sem dependências exposto pela superfície que fizer sentido: CLI, TUI em Textual, UI em PySide6, servidor MCP ou plugin do Claude Code. Publicado no PyPI.",
+          href: "https://github.com/carneirofc/devops-utils",
+          linkLabel: "Código no GitHub",
+          docsHref: "https://carneirofc.github.io/devops-utils/",
+          docsLabel: "Documentação",
+        },
+        {
+          name: "Local LLM Translate",
+          description:
+            "Uma extensão de navegador que traduz páginas usando um llama-server rodando na sua própria máquina — nada é enviado para uma API na nuvem. Texto visível e títulos vêm primeiro, com cache local opcional. Um hard fork do offline-browser-translate do Eldoprano, seguindo meu próprio roteiro.",
+          href: "https://github.com/carneirofc/offline-browser-translate",
+          linkLabel: "Código no GitHub",
+          docsHref: "https://addons.mozilla.org/pt-BR/firefox/addon/local-llm-translator/",
+          docsLabel: "Extensão para Firefox",
         },
         {
           name: "Experimentos de jogo 2D",
