@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- The cloud/container certification bullets (Docker DCA track, Amazon EKS and
+  GKE, Google Cloud fundamentals, Linux Essentials and Ansible) from the
+  "Education & Certifications" section of the about page, in both locales.
 - The section-nav rail's custom JS island (rAF smooth-scroll, click
   handling, `IntersectionObserver` active-section tracking, sliding
   indicator bar): the active-item selection wasn't tracking scroll
