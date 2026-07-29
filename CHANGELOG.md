@@ -17,7 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - The cloud/container certification bullets (Docker DCA track, Amazon EKS and
   GKE, Google Cloud fundamentals, Linux Essentials and Ansible) from the
-  "Education & Certifications" section of the about page, in both locales.
+  education section of the about page, in both locales; the heading is now
+  just "Education" / "Formação".
 - The section-nav rail's custom JS island (rAF smooth-scroll, click
   handling, `IntersectionObserver` active-section tracking, sliding
   indicator bar): the active-item selection wasn't tracking scroll
