@@ -37,7 +37,7 @@ jobs:
           repository: carneirofc/deedlit.dev
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -89,7 +89,7 @@ jobs:
           repository: carneirofc/deedlit.dev
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
