@@ -1,8 +1,9 @@
 # dependencies
 node_modules/
 
-# next.js
-/.next/
+# next.js — unanchored so a stray `next dev` rooted in a subdirectory
+# (e.g. src/app/.next/) is ignored too.
+.next/
 /out/
 
 # velite
