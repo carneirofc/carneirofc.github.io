@@ -15,9 +15,11 @@ pre-commit:
       run: npx eslint --fix --no-warn-ignored {staged_files}
       stage_fixed: true
 
+    # `#site/content` resolves to .velite/, which does not exist on a fresh
+    # clone — generate it before tsc so the first commit isn't blocked.
     - name: typecheck
       glob: "*.{ts,tsx}"
-      run: npx tsc --noEmit
+      run: npx velite build && npx tsc --noEmit
 
     # Strip ALL metadata (GPS, device, timestamps) from staged media, lossless,
     # and re-stage the clean file. Requires exiftool (see README).
