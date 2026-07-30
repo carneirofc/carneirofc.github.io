@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The home page's projects section lists every project instead of the first
+  four. The section header still links to `/projects/`.
 - Documentation is now split by question. `README.md` stays the how-to,
   `CONTEXT.md` describes what the system is and the invariants it keeps, and
   `docs/adr/` holds one record per decision with its rejected alternatives.

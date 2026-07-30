@@ -14,15 +14,11 @@ import { SectionNav, type SectionNavItem } from "@/components/section-nav";
 const BUTTON_ICON = "h-3.5 w-3.5 shrink-0";
 const SECTION_LINK =
   "focus-ring cyber-muted inline-flex items-center gap-1 rounded-md text-ui-sm hover:text-text";
-// The last entry is the "everything else on GitHub" catch-all — the featured
-// grid shows the real projects and the header link leads to the full list.
-const FEATURED_PROJECTS = 4;
 
 export function HomePage({ locale }: { locale: Locale }) {
   const about = getAbout(locale);
   const t = getDictionary(locale);
   const latestPosts = getAllPosts(locale).slice(0, 3);
-  const featuredProjects = t.projects.entries.slice(0, FEATURED_PROJECTS);
 
   const sections: SectionNavItem[] = [
     { href: "#intro", label: t.home.sections.intro, icon: "home" },
@@ -102,7 +98,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          {featuredProjects.map((project) => (
+          {t.projects.entries.map((project) => (
             <ProjectCard key={project.name} project={project} />
           ))}
         </div>
