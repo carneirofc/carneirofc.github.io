@@ -5,8 +5,11 @@ Personal landing page + blog for **Cláudio Carneiro**, served at
 
 Next.js static export (`output: "export"`) + [Velite](https://velite.js.org)
 MDX content + the shared [`@carneirofc/ui`](https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui)
-design system, deployed to GitHub Pages via GitHub Actions. See
-[`PLAN.md`](./PLAN.md) for the full design rationale.
+design system, deployed to GitHub Pages via GitHub Actions.
+
+This README is the how-to. See [`CONTEXT.md`](./CONTEXT.md) for what the system
+is and the invariants it keeps, and [`docs/adr/`](./docs/adr/) for why each
+piece was chosen.
 
 ## Prerequisites
 

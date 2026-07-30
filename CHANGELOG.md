@@ -12,6 +12,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Two entries on the projects page (en and pt-br): `devops-utils` (with a link
   to its docs) and Local LLM Translate (with a link to its Firefox add-on
   listing).
+- `scripts/check-translations.mjs`, run in the CI checks job: a post published
+  in only one language made the header's language switch a hard 404, and
+  nothing caught it. Velite validates one document at a time, so locale parity
+  needs its own gate. It also covers `content/about*.mdx`.
+- `CONTEXT.md` and `docs/adr/`, replacing `PLAN.md` — see Changed/Removed.
+
+### Changed
+
+- Documentation is now split by question. `README.md` stays the how-to,
+  `CONTEXT.md` describes what the system is and the invariants it keeps, and
+  `docs/adr/` holds one record per decision with its rejected alternatives.
+  ADR 0003 supersedes the original "consume `@carneirofc/ui` from GitHub
+  Packages" decision with the sibling `file:` checkout that is actually in use.
+- The Pages deploy no longer cancels itself: `deploy.yml`'s concurrency group
+  uses `cancel-in-progress: false`, so a follow-up push queues behind a running
+  deploy instead of aborting one that may already be inside `deploy-pages` and
+  leaving Pages half-updated.
+- The Lefthook `typecheck` job runs `velite build` first. `#site/content`
+  resolves to `.velite/`, which doesn't exist on a fresh clone, so the first
+  commit after cloning used to fail the hook.
+
+### Fixed
+
+- The language switch on the home page linked to `/pt-br` without the trailing
+  slash the static export emits, costing a redirect hop. `alternatePath()` now
+  keeps the slash in both directions.
+- `src/app/.next/trace` and `trace-build` were committed: `.gitignore`'s
+  `/.next/` is root-anchored and didn't match a nested copy left by a stray
+  `next dev`. The rule is now unanchored and the files are untracked.
+- `src/components/section-nav.tsx`'s docstring still described the smooth-scroll
+  and active-section tracking that was removed with the JS island.
+- `robots.ts` hardcoded the site origin instead of importing `SITE_URL`, and
+  `globals.css` registered the UI source tree twice.
 
 ### Removed
 
