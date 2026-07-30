@@ -14,12 +14,16 @@ export function localePath(locale: Locale, path: string): string {
   return locale === "en" ? path : `/pt-br${path}`;
 }
 
-/** Map a pathname to its equivalent in the other locale. */
+/**
+ * Map a pathname to its equivalent in the other locale. Both directions keep
+ * the trailing slash the static export (`trailingSlash: true`) emits, so the
+ * link lands on the generated page instead of a Pages redirect.
+ */
 export function alternatePath(pathname: string): { locale: Locale; path: string } {
   if (pathname === "/pt-br" || pathname.startsWith("/pt-br/")) {
     return { locale: "en", path: pathname.replace(/^\/pt-br/, "") || "/" };
   }
-  return { locale: "pt-br", path: `/pt-br${pathname === "/" ? "" : pathname}` || "/pt-br" };
+  return { locale: "pt-br", path: pathname === "/" ? "/pt-br/" : `/pt-br${pathname}` };
 }
 
 export type ProjectEntry = {
