@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Baserow FOSS on the projects page (en and pt-br): my MIT-only fork of
+  Baserow, with the premium and enterprise editions, the AI code paths, and the
+  telemetry removed.
 - Two entries on the projects page (en and pt-br): `devops-utils` (with a link
   to its docs) and Local LLM Translate (with a link to its Firefox add-on
   listing).

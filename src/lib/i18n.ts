@@ -201,6 +201,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
           linkLabel: "Source on GitHub",
         },
         {
+          name: "Baserow FOSS",
+          description:
+            "My fork of Baserow, the no-code database platform, with the premium and enterprise editions stripped out so the whole tree stays MIT licensed. No AI code paths and no telemetry; SSO comes from environment-configured OpenID Connect instead. Django, Vue, and PostgreSQL.",
+          href: "https://github.com/carneirofc/baserow",
+          linkLabel: "Source on GitHub",
+        },
+        {
           name: "More on GitHub",
           description:
             "The rest of what I tinker with — control-system software, CLIs, infra tooling, and experiments in Go, TypeScript, Python, .NET, and C/C++.",
@@ -335,6 +342,13 @@ export const dictionaries: Record<Locale, Dictionary> = {
           description:
             "Eu aprendendo desenvolvimento de jogos do zero — um sidescroller em C++23 sobre raylib, sem engine. Um mundo orientado a dados, handles de entidade geracionais, colisão por grade espacial e bastante 'game feel' com squash & stretch. Mais pela diversão.",
           href: "https://github.com/carneirofc/raylib-2d-game-experiments",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Baserow FOSS",
+          description:
+            "Meu fork do Baserow, a plataforma de banco de dados no-code, sem as edições premium e enterprise para que a árvore inteira continue licenciada em MIT. Nenhum caminho de código com IA e nenhuma telemetria; o SSO vem de OpenID Connect configurado por variáveis de ambiente. Django, Vue e PostgreSQL.",
+          href: "https://github.com/carneirofc/baserow",
           linkLabel: "Código no GitHub",
         },
         {
