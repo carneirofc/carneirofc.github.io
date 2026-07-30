@@ -16,9 +16,10 @@ export type SectionNavItem = {
 };
 
 /**
- * Fixed left-side rail that maps the page sections and smooth-scrolls to
- * them; the section in view is highlighted. Hidden below xl so it never
- * overlaps the content column.
+ * Fixed left-side rail mapping the page sections. Plain anchors — scrolling is
+ * native (`scroll-behavior: smooth` plus `.section-anchor`'s scroll-margin, see
+ * globals.css); there is no active-section tracking. Hidden below xl so it
+ * never overlaps the content column.
  */
 export function SectionNav({ items, ariaLabel }: { items: SectionNavItem[]; ariaLabel: string }) {
   return (
