@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
       globals: {
         console: "readonly",
         process: "readonly",
+        URL: "readonly",
       },
     },
   },

@@ -12,7 +12,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Queue a follow-up run instead of aborting one that may already be inside
+  # actions/deploy-pages — a cancelled deployment leaves Pages half-updated.
+  cancel-in-progress: false
 
 env:
   # @carneirofc/ui is a file: dependency on the deedlit.dev monorepo, checked
@@ -49,6 +51,8 @@ jobs:
         run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run velite
+      - name: Translation parity
+        run: node scripts/check-translations.mjs
       - run: npx prettier --check .
       - run: npx eslint .
       - run: npm run typecheck
