@@ -20,7 +20,7 @@ env:
   # @carneirofc/ui is a file: dependency on the deedlit.dev monorepo, checked
   # out as a sibling directory. Bump this sha together with package-lock.json
   # when adopting UI changes.
-  DEEDLIT_REF: 31518054899c4154d83a25cfe411c117bf0eb636
+  DEEDLIT_REF: 4ac0b5613b9c7e05164619312a8e1d0cc6c06c06
 
 jobs:
   checks:

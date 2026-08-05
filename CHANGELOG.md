@@ -51,6 +51,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- On phones the body gradient stopped after the first viewport, leaving the
+  footer on a white background. The deployed build predated the UI package's
+  touch fallback (`background-attachment: scroll` on coarse pointers), so
+  `DEEDLIT_REF` now points at a UI commit that includes it plus an `html`
+  background-color safety net for overscroll.
 - The language switch on the home page linked to `/pt-br` without the trailing
   slash the static export emits, costing a redirect hop. `alternatePath()` now
   keeps the slash in both directions.
