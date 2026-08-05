@@ -21,13 +21,19 @@ export function SiteHeader({ locale }: { locale: Locale }) {
         >
           carneirofc
         </Link>
-        <nav className="flex items-center gap-4 text-ui-sm sm:gap-6">
+        {/* Mono, //-prefixed links echo the `carneirofc // page` eyebrow motif
+            so the nav reads in this site's voice instead of the generic
+            wordmark-plus-links bar. */}
+        <nav className="flex items-center gap-3 font-mono text-ui-xs sm:gap-5">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="focus-ring cyber-muted rounded-md transition-colors hover:text-text"
+              className="focus-ring cyber-muted rounded-md lowercase transition-colors hover:text-text"
             >
+              <span aria-hidden className="text-accent/60">
+                {"//"}
+              </span>
               {item.label}
             </Link>
           ))}

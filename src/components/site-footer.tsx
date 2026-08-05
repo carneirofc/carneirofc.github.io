@@ -1,5 +1,4 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { LuMail } from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
@@ -23,7 +22,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className={LINK_CLASS}
           >
-            <FaGithub aria-hidden className={ICON_CLASS} />
+            <LuGithub aria-hidden className={ICON_CLASS} />
             GitHub
           </a>
           <a
@@ -32,7 +31,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className={LINK_CLASS}
           >
-            <FaLinkedin aria-hidden className={ICON_CLASS} />
+            <LuLinkedin aria-hidden className={ICON_CLASS} />
             LinkedIn
           </a>
           <a href={`mailto:${about.email}`} className={LINK_CLASS}>

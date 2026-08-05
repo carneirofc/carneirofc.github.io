@@ -1,40 +1,16 @@
-import type { IconType } from "react-icons";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { LuMail } from "react-icons/lu";
+import { LuArrowUpRight, LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 import { PageHeader } from "@/components/page-header";
-import { SectionLabel } from "@/components/section-label";
 import { SurfacePanel } from "@/components/surface-panel";
 import { buttonClass } from "@/lib/ui";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
+const SECONDARY_LINK =
+  "focus-ring cyber-muted inline-flex items-center gap-1.5 rounded-md text-ui-sm hover:text-text";
+
 export function ContactPage({ locale }: { locale: Locale }) {
   const about = getAbout(locale);
   const t = getDictionary(locale);
-
-  const channels: { icon: IconType; label: string; value: string; href: string; cta: string }[] = [
-    {
-      icon: LuMail,
-      label: t.contact.email.label,
-      value: about.email,
-      href: `mailto:${about.email}`,
-      cta: t.contact.email.cta,
-    },
-    {
-      icon: FaGithub,
-      label: t.contact.github.label,
-      value: about.links.github.replace("https://", ""),
-      href: about.links.github,
-      cta: t.contact.github.cta,
-    },
-    {
-      icon: FaLinkedin,
-      label: t.contact.linkedin.label,
-      value: about.name,
-      href: about.links.linkedin,
-      cta: t.contact.linkedin.cta,
-    },
-  ];
 
   return (
     <div className="flex flex-col gap-8">
@@ -44,31 +20,44 @@ export function ContactPage({ locale }: { locale: Locale }) {
         description={t.contact.description}
       />
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        {channels.map((channel) => (
-          <SurfacePanel key={channel.label}>
-            <div className="flex h-full flex-col gap-3">
-              <SectionLabel className="inline-flex items-center gap-1.5">
-                <channel.icon aria-hidden className="h-3.5 w-3.5 shrink-0" />
-                {channel.label}
-              </SectionLabel>
-              <p className="cyber-title flex-1 break-words text-ui-sm font-medium">
-                {channel.value}
-              </p>
-              <div>
-                <a
-                  href={channel.href}
-                  className={buttonClass("neutral", "sm")}
-                  {...(channel.href.startsWith("http")
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                >
-                  {channel.cta}
-                </a>
-              </div>
-            </div>
-          </SurfacePanel>
-        ))}
+      {/* Email is the channel the description points at, so it gets the panel;
+          GitHub and LinkedIn are secondary and stay inline links. */}
+      <SurfacePanel className="sm:max-w-xl">
+        <div className="flex flex-col gap-3">
+          <h2 className="cyber-title inline-flex items-center gap-1.5 text-ui-md font-semibold">
+            <LuMail aria-hidden className="h-4 w-4 shrink-0" />
+            {t.contact.email.label}
+          </h2>
+          <p className="cyber-muted break-words text-ui-sm">{about.email}</p>
+          <div>
+            <a href={`mailto:${about.email}`} className={buttonClass("accent", "md")}>
+              {t.contact.email.cta}
+            </a>
+          </div>
+        </div>
+      </SurfacePanel>
+
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a
+          href={about.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={SECONDARY_LINK}
+        >
+          <LuGithub aria-hidden className="h-3.5 w-3.5 shrink-0" />
+          {about.links.github.replace("https://", "")}
+          <LuArrowUpRight aria-hidden className="h-3.5 w-3.5 shrink-0" />
+        </a>
+        <a
+          href={about.links.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={SECONDARY_LINK}
+        >
+          <LuLinkedin aria-hidden className="h-3.5 w-3.5 shrink-0" />
+          {t.contact.linkedin.label}
+          <LuArrowUpRight aria-hidden className="h-3.5 w-3.5 shrink-0" />
+        </a>
       </div>
     </div>
   );

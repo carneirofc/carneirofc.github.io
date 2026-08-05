@@ -14,15 +14,15 @@
 /* Dark mode follows the `.dark` class set by the theme toggle / init script. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* App token aliases mirroring deedlit.dev so both sites stay in sync. */
+/* App token aliases mirroring deedlit.dev so both sites stay in sync.
+   The accent is NOT redefined here: @carneirofc/ui's --accent-cyan is the
+   single accent source so the app can't drift from the shared system. */
 :root {
   --base: 247 247 250;
   --surface: 255 255 255;
   --line: 210 214 229;
   --text: 21 24 37;
   --muted: 93 100 124;
-  --accent: 124 99 255;
-  --accent-soft: 223 216 255;
 }
 
 html[data-theme="dark"],
@@ -32,8 +32,6 @@ html[data-theme="dark"],
   --line: 57 63 94;
   --text: 232 236 255;
   --muted: 160 168 206;
-  --accent: 176 154 255;
-  --accent-soft: 54 44 90;
 }
 
 @theme inline {
@@ -42,10 +40,16 @@ html[data-theme="dark"],
   --color-line: rgb(var(--line));
   --color-text: rgb(var(--text));
   --color-muted: rgb(var(--muted));
-  --color-accent: rgb(var(--accent));
-  --color-accent-soft: rgb(var(--accent-soft));
+  --color-accent: var(--accent-cyan);
   --shadow-soft: 0 10px 30px rgba(6, 8, 18, 0.24);
   --radius-xl2: 1.25rem;
+}
+
+/* Accent buttons signal hover with shadow only; cancel the package's lift so
+   each element carries a single hover signal (see lib/ui.ts). Unlayered on
+   purpose — it must out-cascade the package's unlayered .cyber-button:hover. */
+.cyber-button:hover {
+  transform: none;
 }
 
 html,
@@ -68,17 +72,6 @@ html {
   scroll-margin-top: 6rem;
 }
 
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes rail-in {
   from {
     opacity: 0;
@@ -91,7 +84,8 @@ html {
 }
 
 /* Staggered entrance for the section-nav rail buttons; the per-item delay is
-   set inline. Neutralized under reduced-motion so the rail just appears. */
+   set inline. This is the page's single orchestrated entrance — sections are
+   just there. Neutralized under reduced-motion so the rail simply appears. */
 .rail-item {
   animation: rail-in 0.4s ease-out both;
 }
@@ -102,25 +96,13 @@ html {
   }
 }
 
-/* Reveal sections as they scroll into view. Gated on scroll-driven timeline
-   support so unsupported browsers keep sections fully visible, and disabled
-   under reduced-motion. A section already in view at load resolves to the end
-   (visible) state. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .section-anchor {
-      animation: reveal-up linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 28%;
-    }
-  }
-}
-
+/* Same ring color as the shared buttons (--ui-ring-focus) so the whole site
+   focuses in one voice. Shown instantly — never transitioned. */
 .focus-ring:focus-visible {
   outline: none;
   box-shadow:
     0 0 0 2px rgb(var(--base)),
-    0 0 0 4px rgb(var(--accent));
+    0 0 0 4px var(--ui-ring-focus);
 }
 
 /* Map @tailwindcss/typography onto the theme tokens so prose follows the
@@ -129,13 +111,13 @@ html {
   --tw-prose-body: rgb(var(--text) / 0.92);
   --tw-prose-headings: rgb(var(--text));
   --tw-prose-lead: rgb(var(--muted));
-  --tw-prose-links: rgb(var(--accent));
+  --tw-prose-links: var(--accent-cyan);
   --tw-prose-bold: rgb(var(--text));
   --tw-prose-counters: rgb(var(--muted));
-  --tw-prose-bullets: rgb(var(--accent));
+  --tw-prose-bullets: var(--accent-cyan);
   --tw-prose-hr: rgb(var(--line));
   --tw-prose-quotes: rgb(var(--muted));
-  --tw-prose-quote-borders: rgb(var(--accent) / 0.5);
+  --tw-prose-quote-borders: color-mix(in oklab, var(--accent-cyan) 50%, transparent);
   --tw-prose-captions: rgb(var(--muted));
   --tw-prose-code: rgb(var(--text));
   --tw-prose-pre-code: rgb(var(--text));

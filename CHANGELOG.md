@@ -23,6 +23,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Design-audit fixes across the app layer (the shared `@carneirofc/ui` package
+  is untouched): the app no longer defines its own violet accent — `--color-accent`,
+  prose links, and the shared focus ring now come from the UI system's
+  `--accent-cyan` / `--ui-ring-focus`; the contact page's three equal cards are
+  replaced by an email-dominant panel with inline GitHub/LinkedIn links; header
+  nav links pick up the mono `//` motif from the page eyebrows; section labels
+  on home/about are real headings instead of uppercase eyebrows; the
+  per-section scroll-reveal animation is gone (the section rail keeps the one
+  entrance); buttons show the focus outline instantly and carry a single hover
+  signal per variant; GitHub/LinkedIn glyphs use Lucide so all icons share one
+  stroke voice.
 - The home page's projects section lists every project instead of the first
   four. The section header still links to `/projects/`.
 - Documentation is now split by question. `README.md` stays the how-to,

@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa6";
-import { LuMail, LuMapPin, LuUser } from "react-icons/lu";
+import { LuGithub, LuLinkedin, LuMail, LuMapPin, LuUser } from "react-icons/lu";
 import { ChevronRightIcon } from "@/components/icons";
 import { PageHeader } from "@/components/page-header";
-import { SectionLabel } from "@/components/section-label";
 import { buttonClass } from "@/lib/ui";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAbout, getAllPosts } from "@/lib/posts";
@@ -30,7 +28,8 @@ export function HomePage({ locale }: { locale: Locale }) {
     <div className="flex flex-col gap-12">
       <SectionNav items={sections} ariaLabel={t.home.sectionsAriaLabel} />
 
-      <section id="intro" className="section-anchor flex flex-col gap-6">
+      {/* The intro breathes more than the card lists below (varied rhythm). */}
+      <section id="intro" className="section-anchor flex flex-col gap-6 pb-4">
         <PageHeader subtitle={t.home.subtitle} title={about.name} description={about.headline} />
 
         <div className="cyber-muted flex flex-wrap items-center gap-2 text-ui-sm">
@@ -53,7 +52,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className={buttonClass("neutral", "md")}
           >
-            <FaGithub aria-hidden className={BUTTON_ICON} />
+            <LuGithub aria-hidden className={BUTTON_ICON} />
             GitHub
           </a>
           <a
@@ -62,7 +61,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             rel="noopener noreferrer"
             className={buttonClass("neutral", "md")}
           >
-            <FaLinkedin aria-hidden className={BUTTON_ICON} />
+            <LuLinkedin aria-hidden className={BUTTON_ICON} />
             LinkedIn
           </a>
           <a href={`mailto:${about.email}`} className={buttonClass("ghost", "md")}>
@@ -75,7 +74,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       {latestPosts.length > 0 && (
         <section id="posts" className="section-anchor flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <SectionLabel>{t.home.latestPosts}</SectionLabel>
+            <h2 className="cyber-title text-ui-lg font-semibold">{t.home.latestPosts}</h2>
             <Link href={localePath(locale, "/blog/")} className={SECTION_LINK}>
               {t.home.allPosts}
               <ChevronRightIcon aria-hidden className="h-3.5 w-3.5" />
@@ -91,7 +90,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       <section id="projects" className="section-anchor flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <SectionLabel>{t.home.featuredProjects}</SectionLabel>
+          <h2 className="cyber-title text-ui-lg font-semibold">{t.home.featuredProjects}</h2>
           <Link href={localePath(locale, "/projects/")} className={SECTION_LINK}>
             {t.home.allProjects}
             <ChevronRightIcon aria-hidden className="h-3.5 w-3.5" />
