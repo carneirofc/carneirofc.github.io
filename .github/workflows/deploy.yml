@@ -103,7 +103,7 @@ jobs:
         run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run build
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/out
