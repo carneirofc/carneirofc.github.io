@@ -12,8 +12,15 @@ const componentCache = new Map<string, MDXComponent>();
 function getMDXComponent(code: string): MDXComponent {
   let component = componentCache.get(code);
   if (!component) {
-    const fn = new Function(code);
-    component = fn({ ...runtime }).default as MDXComponent;
+    const mod: unknown = new Function(code)({ ...runtime });
+    const exported: unknown =
+      typeof mod === "object" && mod !== null && "default" in mod ? mod.default : undefined;
+    if (typeof exported !== "function") {
+      throw new Error("Velite MDX code did not export a default component");
+    }
+    // The one permitted boundary cast (AGENTS.md): a compiled component's props
+    // can't be checked at runtime, only that it is a function.
+    component = exported as MDXComponent;
     componentCache.set(code, component);
   }
   return component;

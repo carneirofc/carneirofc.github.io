@@ -9,6 +9,14 @@ const eslintConfig = defineConfig([
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
+    // AGENTS.md: never `any` — take `unknown` and parse it with Zod.
+    files: ["**/*.{ts,tsx}"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unsafe-function-type": "error",
+    },
+  },
+  {
     files: ["scripts/**/*.mjs"],
     languageOptions: {
       globals: {

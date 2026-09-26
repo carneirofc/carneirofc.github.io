@@ -5,6 +5,7 @@
  * hook strips these, but `git commit --no-verify` can bypass it — this cannot.
  */
 import { execFileSync } from "node:child_process";
+import { z } from "zod";
 
 const MEDIA_RE = /\.(jpe?g|png|webp|heic|heif|tiff?|gif|mp4|mov|m4v|mkv|avi|webm)$/i;
 
@@ -51,7 +52,15 @@ try {
   process.exit(1);
 }
 
-const entries = output.trim() ? JSON.parse(output) : [];
+// exiftool -json: one object per file, keyed by tag name, plus SourceFile.
+const entriesSchema = z.array(z.looseObject({ SourceFile: z.string() }));
+const parsed = entriesSchema.safeParse(output.trim() ? JSON.parse(output) : []);
+if (!parsed.success) {
+  console.error("check-media-metadata: unexpected exiftool output:\n");
+  console.error(z.prettifyError(parsed.error));
+  process.exit(1);
+}
+const entries = parsed.data;
 const offenders = entries
   .map((entry) => {
     const { SourceFile, ...tags } = entry;

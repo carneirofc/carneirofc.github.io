@@ -16,3 +16,4 @@ for why it is that way.
 | [0005](./0005-lefthook-and-exiftool-privacy-gates.md) | Lefthook hooks + exiftool media stripping        | Accepted                              |
 | [0006](./0006-single-gated-deploy-workflow.md)        | One `deploy.yml` with gated jobs                 | Accepted                              |
 | [0007](./0007-bilingual-en-pt-br-routes.md)           | English at the root, pt-BR under `/pt-br/`       | Accepted                              |
+| [0008](./0008-zod-at-data-boundaries.md)              | Zod schemas as the source of data types          | Accepted                              |

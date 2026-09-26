@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `AGENTS.md`: the rules for changing this repo — Zod schemas for every data
+  shape, no `any`, TanStack Query if client-side fetching is ever needed — and
+  ADR 0008 recording the Zod decision. `CLAUDE.md` imports it.
+- `zod` as a direct dependency.
+
 - Baserow FOSS on the projects page (en and pt-br): my MIT-only fork of
   Baserow, with the premium and enterprise editions, the AI code paths, and the
   telemetry removed.
@@ -22,6 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `CONTEXT.md` and `docs/adr/`, replacing `PLAN.md` — see Changed/Removed.
 
 ### Changed
+
+- `ProjectEntry` and `Dictionary` are derived from Zod schemas, and the
+  dictionaries are parsed at module load: a project with a bad URL, or a docs
+  link without a label, now fails the build.
+- The theme cookie and the JSON the check scripts read are parsed with Zod
+  instead of being cast or trusted.
+- `@typescript-eslint/no-explicit-any` is an error instead of a warning.
 
 - Design-audit fixes across the app layer (the shared `@carneirofc/ui` package
   is untouched): the app no longer defines its own violet accent — `--color-accent`,

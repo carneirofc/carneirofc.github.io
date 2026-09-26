@@ -19,6 +19,7 @@ each choice — including the alternatives that lost — is in
 | Local gates   | Lefthook + exiftool + gitleaks                      | [0005](./docs/adr/0005-lefthook-and-exiftool-privacy-gates.md) |
 | CI/CD         | One `deploy.yml`, checks-gated                      | [0006](./docs/adr/0006-single-gated-deploy-workflow.md)        |
 | Languages     | en at the root, pt-BR mirrored under `/pt-br/`      | [0007](./docs/adr/0007-bilingual-en-pt-br-routes.md)           |
+| Data types    | Zod schemas + `z.infer`, parsed at boundaries       | [0008](./docs/adr/0008-zod-at-data-boundaries.md)              |
 
 Build order is always **Velite first, Next second** (`npm run build`): the app
 imports `#site/content` → `.velite/`, which does not exist until Velite runs.
@@ -69,7 +70,8 @@ Portuguese, and translations share the base slug. Velite's transform turns that
 into `locale`, `slug`, and `permalink` fields.
 
 UI strings and the projects list are code, not content — they live in
-`src/lib/i18n.ts` as a typed `Dictionary` per locale. Prose (bio, posts) is
+`src/lib/i18n.ts` as a `Dictionary` per locale, validated against
+`dictionarySchema` at module load so a malformed entry fails the build. Prose (bio, posts) is
 content, in `content/`.
 
 ## Known constraints

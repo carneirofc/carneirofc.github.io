@@ -1,17 +1,21 @@
 "use client";
 
 import { ThemeToggleButton as BaseThemeToggleButton } from "@carneirofc/ui";
+import { z } from "zod";
 import type {
   ThemeMode,
   ThemeToggleButtonProps as BaseThemeToggleButtonProps,
 } from "@carneirofc/ui";
 
 const THEME_COOKIE = "carneirofc-theme";
+const THEME_COOKIE_RE = new RegExp(`(?:^|; )${THEME_COOKIE}=([^;]*)`);
+
+const themeSchema = z.enum(["dark", "light"]) satisfies z.ZodType<ThemeMode>;
 
 function readTheme(): ThemeMode | null {
   try {
-    const match = document.cookie.match(/(?:^|; )carneirofc-theme=(dark|light)/);
-    return match ? (match[1] as ThemeMode) : null;
+    const parsed = themeSchema.safeParse(document.cookie.match(THEME_COOKIE_RE)?.[1]);
+    return parsed.success ? parsed.data : null;
   } catch {
     return null;
   }

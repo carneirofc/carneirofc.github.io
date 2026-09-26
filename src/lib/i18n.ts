@@ -1,5 +1,8 @@
+import { z } from "zod";
+
 export const locales = ["en", "pt-br"] as const;
-export type Locale = (typeof locales)[number];
+export const localeSchema = z.enum(locales);
+export type Locale = z.infer<typeof localeSchema>;
 
 export const defaultLocale: Locale = "en";
 
@@ -26,64 +29,83 @@ export function alternatePath(pathname: string): { locale: Locale; path: string 
   return { locale: "pt-br", path: pathname === "/" ? "/pt-br/" : `/pt-br${pathname}` };
 }
 
-export type ProjectEntry = {
-  name: string;
-  description: string;
-  href: string;
-  linkLabel: string;
-  docsHref?: string;
-  docsLabel?: string;
-};
+const text = z.string().min(1);
 
-export type Dictionary = {
-  nav: { home: string; about: string; blog: string; projects: string; contact: string };
-  home: {
-    subtitle: string;
-    aboutMe: string;
-    latestPosts: string;
-    allPosts: string;
-    featuredProjects: string;
-    allProjects: string;
-    email: string;
-    sectionsAriaLabel: string;
-    sections: { intro: string; posts: string; projects: string };
-  };
-  about: {
-    subtitle: string;
-    title: string;
-    sectionsAriaLabel: string;
-    sections: { bio: string; skills: string };
-    skills: Record<"languages" | "web" | "platform" | "devsecops" | "cloud" | "data_ai", string>;
-  };
-  blog: {
-    subtitle: string;
-    title: string;
-    description: string;
-    postSingular: string;
-    postPlural: string;
-    backToAll: string;
-    tagSubtitle: string;
-    tagDescription: (tag: string) => string;
-    minRead: (minutes: number) => string;
-  };
-  projects: {
-    subtitle: string;
-    title: string;
-    description: string;
-    entries: ProjectEntry[];
-  };
-  contact: {
-    subtitle: string;
-    title: string;
-    description: string;
-    email: { label: string; cta: string };
-    github: { label: string; cta: string };
-    linkedin: { label: string; cta: string };
-  };
-  footer: { rightsReserved: string };
-};
+// A docs link without a label (or the reverse) renders an empty button.
+export const projectEntrySchema = z
+  .object({
+    name: text,
+    description: text,
+    href: z.url(),
+    linkLabel: text,
+    docsHref: z.url().optional(),
+    docsLabel: text.optional(),
+  })
+  .refine((entry) => (entry.docsHref === undefined) === (entry.docsLabel === undefined), {
+    message: "docsHref and docsLabel must be set together",
+    path: ["docsLabel"],
+  });
+export type ProjectEntry = z.infer<typeof projectEntrySchema>;
 
-export const dictionaries: Record<Locale, Dictionary> = {
+const labelCta = z.object({ label: text, cta: text });
+
+export const dictionarySchema = z.object({
+  nav: z.object({ home: text, about: text, blog: text, projects: text, contact: text }),
+  home: z.object({
+    subtitle: text,
+    aboutMe: text,
+    latestPosts: text,
+    allPosts: text,
+    featuredProjects: text,
+    allProjects: text,
+    email: text,
+    sectionsAriaLabel: text,
+    sections: z.object({ intro: text, posts: text, projects: text }),
+  }),
+  about: z.object({
+    subtitle: text,
+    title: text,
+    sectionsAriaLabel: text,
+    sections: z.object({ bio: text, skills: text }),
+    skills: z.object({
+      languages: text,
+      web: text,
+      platform: text,
+      devsecops: text,
+      cloud: text,
+      data_ai: text,
+    }),
+  }),
+  blog: z.object({
+    subtitle: text,
+    title: text,
+    description: text,
+    postSingular: text,
+    postPlural: text,
+    backToAll: text,
+    tagSubtitle: text,
+    tagDescription: z.custom<(tag: string) => string>((value) => typeof value === "function"),
+    minRead: z.custom<(minutes: number) => string>((value) => typeof value === "function"),
+  }),
+  projects: z.object({
+    subtitle: text,
+    title: text,
+    description: text,
+    entries: z.array(projectEntrySchema),
+  }),
+  contact: z.object({
+    subtitle: text,
+    title: text,
+    description: text,
+    email: labelCta,
+    github: labelCta,
+    linkedin: labelCta,
+  }),
+  footer: z.object({ rightsReserved: text }),
+});
+export type Dictionary = z.infer<typeof dictionarySchema>;
+
+const dictionaryData: Record<Locale, Dictionary> = {
   en: {
     nav: { home: "home", about: "about", blog: "blog", projects: "projects", contact: "contact" },
     home: {
@@ -372,6 +394,9 @@ export const dictionaries: Record<Locale, Dictionary> = {
     footer: { rightsReserved: "Todos os direitos reservados." },
   },
 };
+
+// Parsed at module load, so a malformed entry fails `next build`.
+export const dictionaries = z.record(localeSchema, dictionarySchema).parse(dictionaryData);
 
 export function getDictionary(locale: Locale): Dictionary {
   return dictionaries[locale];

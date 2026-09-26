@@ -11,12 +11,21 @@
  * Run after `velite build`; reads the generated .velite/ data.
  */
 import { readFileSync } from "node:fs";
+import { z } from "zod";
 
-const LOCALES = ["en", "pt-br"];
+const LOCALES = /** @type {const} */ (["en", "pt-br"]);
 
-function load(name) {
+// Only the fields this script reads; everything else passes through untouched.
+const localeSchema = z.enum(LOCALES);
+const postsSchema = z.array(
+  z.object({ slug: z.string(), locale: localeSchema, draft: z.boolean() }),
+);
+const aboutsSchema = z.array(z.object({ locale: localeSchema }));
+
+function load(name, schema) {
+  let raw;
   try {
-    return JSON.parse(readFileSync(new URL(`../.velite/${name}`, import.meta.url), "utf8"));
+    raw = readFileSync(new URL(`../.velite/${name}`, import.meta.url), "utf8");
   } catch (error) {
     if (error.code === "ENOENT") {
       console.error(
@@ -26,6 +35,13 @@ function load(name) {
     }
     throw error;
   }
+  const parsed = schema.safeParse(JSON.parse(raw));
+  if (!parsed.success) {
+    console.error(`check-translations: .velite/${name} has an unexpected shape:\n`);
+    console.error(z.prettifyError(parsed.error));
+    process.exit(1);
+  }
+  return parsed.data;
 }
 
 /** Group entries by `key`, returning the locales each key was found in. */
@@ -51,14 +67,14 @@ function collectGaps(label, entries, key, fileFor) {
 
 // Drafts are excluded from the site, so they are excluded from parity too — but
 // a draft translation of a published post still leaves the route missing.
-const posts = load("posts.json").filter((post) => !post.draft);
+const posts = load("posts.json", postsSchema).filter((post) => !post.draft);
 collectGaps("post", posts, "slug", (slug, locale) =>
   locale === "en" ? `content/blog/${slug}.mdx` : `content/blog/${slug}.pt-br.mdx`,
 );
 
 // getAbout() falls back to English, so a missing translation degrades quietly
 // rather than 404ing — still a bug worth failing on.
-const abouts = load("abouts.json").map((about) => ({ ...about, id: "about" }));
+const abouts = load("abouts.json", aboutsSchema).map((about) => ({ ...about, id: "about" }));
 collectGaps("about page", abouts, "id", (_id, locale) =>
   locale === "en" ? "content/about.mdx" : "content/about.pt-br.mdx",
 );

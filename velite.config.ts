@@ -1,4 +1,5 @@
 import { defineCollection, defineConfig, s } from "velite";
+import { z } from "zod";
 
 // Locale is derived from the filename: `foo.mdx` is English, `foo.pt-br.mdx`
 // is Brazilian Portuguese. Translations share the same base slug.
@@ -6,12 +7,17 @@ const LOCALE_SUFFIX = /\.pt-br$/;
 
 const EXTERNAL_HREF = /^https?:\/\//;
 
-type HastNode = {
-  type: string;
-  tagName?: string;
-  properties?: Record<string, unknown>;
-  children?: HastNode[];
-};
+// The subset of a hast node the plugin below reads. Type-only: the plugin
+// mutates the tree in place, so it must not be replaced by a parsed copy.
+const hastNodeSchema = z.object({
+  type: z.string(),
+  tagName: z.string().optional(),
+  properties: z.record(z.string(), z.unknown()).optional(),
+  get children() {
+    return z.array(hastNodeSchema).optional();
+  },
+});
+type HastNode = z.infer<typeof hastNodeSchema>;
 
 // External links in MDX content open in a new tab.
 function rehypeExternalLinksNewTab() {
