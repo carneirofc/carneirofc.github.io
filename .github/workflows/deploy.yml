@@ -29,15 +29,15 @@ jobs:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           path: site
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: carneirofc/deedlit.dev
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -64,10 +64,10 @@ jobs:
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
+      - uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -81,15 +81,15 @@ jobs:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           path: site
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: carneirofc/deedlit.dev
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -103,9 +103,9 @@ jobs:
         run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev/deedlit.dev.ui
       - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site/out
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

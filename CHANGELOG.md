@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- GitHub Actions bumped to their Node 24 majors (`checkout` v7, `setup-node`
+  v7, `gitleaks-action` v3, `configure-pages` v6, `upload-pages-artifact` v5,
+  `deploy-pages` v5, `codeql-action` v4). GitHub-hosted runners dropped
+  Node 20 on 2026-09-16.
+
 - `ProjectEntry` and `Dictionary` are derived from Zod schemas, and the
   dictionaries are parsed at module load: a project with a bad URL, or a docs
   link without a label, now fails the build.
