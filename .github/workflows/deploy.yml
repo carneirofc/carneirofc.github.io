@@ -24,7 +24,7 @@ env:
 
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     defaults:
       run:
         working-directory: site
@@ -62,7 +62,7 @@ jobs:
         run: node scripts/check-media-metadata.mjs
 
   gitleaks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
         with:
@@ -73,7 +73,7 @@ jobs:
 
   deploy:
     needs: [checks, gitleaks]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

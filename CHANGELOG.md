@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   v7, `gitleaks-action` v3, `configure-pages` v6, `upload-pages-artifact` v5,
   `deploy-pages` v5, `codeql-action` v4). GitHub-hosted runners dropped
   Node 20 on 2026-09-16.
+- CI runs on `ubuntu-26.04`, pinned, instead of `ubuntu-latest`, ahead of
+  that label's move to 26.04 (2026-10-19 to 2026-11-19).
 
 - `ProjectEntry` and `Dictionary` are derived from Zod schemas, and the
   dictionaries are parsed at module load: a project with a bad URL, or a docs
