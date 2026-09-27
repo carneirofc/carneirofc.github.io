@@ -39,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - The theme cookie and the JSON the check scripts read are parsed with Zod
   instead of being cast or trusted.
 - `@typescript-eslint/no-explicit-any` is an error instead of a warning.
+  `@next/next/no-head-element` is off: it is a Pages Router rule that
+  misfired on the root layout's `<head>` in `SiteShell`.
 
 - Design-audit fixes across the app layer (the shared `@carneirofc/ui` package
   is untouched): the app no longer defines its own violet accent — `--color-accent`,

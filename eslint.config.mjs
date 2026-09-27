@@ -17,6 +17,13 @@ const eslintConfig = defineConfig([
     },
   },
   {
+    // Pages Router rule. It treats any file outside an `app/` path as a page,
+    // so it flags SiteShell's <head>, which is the root layout's <head>.
+    // There is no pages/ directory here (ADR 0002), and next/head, which
+    // the rule suggests, does nothing in the App Router.
+    rules: { "@next/next/no-head-element": "off" },
+  },
+  {
     files: ["scripts/**/*.mjs"],
     languageOptions: {
       globals: {
