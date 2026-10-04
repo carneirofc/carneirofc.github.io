@@ -72,6 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The section nav's icon key was typed as `string`, so a misspelt icon
+  type-checked and then crashed at render. The icon map now uses `satisfies`.
 - On phones the body gradient stopped after the first viewport, leaving the
   footer on a white background. The deployed build predated the UI package's
   touch fallback (`background-attachment: scroll` on coarse pointers), so

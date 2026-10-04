@@ -1,13 +1,13 @@
 import type { IconType } from "react-icons";
 import { LuFolderGit2, LuHouse, LuNewspaper, LuUser, LuWrench } from "react-icons/lu";
 
-const ICONS: Record<string, IconType> = {
+const ICONS = {
   home: LuHouse,
   about: LuUser,
   posts: LuNewspaper,
   projects: LuFolderGit2,
   skills: LuWrench,
-};
+} satisfies Record<string, IconType>;
 
 export type SectionNavItem = {
   href: string;
