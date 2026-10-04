@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localePath, type Locale } from "@/lib/i18n";
+import { localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
 export const SITE_URL = "https://carneirofc.github.io";
@@ -37,7 +37,7 @@ export function buildSiteMetadata(locale: Locale): Metadata {
       title: `${about.name} — ${about.role}`,
       description: about.headline,
       siteName: "carneirofc.github.io",
-      locale: locale === "en" ? "en_US" : "pt_BR",
+      locale: ogLocale[locale],
     },
     twitter: {
       card: "summary",

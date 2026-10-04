@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - The theme cookie's name and values live in `src/lib/theme.ts`; the inline
   init script and the toggle both build their pattern from it instead of
   repeating it.
+- `getAbout()` no longer falls back to the English about page: a missing
+  translation fails the build instead of shipping English under `/pt-br/`.
 - GitHub Actions bumped to their Node 24 majors (`checkout` v7, `setup-node`
   v7, `gitleaks-action` v3, `configure-pages` v6, `upload-pages-artifact` v5,
   `deploy-pages` v5, `codeql-action` v4). GitHub-hosted runners dropped

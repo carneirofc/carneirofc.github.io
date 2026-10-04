@@ -1,5 +1,6 @@
+import { z } from "zod";
 import { posts, abouts } from "#site/content";
-import { defaultLocale, type Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n";
 
 export type Post = (typeof posts)[number];
 export type About = (typeof abouts)[number];
@@ -21,7 +22,10 @@ export function getTranslation(post: Post): Post | undefined {
   return published.find((p) => p.slug === post.slug && p.locale !== post.locale);
 }
 
-export function getAllTags(locale: Locale): { tag: string; count: number }[] {
+export const tagCountSchema = z.object({ tag: z.string(), count: z.number().int().positive() });
+export type TagCount = z.infer<typeof tagCountSchema>;
+
+export function getAllTags(locale: Locale): TagCount[] {
   const counts = new Map<string, number>();
   for (const post of getAllPosts(locale)) {
     for (const tag of post.tags) {
@@ -38,10 +42,10 @@ export function getPostsByTag(locale: Locale, tag: string): Post[] {
 }
 
 export function getAbout(locale: Locale): About {
-  const match = abouts.find((entry) => entry.locale === locale);
-  const fallback = abouts.find((entry) => entry.locale === defaultLocale);
-  const about = match ?? fallback;
-  if (!about) throw new Error("content/about.mdx is missing");
+  // No fallback: every page exists in both locales, so a missing translation
+  // fails the build instead of shipping English copy under /pt-br/.
+  const about = abouts.find((entry) => entry.locale === locale);
+  if (!about) throw new Error(`about page for locale "${locale}" is missing`);
   return about;
 }
 
