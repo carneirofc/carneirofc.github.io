@@ -3,12 +3,13 @@ import { htmlLang, type Locale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { THEME_COOKIE_PATTERN } from "@/lib/theme";
 import "@/app/globals.css";
 
 const themeInitScript = `
 (() => {
   try {
-    const match = document.cookie.match(/(?:^|; )carneirofc-theme=(dark|light)/);
+    const match = document.cookie.match(new RegExp(${JSON.stringify(THEME_COOKIE_PATTERN)}));
     const stored = match ? match[1] : null;
     const preferred = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     const resolved = stored || preferred;
