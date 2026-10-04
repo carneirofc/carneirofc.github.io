@@ -20,6 +20,7 @@ each choice — including the alternatives that lost — is in
 | CI/CD         | One `deploy.yml`, checks-gated                      | [0006](./docs/adr/0006-single-gated-deploy-workflow.md)        |
 | Languages     | en at the root, pt-BR mirrored under `/pt-br/`      | [0007](./docs/adr/0007-bilingual-en-pt-br-routes.md)           |
 | Data types    | Zod schemas + `z.infer`, parsed at boundaries       | [0008](./docs/adr/0008-zod-at-data-boundaries.md)              |
+| Client data   | TanStack Query, GitHub repo stats only              | [0009](./docs/adr/0009-tanstack-query-for-github-stats.md)     |
 
 Build order is always **Velite first, Next second** (`npm run build`): the app
 imports `#site/content` → `.velite/`, which does not exist until Velite runs.
@@ -62,6 +63,9 @@ These are enforced by tooling, not by discipline. Breaking one fails the build.
 - **Fonts are self-hosted.** `next/font` loads Sora and IBM Plex Mono; a postcss
   plugin strips the `fonts.gstatic.com` `@font-face` fallbacks that
   `@carneirofc/ui` ships. Nothing is fetched from Google at runtime.
+- **One optional runtime fetch.** The project cards' GitHub stats are the only
+  client-side request (one shared TanStack Query, Zod-parsed). They are absent
+  from the prerendered HTML, and the page is complete without them.
 
 ## Content model
 

@@ -98,7 +98,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {t.projects.entries.map((project) => (
-            <ProjectCard key={project.name} project={project} />
+            <ProjectCard key={project.name} project={project} locale={locale} />
           ))}
         </div>
       </section>

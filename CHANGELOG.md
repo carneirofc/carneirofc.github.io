@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   shape, no `any`, TanStack Query if client-side fetching is ever needed — and
   ADR 0008 recording the Zod decision. `CLAUDE.md` imports it.
 - `zod` as a direct dependency.
+- Live GitHub stats (stars, language, last push) on the project cards, fetched
+  once in the browser with `@tanstack/react-query` and parsed with Zod. Public
+  repos only. ADR 0009 records the decision.
 
 - Baserow FOSS on the projects page (en and pt-br): my MIT-only fork of
   Baserow, with the premium and enterprise editions, the AI code paths, and the

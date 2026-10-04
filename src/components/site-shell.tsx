@@ -3,6 +3,7 @@ import { htmlLang, type Locale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Providers } from "@/components/providers";
 import { THEME_COOKIE_PATTERN } from "@/lib/theme";
 import "@/app/globals.css";
 
@@ -40,12 +41,14 @@ export function SiteShell({ locale, children }: { locale: Locale; children: Reac
       <body
         className={`${display.variable} ${mono.variable} font-[var(--font-display)] antialiased`}
       >
-        <ThemeToggle />
-        <SiteHeader locale={locale} />
-        <main className="mx-auto w-full max-w-4xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
-          {children}
-        </main>
-        <SiteFooter locale={locale} />
+        <Providers>
+          <ThemeToggle />
+          <SiteHeader locale={locale} />
+          <main className="mx-auto w-full max-w-4xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+            {children}
+          </main>
+          <SiteFooter locale={locale} />
+        </Providers>
       </body>
     </html>
   );

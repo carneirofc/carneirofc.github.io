@@ -101,6 +101,7 @@ export const dictionarySchema = z.object({
     title: text,
     description: text,
     entries: z.array(projectEntrySchema),
+    stats: z.object({ stars: text, updated: text }),
   }),
   contact: z.object({
     subtitle: text,
@@ -157,6 +158,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
       subtitle: "carneirofc // projects",
       title: "Projects",
       description: "Selected work and side projects. The rest lives at github.com/carneirofc.",
+      stats: { stars: "stars", updated: "updated" },
       entries: [
         {
           name: "deedlit.dev",
@@ -301,6 +303,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
       title: "Projetos",
       description:
         "Trabalhos selecionados e projetos paralelos. O resto está em github.com/carneirofc.",
+      stats: { stars: "estrelas", updated: "atualizado" },
       entries: [
         {
           name: "deedlit.dev",
