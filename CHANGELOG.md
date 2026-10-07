@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The home page's projects section shows only entries marked `featured`
+  (four today) instead of repeating the whole projects page.
 - The language switch's labels moved into the dictionaries (`localeSwitch`)
   instead of being hard-coded in the component, and the link carries
   `hreflang`.

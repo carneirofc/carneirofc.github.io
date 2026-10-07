@@ -25,6 +25,8 @@ export const projectEntrySchema = z
     linkLabel: text,
     docsHref: z.url().optional(),
     docsLabel: text.optional(),
+    // Shown on the home page as well as /projects/.
+    featured: z.boolean().optional(),
   })
   .refine((entry) => (entry.docsHref === undefined) === (entry.docsLabel === undefined), {
     message: "docsHref and docsLabel must be set together",
@@ -146,6 +148,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "My personal creative space — an AI-art gallery, a book library, and hobby projects. Next.js, self-hosted, running the same design system as this site.",
           href: "https://github.com/carneirofc/deedlit.dev",
+          featured: true,
           linkLabel: "Source on GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev/",
           docsLabel: "Docs",
@@ -155,6 +158,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "The React design system I share between deedlit.dev and this site — app-agnostic building blocks, dark/light theming, and a cyber-flavored look.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
+          featured: true,
           linkLabel: "Source on GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
           docsLabel: "Storybook",
@@ -171,6 +175,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "My personal AI assistant framework — one shared agent brain, many channels (Discord, an HTTP API, a desktop app), all driving the same stack. Model-agnostic, with memory it writes on purpose. Built on Agno, shipped to PyPI.",
           href: "https://github.com/carneirofc/magi-ai-assistant",
+          featured: true,
           linkLabel: "Source on GitHub",
         },
         {
@@ -194,6 +199,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "A Python toolbox for the DevOps chores I keep repeating — Kubernetes secret sanitizing, Azure DevOps work items, and more. A dependency-free core wrapped in whichever surface fits: CLI, Textual TUI, PySide6 UI, MCP server, or a Claude Code plugin. Published on PyPI.",
           href: "https://github.com/carneirofc/devops-utils",
+          featured: true,
           linkLabel: "Source on GitHub",
           docsHref: "https://carneirofc.github.io/devops-utils/",
           docsLabel: "Docs",
@@ -298,6 +304,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e projetos de hobby. Next.js, self-hosted, rodando o mesmo design system deste site.",
           href: "https://github.com/carneirofc/deedlit.dev",
+          featured: true,
           linkLabel: "Código no GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev/",
           docsLabel: "Docs",
@@ -307,6 +314,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "O design system React que eu compartilho entre o deedlit.dev e este site — blocos agnósticos de aplicação, temas claro/escuro e um visual cyber.",
           href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
+          featured: true,
           linkLabel: "Código no GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
           docsLabel: "Storybook",
@@ -323,6 +331,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "Meu framework de assistente de IA pessoal — um cérebro de agente compartilhado e vários canais (Discord, uma API HTTP, um app desktop), todos usando o mesmo stack. Agnóstico de modelo, com memória que ele escreve de propósito. Construído sobre o Agno, publicado no PyPI.",
           href: "https://github.com/carneirofc/magi-ai-assistant",
+          featured: true,
           linkLabel: "Código no GitHub",
         },
         {
@@ -346,6 +355,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "Uma caixa de ferramentas em Python para as tarefas de DevOps que eu repito sempre — sanitizar secrets de manifestos Kubernetes, work items do Azure DevOps e mais. Um núcleo sem dependências exposto pela superfície que fizer sentido: CLI, TUI em Textual, UI em PySide6, servidor MCP ou plugin do Claude Code. Publicado no PyPI.",
           href: "https://github.com/carneirofc/devops-utils",
+          featured: true,
           linkLabel: "Código no GitHub",
           docsHref: "https://carneirofc.github.io/devops-utils/",
           docsLabel: "Documentação",

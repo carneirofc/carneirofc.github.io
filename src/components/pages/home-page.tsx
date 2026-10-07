@@ -17,6 +17,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   const about = getAbout(locale);
   const t = getDictionary(locale);
   const latestPosts = getAllPosts(locale).slice(0, 3);
+  const featuredProjects = t.projects.entries.filter((project) => project.featured);
 
   // The posts section only renders when there are posts; so does its rail link.
   const sections: SectionNavItem[] = [
@@ -100,7 +101,7 @@ export function HomePage({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          {t.projects.entries.map((project) => (
+          {featuredProjects.map((project) => (
             <ProjectCard key={project.name} project={project} locale={locale} />
           ))}
         </div>
