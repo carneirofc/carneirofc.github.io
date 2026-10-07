@@ -33,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- CI builds against `deedlit.dev` at `2e6f8ed` (was `4ac0b56`), matching the
+  `@carneirofc/ui` package.json the lockfile records: radix-ui 1.6.7 and
+  tailwind-merge 3.7. No UI source changes.
 - Dependencies bumped to their latest compatible releases: Next 16.4, React
   19.3, Tailwind 4.3.3, tailwind-merge 3.7, eslint-config-next 16.4, lefthook
   2.2, postcss 8.5.29, prettier 3.9.9 and the React types. Held back: ESLint
