@@ -80,6 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The body's display-font class compiled to `font-weight` instead of
+  `font-family`; it now uses Tailwind's typed `font-(family-name:…)` form.
 - Every page now sends its own Open Graph `url`, `title` and `siteName`.
   About, blog, projects, contact and tag pages used to inherit the home
   page's `og:url` and title, and posts dropped `siteName`.

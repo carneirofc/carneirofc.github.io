@@ -39,7 +39,7 @@ export function SiteShell({ locale, children }: { locale: Locale; children: Reac
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body
-        className={`${display.variable} ${mono.variable} font-[var(--font-display)] antialiased`}
+        className={`${display.variable} ${mono.variable} font-(family-name:--font-display) antialiased`}
       >
         <Providers>
           <ThemeToggle />
