@@ -33,6 +33,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Dependencies bumped to their latest compatible releases: Next 16.4, React
+  19.3, Tailwind 4.3.3, tailwind-merge 3.7, eslint-config-next 16.4, lefthook
+  2.2, postcss 8.5.29, prettier 3.9.9 and the React types. Held back: ESLint
+  10 (the React, import and jsx-a11y plugins bundled by `eslint-config-next`
+  still cap at ESLint 9), TypeScript 7 (`typescript-eslint` supports
+  <6.1), and `@types/node` 26 (CI runs Node 24).
 - Chevrons come from `react-icons/lu` like every other icon; the
   hand-written `icons.tsx` is gone. The home/about intro, the tag-chip list,
   `MetaDot` and the layouts' `viewport` are each defined once
