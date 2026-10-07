@@ -15,6 +15,33 @@ export function pageAlternates(locale: Locale, path: string): Metadata["alternat
   };
 }
 
+const SITE_NAME = "carneirofc.github.io";
+
+/**
+ * Title, description, alternates and a complete Open Graph block for one page.
+ * Next replaces `openGraph` wholesale rather than merging it with the layout's,
+ * so every page has to send its own — otherwise it inherits the home page's url.
+ */
+export function pageMetadata(
+  locale: Locale,
+  path: string,
+  { title, description }: { title: string; description?: string },
+): Metadata {
+  return {
+    title,
+    description,
+    alternates: pageAlternates(locale, path),
+    openGraph: {
+      type: "website",
+      url: localePath(locale, path),
+      title,
+      description,
+      siteName: SITE_NAME,
+      locale: ogLocale[locale],
+    },
+  };
+}
+
 export function buildSiteMetadata(locale: Locale): Metadata {
   const about = getAbout(locale);
   return {
@@ -36,7 +63,7 @@ export function buildSiteMetadata(locale: Locale): Metadata {
       url: localePath(locale, "/"),
       title: `${about.name} — ${about.role}`,
       description: about.headline,
-      siteName: "carneirofc.github.io",
+      siteName: SITE_NAME,
       locale: ogLocale[locale],
     },
     twitter: {

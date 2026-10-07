@@ -12,6 +12,7 @@ import {
   readingTimeMinutes,
 } from "@/lib/posts";
 import { MDXContent } from "@/components/mdx-content";
+import { pageMetadata } from "@/lib/metadata";
 import { MetaDot } from "@/components/post-card";
 
 export function postStaticParams(locale: Locale): { slug: string }[] {
@@ -21,28 +22,17 @@ export function postStaticParams(locale: Locale): { slug: string }[] {
 export function postMetadata(locale: Locale, slug: string): Metadata {
   const post = getPostBySlug(locale, slug);
   if (!post) return {};
-  const translation = getTranslation(post);
-  return {
+  const base = pageMetadata(locale, `/blog/${slug}/`, {
     title: post.title,
     description: post.excerpt,
-    alternates: {
-      canonical: post.permalink,
-      ...(translation && {
-        languages: {
-          en: localePath("en", `/blog/${slug}/`),
-          "pt-BR": localePath("pt-br", `/blog/${slug}/`),
-        },
-      }),
-    },
-    openGraph: {
-      type: "article",
-      url: post.permalink,
-      title: post.title,
-      description: post.excerpt,
-      publishedTime: post.date,
-      tags: post.tags,
-      locale: locale === "en" ? "en_US" : "pt_BR",
-    },
+  });
+  // check-translations.mjs guarantees the other locale exists, but only point
+  // hreflang at it when it really does.
+  const alternates = getTranslation(post) ? base.alternates : { canonical: post.permalink };
+  return {
+    ...base,
+    alternates,
+    openGraph: { ...base.openGraph, type: "article", publishedTime: post.date, tags: post.tags },
   };
 }
 

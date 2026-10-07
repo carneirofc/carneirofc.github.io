@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/page-header";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import { getAllTags, getPostsByTag } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";
-import { pageAlternates } from "@/lib/metadata";
+import { pageMetadata } from "@/lib/metadata";
 
 export function tagStaticParams(locale: Locale): { tag: string }[] {
   return getAllTags(locale).map(({ tag }) => ({ tag }));
@@ -15,11 +15,10 @@ export function tagStaticParams(locale: Locale): { tag: string }[] {
 
 export function tagMetadata(locale: Locale, tag: string): Metadata {
   const t = getDictionary(locale);
-  return {
+  return pageMetadata(locale, `/blog/tags/${tag}/`, {
     title: `#${tag}`,
     description: t.blog.tagDescription(tag),
-    alternates: pageAlternates(locale, `/blog/tags/${tag}/`),
-  };
+  });
 }
 
 export function BlogTagPage({ locale, tag }: { locale: Locale; tag: string }) {

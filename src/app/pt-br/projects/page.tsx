@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { ProjectsPage } from "@/components/pages/projects-page";
 import { getDictionary } from "@/lib/i18n";
-import { pageAlternates } from "@/lib/metadata";
+import { pageMetadata } from "@/lib/metadata";
 
 const t = getDictionary("pt-br");
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata("pt-br", "/projects/", {
   title: t.projects.title,
   description: t.projects.description,
-  alternates: pageAlternates("pt-br", "/projects/"),
-};
+});
 
 export default function Page() {
   return <ProjectsPage locale="pt-br" />;

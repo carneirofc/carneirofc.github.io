@@ -80,6 +80,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Every page now sends its own Open Graph `url`, `title` and `siteName`.
+  About, blog, projects, contact and tag pages used to inherit the home
+  page's `og:url` and title, and posts dropped `siteName`.
 - The section nav's icon key was typed as `string`, so a misspelt icon
   type-checked and then crashed at render. The icon map now uses `satisfies`.
 - On phones the body gradient stopped after the first viewport, leaving the
