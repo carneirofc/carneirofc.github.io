@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeftIcon } from "@/components/icons";
+import { LuChevronLeft } from "react-icons/lu";
 import { InfoChip } from "@/components/info-chip";
 import { PageHeader } from "@/components/page-header";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
@@ -49,7 +49,7 @@ export function BlogTagPage({ locale, tag }: { locale: Locale; tag: string }) {
         href={localePath(locale, "/blog/")}
         className="focus-ring cyber-muted inline-flex items-center gap-1 rounded-md text-ui-sm hover:text-text"
       >
-        <ChevronLeftIcon aria-hidden className="h-3.5 w-3.5" />
+        <LuChevronLeft aria-hidden className="h-3.5 w-3.5 shrink-0" />
         {t.blog.backToAll}
       </Link>
     </div>

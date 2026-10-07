@@ -1,12 +1,9 @@
 import Link from "next/link";
-import { InfoChip } from "@/components/info-chip";
+import { MetaDot } from "@/components/meta-dot";
 import { SurfacePanel } from "@/components/surface-panel";
-import { getDictionary, localePath } from "@/lib/i18n";
+import { TagLinks } from "@/components/tag-links";
+import { getDictionary } from "@/lib/i18n";
 import { formatDate, readingTimeMinutes, type Post } from "@/lib/posts";
-
-export function MetaDot() {
-  return <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-current opacity-60" />;
-}
 
 export function PostCard({ post }: { post: Post }) {
   const t = getDictionary(post.locale);
@@ -28,19 +25,7 @@ export function PostCard({ post }: { post: Post }) {
           </Link>
         </h2>
         {post.excerpt && <p className="cyber-muted text-ui-sm">{post.excerpt}</p>}
-        {post.tags.length > 0 && (
-          <div className="mt-1 flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <Link
-                key={tag}
-                href={localePath(post.locale, `/blog/tags/${tag}/`)}
-                className="focus-ring rounded-full"
-              >
-                <InfoChip>#{tag}</InfoChip>
-              </Link>
-            ))}
-          </div>
-        )}
+        <TagLinks locale={post.locale} tags={post.tags.map((tag) => ({ tag }))} className="mt-1" />
       </article>
     </SurfacePanel>
   );

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { InfoChip } from "@/components/info-chip";
 import { PageHeader } from "@/components/page-header";
-import { getDictionary, localePath, type Locale } from "@/lib/i18n";
+import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAllPosts, getAllTags } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";
+import { TagLinks } from "@/components/tag-links";
 
 export function BlogIndexPage({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
@@ -23,21 +23,7 @@ export function BlogIndexPage({ locale }: { locale: Locale }) {
         }
       />
 
-      {tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {tags.map(({ tag, count }) => (
-            <Link
-              key={tag}
-              href={localePath(locale, `/blog/tags/${tag}/`)}
-              className="focus-ring rounded-full"
-            >
-              <InfoChip>
-                #{tag} ({count})
-              </InfoChip>
-            </Link>
-          ))}
-        </div>
-      )}
+      <TagLinks locale={locale} tags={tags} />
 
       <div className="flex flex-col gap-4">
         {posts.map((post) => (

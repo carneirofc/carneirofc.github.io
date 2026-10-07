@@ -1,8 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
 export const SITE_URL = "https://carneirofc.github.io";
+
+/** Browser chrome colour per OS scheme; shared by both root layouts. */
+export const siteViewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f7fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0c13" },
+  ],
+};
 
 /** Canonical + hreflang alternates for a route that exists in both locales. */
 export function pageAlternates(locale: Locale, path: string): Metadata["alternates"] {

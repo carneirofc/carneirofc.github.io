@@ -33,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Chevrons come from `react-icons/lu` like every other icon; the
+  hand-written `icons.tsx` is gone. The home/about intro, the tag-chip list,
+  `MetaDot` and the layouts' `viewport` are each defined once
+  (`ProfileIntro`, `TagLinks`, `meta-dot.tsx`, `siteViewport`).
 - The home page's projects section shows only entries marked `featured`
   (four today) instead of repeating the whole projects page.
 - The language switch's labels moved into the dictionaries (`localeSwitch`)

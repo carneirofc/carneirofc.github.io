@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeftIcon } from "@/components/icons";
-import { InfoChip } from "@/components/info-chip";
+import { LuChevronLeft } from "react-icons/lu";
+import { TagLinks } from "@/components/tag-links";
 import { getDictionary, localePath, type Locale } from "@/lib/i18n";
 import {
   formatDate,
@@ -13,7 +13,7 @@ import {
 } from "@/lib/posts";
 import { MDXContent } from "@/components/mdx-content";
 import { pageMetadata } from "@/lib/metadata";
-import { MetaDot } from "@/components/post-card";
+import { MetaDot } from "@/components/meta-dot";
 
 export function postStaticParams(locale: Locale): { slug: string }[] {
   return getAllPosts(locale).map((post) => ({ slug: post.slug }));
@@ -58,19 +58,7 @@ export function BlogPostPage({ locale, slug }: { locale: Locale; slug: string })
           <MetaDot />
           <span>{t.blog.minRead(readingTimeMinutes(post.metadata.readingTime))}</span>
         </div>
-        {post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <Link
-                key={tag}
-                href={localePath(locale, `/blog/tags/${tag}/`)}
-                className="focus-ring rounded-full"
-              >
-                <InfoChip>#{tag}</InfoChip>
-              </Link>
-            ))}
-          </div>
-        )}
+        <TagLinks locale={locale} tags={post.tags.map((tag) => ({ tag }))} />
       </header>
 
       <div className="prose max-w-none">
@@ -82,7 +70,7 @@ export function BlogPostPage({ locale, slug }: { locale: Locale; slug: string })
           href={localePath(locale, "/blog/")}
           className="focus-ring cyber-muted inline-flex items-center gap-1 rounded-md text-ui-sm hover:text-text"
         >
-          <ChevronLeftIcon aria-hidden className="h-3.5 w-3.5" />
+          <LuChevronLeft aria-hidden className="h-3.5 w-3.5 shrink-0" />
           {t.blog.backToAll}
         </Link>
       </footer>
