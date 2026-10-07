@@ -4,6 +4,7 @@ import { LocaleSwitch } from "@/components/locale-switch";
 
 export function SiteHeader({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
+  const switchTo = getDictionary(locale === "en" ? "pt-br" : "en").localeSwitch;
   const nav = [
     { href: localePath(locale, "/"), label: t.nav.home },
     { href: localePath(locale, "/about/"), label: t.nav.about },
@@ -37,7 +38,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
               {item.label}
             </Link>
           ))}
-          <LocaleSwitch />
+          <LocaleSwitch label={switchTo.label} ariaLabel={switchTo.ariaLabel} />
         </nav>
       </div>
     </header>

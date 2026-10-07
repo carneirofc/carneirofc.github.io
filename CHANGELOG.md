@@ -31,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The language switch's labels moved into the dictionaries (`localeSwitch`)
+  instead of being hard-coded in the component, and the link carries
+  `hreflang`.
 - The theme cookie's name and values live in `src/lib/theme.ts`; the inline
   init script and the toggle both build their pattern from it instead of
   repeating it.
@@ -80,6 +83,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The client bundle no longer ships every UI string. The locale helpers
+  client components need moved to `src/lib/locale.ts` (re-exported from
+  `i18n.ts`), so the dictionaries and their module-load parse stay on the
+  server.
 - The home page's section rail no longer links to `#posts` when there are
   no posts to show.
 - The body's display-font class compiled to `font-weight` instead of

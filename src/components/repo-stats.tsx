@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { LuCode, LuHistory, LuStar } from "react-icons/lu";
 import { githubReposQuery } from "@/lib/github";
-import { htmlLang, type Locale } from "@/lib/i18n";
+import { htmlLang, type Locale } from "@/lib/locale";
 
 const ICON = "h-3.5 w-3.5 shrink-0";
 
