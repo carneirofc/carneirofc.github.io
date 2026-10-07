@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- A styled 404 page: `src/app/global-not-found.tsx` renders inside the site
+  shell (header, footer, theme, `noindex`) instead of Next's bare default.
 - `AGENTS.md`: the rules for changing this repo — Zod schemas for every data
   shape, no `any`, TanStack Query if client-side fetching is ever needed — and
   ADR 0008 recording the Zod decision. `CLAUDE.md` imports it.

@@ -43,6 +43,11 @@ route group); Brazilian Portuguese mirrors it under `/pt-br/`.
 Page bodies are shared: each route file is a thin wrapper that passes a
 `locale` into a component in `src/components/pages/`.
 
+Unmatched URLs get `src/app/global-not-found.tsx` (behind
+`experimental.globalNotFound`): with two root layouts there is no single layout
+for a `not-found.tsx` to render in. GitHub Pages serves one `404.html` for
+every path, so it is English.
+
 ## Invariants
 
 These are enforced by tooling, not by discipline. Breaking one fails the build.

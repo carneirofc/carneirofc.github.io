@@ -39,6 +39,9 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     externalDir: true,
+    // Two root layouts ((en) and pt-br) leave no single layout for a
+    // not-found.js to render in; global-not-found.tsx is the app-wide 404.
+    globalNotFound: true,
   },
 };
 

@@ -90,6 +90,7 @@ export const dictionarySchema = z.object({
     github: labelCta,
     linkedin: labelCta,
   }),
+  notFound: z.object({ subtitle: text, title: text, description: text, home: text }),
   footer: z.object({ rightsReserved: text }),
 });
 export type Dictionary = z.infer<typeof dictionarySchema>;
@@ -238,6 +239,12 @@ const dictionaryData: Record<Locale, Dictionary> = {
       github: { label: "GitHub", cta: "Follow" },
       linkedin: { label: "LinkedIn", cta: "Connect" },
     },
+    notFound: {
+      subtitle: "carneirofc // 404",
+      title: "Page not found",
+      description: "There's nothing at this address. It may have moved, or never existed.",
+      home: "back to home",
+    },
     footer: { rightsReserved: "All rights reserved." },
   },
   "pt-br": {
@@ -383,6 +390,12 @@ const dictionaryData: Record<Locale, Dictionary> = {
       email: { label: "E-mail", cta: "Escreva para mim" },
       github: { label: "GitHub", cta: "Seguir" },
       linkedin: { label: "LinkedIn", cta: "Conectar" },
+    },
+    notFound: {
+      subtitle: "carneirofc // 404",
+      title: "Página não encontrada",
+      description: "Não há nada neste endereço. Talvez tenha mudado de lugar, ou nunca existiu.",
+      home: "voltar para o início",
     },
     footer: { rightsReserved: "Todos os direitos reservados." },
   },
