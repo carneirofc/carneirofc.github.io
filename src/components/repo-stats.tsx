@@ -48,12 +48,10 @@ export function RepoStats({
     <div className="cyber-muted flex min-h-5 flex-wrap items-center gap-x-4 gap-y-1 text-ui-xs">
       {data && (
         <>
-          <span
-            className="inline-flex items-center gap-1"
-            aria-label={`${data.stargazers_count} ${labels.stars}`}
-          >
+          <span className="inline-flex items-center gap-1">
             <LuStar aria-hidden className={ICON} />
             {data.stargazers_count}
+            <span className="sr-only">{labels.stars}</span>
           </span>
           {data.language && (
             <span className="inline-flex items-center gap-1">

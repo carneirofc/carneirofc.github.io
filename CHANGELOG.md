@@ -91,6 +91,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Screen readers now hear the project cards' star count with its label: the
+  `aria-label` on a plain `<span>` was ignored, so it is visually hidden
+  text instead.
 - The client bundle no longer ships every UI string. The locale helpers
   client components need moved to `src/lib/locale.ts` (re-exported from
   `i18n.ts`), so the dictionaries and their module-load parse stay on the

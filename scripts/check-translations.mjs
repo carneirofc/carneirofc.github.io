@@ -72,8 +72,8 @@ collectGaps("post", posts, "slug", (slug, locale) =>
   locale === "en" ? `content/blog/${slug}.mdx` : `content/blog/${slug}.pt-br.mdx`,
 );
 
-// getAbout() falls back to English, so a missing translation degrades quietly
-// rather than 404ing — still a bug worth failing on.
+// getAbout() throws on a missing locale, so `next build` would fail too — this
+// gate just says so earlier, before the build, and names the file to write.
 const abouts = load("abouts.json", aboutsSchema).map((about) => ({ ...about, id: "about" }));
 collectGaps("about page", abouts, "id", (_id, locale) =>
   locale === "en" ? "content/about.mdx" : "content/about.pt-br.mdx",
