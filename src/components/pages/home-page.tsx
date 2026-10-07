@@ -18,9 +18,12 @@ export function HomePage({ locale }: { locale: Locale }) {
   const t = getDictionary(locale);
   const latestPosts = getAllPosts(locale).slice(0, 3);
 
+  // The posts section only renders when there are posts; so does its rail link.
   const sections: SectionNavItem[] = [
     { href: "#intro", label: t.home.sections.intro, icon: "home" },
-    { href: "#posts", label: t.home.sections.posts, icon: "posts" },
+    ...(latestPosts.length > 0
+      ? [{ href: "#posts", label: t.home.sections.posts, icon: "posts" } as const]
+      : []),
     { href: "#projects", label: t.home.sections.projects, icon: "projects" },
   ];
 

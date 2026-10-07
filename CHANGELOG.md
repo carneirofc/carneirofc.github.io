@@ -80,6 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The home page's section rail no longer links to `#posts` when there are
+  no posts to show.
 - The body's display-font class compiled to `font-weight` instead of
   `font-family`; it now uses Tailwind's typed `font-(family-name:…)` form.
 - Every page now sends its own Open Graph `url`, `title` and `siteName`.
