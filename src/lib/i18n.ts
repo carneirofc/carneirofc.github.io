@@ -147,20 +147,20 @@ const dictionaryData: Record<Locale, Dictionary> = {
           name: "deedlit.dev",
           description:
             "My personal creative space — an AI-art gallery, a book library, and hobby projects. Next.js, self-hosted, running the same design system as this site.",
-          href: "https://github.com/carneirofc/deedlit.dev",
+          href: "https://github.com/carneirofc/deedlit.dev.ui",
           featured: true,
           linkLabel: "Source on GitHub",
-          docsHref: "https://carneirofc.github.io/deedlit.dev/",
+          docsHref: "https://carneirofc.github.io/deedlit.dev.ui/",
           docsLabel: "Docs",
         },
         {
           name: "@carneirofc/ui",
           description:
             "The React design system I share between deedlit.dev and this site — app-agnostic building blocks, dark/light theming, and a cyber-flavored look.",
-          href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
+          href: "https://github.com/carneirofc/deedlit.dev.ui/tree/master/deedlit.dev.ui",
           featured: true,
           linkLabel: "Source on GitHub",
-          docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
+          docsHref: "https://carneirofc.github.io/deedlit.dev.ui/ui/storybook/",
           docsLabel: "Storybook",
         },
         {
@@ -303,20 +303,20 @@ const dictionaryData: Record<Locale, Dictionary> = {
           name: "deedlit.dev",
           description:
             "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e projetos de hobby. Next.js, self-hosted, rodando o mesmo design system deste site.",
-          href: "https://github.com/carneirofc/deedlit.dev",
+          href: "https://github.com/carneirofc/deedlit.dev.ui",
           featured: true,
           linkLabel: "Código no GitHub",
-          docsHref: "https://carneirofc.github.io/deedlit.dev/",
+          docsHref: "https://carneirofc.github.io/deedlit.dev.ui/",
           docsLabel: "Docs",
         },
         {
           name: "@carneirofc/ui",
           description:
             "O design system React que eu compartilho entre o deedlit.dev e este site — blocos agnósticos de aplicação, temas claro/escuro e um visual cyber.",
-          href: "https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui",
+          href: "https://github.com/carneirofc/deedlit.dev.ui/tree/master/deedlit.dev.ui",
           featured: true,
           linkLabel: "Código no GitHub",
-          docsHref: "https://carneirofc.github.io/deedlit.dev/ui/storybook/",
+          docsHref: "https://carneirofc.github.io/deedlit.dev.ui/ui/storybook/",
           docsLabel: "Storybook",
         },
         {

@@ -100,6 +100,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The deedlit.dev and `@carneirofc/ui` project cards (en and pt-br) linked to
+  `carneirofc.github.io/deedlit.dev/`, which 404s since the repo was renamed
+  to `deedlit.dev.ui`. Docs, Storybook and source links now use the new name.
 - Screen readers now hear the project cards' star count with its label: the
   `aria-label` on a plain `<span>` was ignored, so it is visually hidden
   text instead.
