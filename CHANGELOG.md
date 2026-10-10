@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Three entries on the projects page (en and pt-br): ComfyHelper (the
+  image library in `deedlit.dev.ui`, with its docs), `linux-diagnostics`, and
+  the Next.js template for LLM-assisted development.
 - A styled 404 page: `src/app/global-not-found.tsx` renders inside the site
   shell (header, footer, theme, `noindex`) instead of Next's bare default.
 - `AGENTS.md`: the rules for changing this repo — Zod schemas for every data
@@ -33,6 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Projects page: the Baserow fork is now Saveroom, linking to the renamed
+  repo and its docs; the deedlit.dev card points to `deedlit.dev.portal`,
+  where the public site now lives.
 - CI builds against `deedlit.dev` at `2e6f8ed` (was `4ac0b56`), matching the
   `@carneirofc/ui` package.json the lockfile records: radix-ui 1.6.7 and
   tailwind-merge 3.7. No UI source changes.
@@ -137,6 +143,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- The Alyssa card from the projects page: its repo is private, so the
+  link was a 404 for visitors.
 - The cloud/container certification bullets (Docker DCA track, Amazon EKS and
   GKE, Google Cloud fundamentals, Linux Essentials and Ansible) from the
   education section of the about page, in both locales; the heading is now

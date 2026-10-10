@@ -146,9 +146,16 @@ const dictionaryData: Record<Locale, Dictionary> = {
         {
           name: "deedlit.dev",
           description:
-            "My personal creative space — an AI-art gallery, a book library, and hobby projects. Next.js, self-hosted, running the same design system as this site.",
-          href: "https://github.com/carneirofc/deedlit.dev.ui",
+            "My personal creative space — an AI-art gallery, a book library, and a sign-in portal for the services I self-host. Next.js, running the same design system as this site.",
+          href: "https://github.com/carneirofc/deedlit.dev.portal",
           featured: true,
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "ComfyHelper",
+          description:
+            "A self-hosted library for the images I generate locally with ComfyUI and Automatic1111. It parses the prompt, parameters, and model references embedded in each file, then lets me filter on them and find similar images through hybrid vector search. FastAPI services behind a gateway, one datastore each.",
+          href: "https://github.com/carneirofc/deedlit.dev.ui",
           linkLabel: "Source on GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev.ui/",
           docsLabel: "Docs",
@@ -176,13 +183,6 @@ const dictionaryData: Record<Locale, Dictionary> = {
             "My personal AI assistant framework — one shared agent brain, many channels (Discord, an HTTP API, a desktop app), all driving the same stack. Model-agnostic, with memory it writes on purpose. Built on Agno, shipped to PyPI.",
           href: "https://github.com/carneirofc/magi-ai-assistant",
           featured: true,
-          linkLabel: "Source on GitHub",
-        },
-        {
-          name: "Alyssa",
-          description:
-            "My AI assistant, built on top of the magi framework. She's a persona with a point of view — dryly warm, leads with the answer, and tells you when she doesn't know something.",
-          href: "https://github.com/carneirofc/alyssa",
           linkLabel: "Source on GitHub",
         },
         {
@@ -221,10 +221,26 @@ const dictionaryData: Record<Locale, Dictionary> = {
           linkLabel: "Source on GitHub",
         },
         {
-          name: "Baserow FOSS",
+          name: "Saveroom",
           description:
             "My fork of Baserow, the no-code database platform, with the premium and enterprise editions stripped out so the whole tree stays MIT licensed. No AI code paths and no telemetry; SSO comes from environment-configured OpenID Connect instead. Django, Vue, and PostgreSQL.",
-          href: "https://github.com/carneirofc/baserow",
+          href: "https://github.com/carneirofc/saveroom",
+          linkLabel: "Source on GitHub",
+          docsHref: "https://carneirofc.github.io/saveroom/",
+          docsLabel: "Docs",
+        },
+        {
+          name: "linux-diagnostics",
+          description:
+            "One command that collects a Linux machine's troubleshooting data — kernel and driver logs, Bluetooth, NFS, network, firewall, services, storage — into a bundle a human or an LLM can read. It writes a heuristic triage summary with file:line references and can redact MACs, IPs, and serials before you share it. Standard-library Python only.",
+          href: "https://github.com/carneirofc/linux-diagnostics",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "Next.js template for LLMs",
+          description:
+            "A minimal, opinionated Next.js 16 starter built for working with coding agents: AGENTS.md rules per source tree, reusable Claude Code skills, Lefthook and CI gates, typed i18n dictionaries, and an embedded PGlite database, so it runs with no setup.",
+          href: "https://github.com/carneirofc/a-simple-nextjs-for-llm-template",
           linkLabel: "Source on GitHub",
         },
         {
@@ -302,12 +318,19 @@ const dictionaryData: Record<Locale, Dictionary> = {
         {
           name: "deedlit.dev",
           description:
-            "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e projetos de hobby. Next.js, self-hosted, rodando o mesmo design system deste site.",
-          href: "https://github.com/carneirofc/deedlit.dev.ui",
+            "Meu espaço criativo pessoal — uma galeria de arte gerada por IA, uma biblioteca de livros e um portal com login para os serviços que eu hospedo. Next.js, rodando o mesmo design system deste site.",
+          href: "https://github.com/carneirofc/deedlit.dev.portal",
           featured: true,
           linkLabel: "Código no GitHub",
+        },
+        {
+          name: "ComfyHelper",
+          description:
+            "Uma biblioteca self-hosted para as imagens que eu gero localmente com ComfyUI e Automatic1111. Ela lê o prompt, os parâmetros e as referências de modelo embutidos em cada arquivo, e permite filtrar por eles e achar imagens parecidas com busca vetorial híbrida. Serviços FastAPI atrás de um gateway, cada um com seu próprio banco.",
+          href: "https://github.com/carneirofc/deedlit.dev.ui",
+          linkLabel: "Código no GitHub",
           docsHref: "https://carneirofc.github.io/deedlit.dev.ui/",
-          docsLabel: "Docs",
+          docsLabel: "Documentação",
         },
         {
           name: "@carneirofc/ui",
@@ -332,13 +355,6 @@ const dictionaryData: Record<Locale, Dictionary> = {
             "Meu framework de assistente de IA pessoal — um cérebro de agente compartilhado e vários canais (Discord, uma API HTTP, um app desktop), todos usando o mesmo stack. Agnóstico de modelo, com memória que ele escreve de propósito. Construído sobre o Agno, publicado no PyPI.",
           href: "https://github.com/carneirofc/magi-ai-assistant",
           featured: true,
-          linkLabel: "Código no GitHub",
-        },
-        {
-          name: "Alyssa",
-          description:
-            "Minha assistente de IA, construída sobre o framework magi. Ela é uma persona com opinião própria — de humor seco e acolhedor, entrega a resposta primeiro e avisa quando não sabe de algo.",
-          href: "https://github.com/carneirofc/alyssa",
           linkLabel: "Código no GitHub",
         },
         {
@@ -377,10 +393,26 @@ const dictionaryData: Record<Locale, Dictionary> = {
           linkLabel: "Código no GitHub",
         },
         {
-          name: "Baserow FOSS",
+          name: "Saveroom",
           description:
             "Meu fork do Baserow, a plataforma de banco de dados no-code, sem as edições premium e enterprise para que a árvore inteira continue licenciada em MIT. Nenhum caminho de código com IA e nenhuma telemetria; o SSO vem de OpenID Connect configurado por variáveis de ambiente. Django, Vue e PostgreSQL.",
-          href: "https://github.com/carneirofc/baserow",
+          href: "https://github.com/carneirofc/saveroom",
+          linkLabel: "Código no GitHub",
+          docsHref: "https://carneirofc.github.io/saveroom/",
+          docsLabel: "Documentação",
+        },
+        {
+          name: "linux-diagnostics",
+          description:
+            "Um único comando que coleta os dados de diagnóstico de uma máquina Linux — logs de kernel e drivers, Bluetooth, NFS, rede, firewall, serviços, armazenamento — num pacote que uma pessoa ou um LLM consegue ler. Ele gera um resumo de triagem heurístico com referências arquivo:linha e pode mascarar MACs, IPs e números de série antes de você compartilhar. Só a biblioteca padrão do Python.",
+          href: "https://github.com/carneirofc/linux-diagnostics",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Template Next.js para LLMs",
+          description:
+            "Um starter de Next.js 16 mínimo e opinativo, feito para trabalhar com agentes de código: regras em AGENTS.md por árvore de código, skills reutilizáveis do Claude Code, gates com Lefthook e CI, dicionários de i18n tipados e um banco PGlite embutido, então roda sem nenhuma configuração.",
+          href: "https://github.com/carneirofc/a-simple-nextjs-for-llm-template",
           linkLabel: "Código no GitHub",
         },
         {
