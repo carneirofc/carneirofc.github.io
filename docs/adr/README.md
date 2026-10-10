@@ -18,3 +18,4 @@ for why it is that way.
 | [0007](./0007-bilingual-en-pt-br-routes.md)           | English at the root, pt-BR under `/pt-br/`       | Accepted                              |
 | [0008](./0008-zod-at-data-boundaries.md)              | Zod schemas as the source of data types          | Accepted                              |
 | [0009](./0009-tanstack-query-for-github-stats.md)     | TanStack Query for live GitHub stats             | Accepted                              |
+| [0010](./0010-ui-sibling-renamed-deedlit-dev-ui.md)   | Sibling checkout renamed to `deedlit.dev.ui`     | Accepted — supersedes 0003's paths    |

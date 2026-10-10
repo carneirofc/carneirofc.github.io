@@ -7,7 +7,7 @@
 @source "../../content/**/*.mdx";
 /* The UI is a sibling `file:` checkout (docs/adr/0003), so its classes are
    scanned straight from that source tree. */
-@source "../../../deedlit.dev/deedlit.dev.ui/src/**/*.{ts,tsx,js,jsx}";
+@source "../../../deedlit.dev.ui/deedlit.dev.ui/src/**/*.{ts,tsx,js,jsx}";
 /* Shared visual system from @carneirofc/ui. Keep app-level globals thin. */
 @import "@carneirofc/ui/styles.css";
 

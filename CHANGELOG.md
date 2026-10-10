@@ -36,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- `@carneirofc/ui` is now `file:../deedlit.dev.ui/deedlit.dev.ui`, following
+  the rename of the `deedlit.dev` repo to `deedlit.dev.ui`; CI checks out the
+  renamed repo into `deedlit.dev.ui/` at the same `DEEDLIT_REF`. ADR 0010
+  records it.
 - Projects page: the Baserow fork is now Saveroom, linking to the renamed
   repo and its docs; the deedlit.dev card points to `deedlit.dev.portal`,
   where the public site now lives.

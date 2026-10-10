@@ -4,7 +4,7 @@ Personal landing page + blog for **Cláudio Carneiro**, served at
 [https://carneirofc.github.io/](https://carneirofc.github.io/).
 
 Next.js static export (`output: "export"`) + [Velite](https://velite.js.org)
-MDX content + the shared [`@carneirofc/ui`](https://github.com/carneirofc/deedlit.dev/tree/master/deedlit.dev.ui)
+MDX content + the shared [`@carneirofc/ui`](https://github.com/carneirofc/deedlit.dev.ui/tree/master/deedlit.dev.ui)
 design system, deployed to GitHub Pages via GitHub Actions.
 
 This README is the how-to. See [`CONTEXT.md`](./CONTEXT.md) for what the system
@@ -14,13 +14,13 @@ piece was chosen.
 ## Prerequisites
 
 - **Node 24+** and npm.
-- **A sibling checkout of `deedlit.dev`** — `@carneirofc/ui` is consumed as a
+- **A sibling checkout of `deedlit.dev.ui`** — `@carneirofc/ui` is consumed as a
   local `file:` dependency, so the repos must sit next to each other:
 
   ```
   <parent>/
   ├── carneirofc.github.io/   # this repo
-  └── deedlit.dev/            # git clone https://github.com/carneirofc/deedlit.dev
+  └── deedlit.dev.ui/         # git clone https://github.com/carneirofc/deedlit.dev.ui
       └── deedlit.dev.ui/
   ```
 
@@ -85,8 +85,8 @@ still carries GPS/device/timestamp tags.
 2. **gitleaks** — full-history secret scan.
 3. **deploy** — gated on both; builds and publishes `out/` to GitHub Pages.
 
-CI clones `deedlit.dev` as a sibling directory, pinned to the `DEEDLIT_REF`
-sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev`, run
+CI clones `deedlit.dev.ui` as a sibling directory, pinned to the `DEEDLIT_REF`
+sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev.ui`, run
 `npm install` here (refreshes `package-lock.json`), update `DEEDLIT_REF` to the
 new sha, and commit both.
 

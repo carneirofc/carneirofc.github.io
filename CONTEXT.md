@@ -86,9 +86,9 @@ content, in `content/`.
 ## Known constraints
 
 - **The UI dependency needs a sibling checkout.** `@carneirofc/ui` is
-  `file:../deedlit.dev/deedlit.dev.ui`; CI clones `deedlit.dev` at the
+  `file:../deedlit.dev.ui/deedlit.dev.ui`; CI clones `deedlit.dev.ui` at the
   `DEEDLIT_REF` sha pinned in `deploy.yml`. Adopting UI changes means bumping
-  that sha and `package-lock.json` together. See ADR 0003.
+  that sha and `package-lock.json` together. See ADRs 0003 and 0010.
 - **Dependabot cannot bump npm here** — it can't resolve the `file:` dep — so
   npm updates are manual. GitHub security _alerts_ still fire on the lockfile.
 - **The section-nav rail has no active-section tracking.** The JS island that

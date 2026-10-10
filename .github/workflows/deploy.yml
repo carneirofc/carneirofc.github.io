@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # @carneirofc/ui is a file: dependency on the deedlit.dev monorepo, checked
+  # @carneirofc/ui is a file: dependency on the deedlit.dev.ui monorepo, checked
   # out as a sibling directory. Bump this sha together with package-lock.json
   # when adopting UI changes.
   DEEDLIT_REF: 2e6f8ed56d8b36c16382fef05847c49dda2bb1ab
@@ -34,9 +34,9 @@ jobs:
           path: site
       - uses: actions/checkout@v7
         with:
-          repository: carneirofc/deedlit.dev
+          repository: carneirofc/deedlit.dev.ui
           ref: ${{ env.DEEDLIT_REF }}
-          path: deedlit.dev
+          path: deedlit.dev.ui
       - uses: actions/setup-node@v7
         with:
           node-version: 24
@@ -49,7 +49,7 @@ jobs:
       # React, and next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
         run: npm install --omit=dev --no-audit --no-fund
-        working-directory: deedlit.dev/deedlit.dev.ui
+        working-directory: deedlit.dev.ui/deedlit.dev.ui
       - run: npm run velite
       - name: Translation parity
         run: node scripts/check-translations.mjs
@@ -86,9 +86,9 @@ jobs:
           path: site
       - uses: actions/checkout@v7
         with:
-          repository: carneirofc/deedlit.dev
+          repository: carneirofc/deedlit.dev.ui
           ref: ${{ env.DEEDLIT_REF }}
-          path: deedlit.dev
+          path: deedlit.dev.ui
       - uses: actions/setup-node@v7
         with:
           node-version: 24
@@ -101,7 +101,7 @@ jobs:
       # next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
         run: npm install --omit=dev --no-audit --no-fund
-        working-directory: deedlit.dev/deedlit.dev.ui
+        working-directory: deedlit.dev.ui/deedlit.dev.ui
       - run: npm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

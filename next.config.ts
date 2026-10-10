@@ -1,14 +1,14 @@
 import path from "node:path";
 import type { NextConfig } from "next";
 
-// @carneirofc/ui is consumed from the local deedlit.dev monorepo checkout
+// @carneirofc/ui is consumed from the local deedlit.dev.ui monorepo checkout
 // (file: dependency). The aliases point straight at the package source so no
 // prebuilt dist/ is required — Next transpiles it via `transpilePackages`.
-const UI_SRC = "../deedlit.dev/deedlit.dev.ui/src/index.ts";
-const UI_STYLES = "../deedlit.dev/deedlit.dev.ui/styles/styles.css";
+const UI_SRC = "../deedlit.dev.ui/deedlit.dev.ui/src/index.ts";
+const UI_STYLES = "../deedlit.dev.ui/deedlit.dev.ui/styles/styles.css";
 
 // The UI sources live outside this repo, so their bare imports resolve
-// against the deedlit.dev tree (npm never installs dependencies of linked
+// against the deedlit.dev.ui tree (npm never installs dependencies of linked
 // packages here). That is fine for its stateless runtime deps (radix-ui,
 // cva, …), but React must be a single copy — pin it to THIS repo.
 const SHARED_PACKAGES = ["react", "react-dom"];
