@@ -244,6 +244,20 @@ const dictionaryData: Record<Locale, Dictionary> = {
           linkLabel: "Source on GitHub",
         },
         {
+          name: "BookOrbit",
+          description:
+            "My fork of the self-hosted ebook/comic/audiobook library, hardened with my own fixes — tag import from embedded file metadata, a tag browser, in-place file replacement that keeps reading progress, and a few security patches, merged upstream where it made sense.",
+          href: "https://github.com/carneirofc/bookorbit",
+          linkLabel: "Source on GitHub",
+        },
+        {
+          name: "Readest",
+          description:
+            "My fork of the cross-platform ebook reader, extended to push the book I'm reading straight into my self-hosted BookOrbit library, with packaging and Docker/dependency fixes on top.",
+          href: "https://github.com/carneirofc/readest",
+          linkLabel: "Source on GitHub",
+        },
+        {
           name: "More on GitHub",
           description:
             "The rest of what I tinker with — control-system software, CLIs, infra tooling, and experiments in Go, TypeScript, Python, .NET, and C/C++.",
@@ -413,6 +427,20 @@ const dictionaryData: Record<Locale, Dictionary> = {
           description:
             "Um starter de Next.js 16 mínimo e opinativo, feito para trabalhar com agentes de código: regras em AGENTS.md por árvore de código, skills reutilizáveis do Claude Code, gates com Lefthook e CI, dicionários de i18n tipados e um banco PGlite embutido, então roda sem nenhuma configuração.",
           href: "https://github.com/carneirofc/a-simple-nextjs-for-llm-template",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "BookOrbit",
+          description:
+            "Meu fork da biblioteca self-hosted de ebooks/quadrinhos/audiobooks, com minhas próprias correções — importação de tags de metadados embutidos, um navegador de tags, substituição de arquivo no local sem perder o progresso de leitura, e algumas correções de segurança, enviadas ao upstream quando fazia sentido.",
+          href: "https://github.com/carneirofc/bookorbit",
+          linkLabel: "Código no GitHub",
+        },
+        {
+          name: "Readest",
+          description:
+            "Meu fork do leitor de ebooks multiplataforma, estendido para enviar o livro que estou lendo direto para a minha biblioteca BookOrbit self-hosted, além de correções de empacotamento e de dependências/Docker.",
+          href: "https://github.com/carneirofc/readest",
           linkLabel: "Código no GitHub",
         },
         {
