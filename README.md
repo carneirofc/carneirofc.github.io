@@ -91,9 +91,10 @@ sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev.ui` and update
 not change (ADR 0011).
 
 `codeql.yml` (SAST) and Dependabot (GitHub Actions updates only — Dependabot
-cannot resolve the sibling `link:` dependency, so npm-ecosystem bumps, which
-would cover `pnpm-lock.yaml`, are manual; security _alerts_ still fire) round out
-the security tooling.
+cannot resolve the sibling `link:` dependency, so dependency bumps are manual)
+round out the security tooling. GitHub's dependency graph does not read pnpm
+12's two-document `pnpm-lock.yaml`, so Dependabot security _alerts_ do not fire
+for npm packages either; run `pnpm audit` before releases (ADR 0011).
 
 ### One-time repo setup
 

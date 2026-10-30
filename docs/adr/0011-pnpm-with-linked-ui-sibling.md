@@ -63,3 +63,8 @@ installs none of them.
   to `allowBuilds`, deliberately.
 - Dependabot's `npm` ecosystem also covers `pnpm-lock.yaml`. It stays off for
   the reason in ADR 0003: it cannot resolve the sibling.
+- **Security alerts are lost.** Pinning the pnpm version makes pnpm 12 write
+  `pnpm-lock.yaml` as two YAML documents, and GitHub's dependency graph does
+  not read that format, so Dependabot alerts stop for npm packages and existing
+  ones may close. ADR 0003 counted on those alerts. Until GitHub supports the
+  format, `pnpm audit` run by hand is the only dependency vulnerability check.

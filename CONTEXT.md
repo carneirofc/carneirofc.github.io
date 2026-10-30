@@ -91,7 +91,8 @@ content, in `content/`.
   `DEEDLIT_REF` sha pinned in `deploy.yml`. Adopting UI changes means bumping
   that sha; `pnpm-lock.yaml` only records the link. See ADRs 0003, 0010, 0011.
 - **Dependabot cannot bump dependencies here.** It can't resolve the `link:`
-  dep, so updates are manual. GitHub security _alerts_ still fire on the
-  lockfile.
+  dep, so updates are manual. Security _alerts_ don't fire either: GitHub's
+  dependency graph skips pnpm 12's two-document lockfile, which pinning the pnpm
+  version produces. `pnpm audit` is the check (ADR 0011).
 - **The section-nav rail has no active-section tracking.** The JS island that
   did it was removed; the links are plain anchors on native smooth scrolling.
