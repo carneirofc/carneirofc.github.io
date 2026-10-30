@@ -36,6 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The repo is installed with pnpm 12 (`packageManager` pin) instead of npm;
+  `pnpm-lock.yaml`, imported from `package-lock.json`, resolves the same
+  versions. `@carneirofc/ui` is a `link:` dependency, so it is still a symlink
+  to the sibling checkout. Dependency build scripts are allow-listed in
+  `pnpm-workspace.yaml`. CI, the Lefthook hooks and the docs use pnpm. ADR
+  0011 records the decision.
 - `@carneirofc/ui` is now `file:../deedlit.dev.ui/deedlit.dev.ui`, following
   the rename of the `deedlit.dev` repo to `deedlit.dev.ui`; CI checks out the
   renamed repo into `deedlit.dev.ui/` at the same `DEEDLIT_REF`. ADR 0010

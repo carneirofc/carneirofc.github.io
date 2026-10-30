@@ -13,9 +13,9 @@ piece was chosen.
 
 ## Prerequisites
 
-- **Node 24+** and npm.
+- **Node 24+** and **pnpm** (the version pinned in `packageManager`).
 - **A sibling checkout of `deedlit.dev.ui`** — `@carneirofc/ui` is consumed as a
-  local `file:` dependency, so the repos must sit next to each other:
+  local `link:` dependency, so the repos must sit next to each other:
 
   ```
   <parent>/
@@ -33,12 +33,12 @@ piece was chosen.
 ## Development
 
 ```sh
-npm install        # also installs the Lefthook git hooks
-npm run dev        # velite build + next dev
-npm run build      # velite build + next build -> out/
-npm run lint       # eslint
-npm run typecheck  # tsc --noEmit (run `npm run velite` first on a fresh clone)
-npm run format     # prettier --write
+pnpm install        # also installs the Lefthook git hooks
+pnpm run dev        # velite build + next dev
+pnpm run build      # velite build + next build -> out/
+pnpm run lint       # eslint
+pnpm run typecheck  # tsc --noEmit (run `pnpm run velite` first on a fresh clone)
+pnpm run format     # prettier --write
 ```
 
 ## Writing content
@@ -86,13 +86,14 @@ still carries GPS/device/timestamp tags.
 3. **deploy** — gated on both; builds and publishes `out/` to GitHub Pages.
 
 CI clones `deedlit.dev.ui` as a sibling directory, pinned to the `DEEDLIT_REF`
-sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev.ui`, run
-`npm install` here (refreshes `package-lock.json`), update `DEEDLIT_REF` to the
-new sha, and commit both.
+sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev.ui` and update
+`DEEDLIT_REF` to the new sha. `pnpm-lock.yaml` only records the link, so it does
+not change (ADR 0011).
 
 `codeql.yml` (SAST) and Dependabot (GitHub Actions updates only — Dependabot
-cannot resolve the sibling `file:` dependency, so npm bumps are manual;
-security _alerts_ for npm still fire) round out the security tooling.
+cannot resolve the sibling `link:` dependency, so npm-ecosystem bumps, which
+would cover `pnpm-lock.yaml`, are manual; security _alerts_ still fire) round out
+the security tooling.
 
 ### One-time repo setup
 

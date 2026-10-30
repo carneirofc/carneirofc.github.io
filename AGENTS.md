@@ -10,7 +10,7 @@ changes, add a superseding ADR; don't edit the old one.
 Velite runs before Next — `.velite/` doesn't exist until it does.
 
 ```sh
-npm run lint && npm run typecheck && npm run build
+pnpm run lint && pnpm run typecheck && pnpm run build
 node scripts/check-translations.mjs
 ```
 
@@ -44,8 +44,10 @@ it is a new dependency, so it gets an ADR.
 
 ## Repo conventions
 
-- Dependencies: `@carneirofc/ui` is a `file:` sibling checkout (ADR 0003).
-  Never use `--legacy-peer-deps`.
+- Dependencies: pnpm only (ADR 0011). `@carneirofc/ui` is a `link:` sibling
+  checkout (ADRs 0003, 0011). Never use `--legacy-peer-deps`, and don't
+  switch on hoisting. A new dependency's install script runs only once it is
+  added to `allowBuilds` in `pnpm-workspace.yaml`.
 - Every route and published post exists in both `en` and `pt-br`; UI strings
   live in `src/lib/i18n.ts`. No mixed-language titles.
 - Use icons (`react-icons/lu`), not decorative unicode glyphs.

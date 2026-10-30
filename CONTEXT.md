@@ -14,15 +14,16 @@ each choice — including the alternatives that lost — is in
 | ------------- | --------------------------------------------------- | -------------------------------------------------------------- |
 | Hosting       | GitHub Pages from `carneirofc/carneirofc.github.io` | [0001](./docs/adr/0001-own-repo-root-url.md)                   |
 | Framework     | Next.js App Router, `output: "export"`              | [0002](./docs/adr/0002-nextjs-static-export.md)                |
-| Design system | `@carneirofc/ui`, sibling `file:` checkout          | [0003](./docs/adr/0003-ui-via-sibling-file-dependency.md)      |
+| Design system | `@carneirofc/ui`, sibling `link:` checkout          | [0003](./docs/adr/0003-ui-via-sibling-file-dependency.md)      |
 | Content       | Velite → MDX with Zod-validated frontmatter         | [0004](./docs/adr/0004-velite-content-layer.md)                |
 | Local gates   | Lefthook + exiftool + gitleaks                      | [0005](./docs/adr/0005-lefthook-and-exiftool-privacy-gates.md) |
 | CI/CD         | One `deploy.yml`, checks-gated                      | [0006](./docs/adr/0006-single-gated-deploy-workflow.md)        |
 | Languages     | en at the root, pt-BR mirrored under `/pt-br/`      | [0007](./docs/adr/0007-bilingual-en-pt-br-routes.md)           |
 | Data types    | Zod schemas + `z.infer`, parsed at boundaries       | [0008](./docs/adr/0008-zod-at-data-boundaries.md)              |
 | Client data   | TanStack Query, GitHub repo stats only              | [0009](./docs/adr/0009-tanstack-query-for-github-stats.md)     |
+| Packages      | pnpm; UI as a `link:` dep, scripts allow-listed     | [0011](./docs/adr/0011-pnpm-with-linked-ui-sibling.md)         |
 
-Build order is always **Velite first, Next second** (`npm run build`): the app
+Build order is always **Velite first, Next second** (`pnpm run build`): the app
 imports `#site/content` → `.velite/`, which does not exist until Velite runs.
 
 ## Routes
@@ -86,10 +87,11 @@ content, in `content/`.
 ## Known constraints
 
 - **The UI dependency needs a sibling checkout.** `@carneirofc/ui` is
-  `file:../deedlit.dev.ui/deedlit.dev.ui`; CI clones `deedlit.dev.ui` at the
+  `link:../deedlit.dev.ui/deedlit.dev.ui`; CI clones `deedlit.dev.ui` at the
   `DEEDLIT_REF` sha pinned in `deploy.yml`. Adopting UI changes means bumping
-  that sha and `package-lock.json` together. See ADRs 0003 and 0010.
-- **Dependabot cannot bump npm here** — it can't resolve the `file:` dep — so
-  npm updates are manual. GitHub security _alerts_ still fire on the lockfile.
+  that sha; `pnpm-lock.yaml` only records the link. See ADRs 0003, 0010, 0011.
+- **Dependabot cannot bump dependencies here.** It can't resolve the `link:`
+  dep, so updates are manual. GitHub security _alerts_ still fire on the
+  lockfile.
 - **The section-nav rail has no active-section tracking.** The JS island that
   did it was removed; the links are plain anchors on native smooth scrolling.
