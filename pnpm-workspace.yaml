@@ -1,0 +1,15 @@
+# Single-package repo: this file only carries pnpm settings.
+
+# pnpm blocks dependency lifecycle scripts by default; allow only the ones
+# that do something this repo relies on.
+allowBuilds:
+  # Verifies the platform binary Velite's bundler (ADR 0004) runs on.
+  esbuild: true
+  # Its postinstall runs `lefthook install`, so `pnpm install` sets up the
+  # git hooks (skipped when CI is set).
+  lefthook: true
+  # Both ship prebuilt platform binaries as optional dependencies; their
+  # scripts are only a build-from-source fallback. sharp is never loaded
+  # (static export, `images.unoptimized`).
+  sharp: false
+  unrs-resolver: false

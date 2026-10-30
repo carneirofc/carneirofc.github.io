@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "description": "Personal landing page and blog for Cláudio Carneiro, served at https://carneirofc.github.io/",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "velite build && next dev",
     "build": "velite build && next build",
@@ -13,7 +14,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@carneirofc/ui": "file:../deedlit.dev.ui/deedlit.dev.ui",
+    "@carneirofc/ui": "link:../deedlit.dev.ui/deedlit.dev.ui",
     "@tanstack/react-query": "^5.104.1",
     "clsx": "^2.1.1",
     "next": "^16.4.0",

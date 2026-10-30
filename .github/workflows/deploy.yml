@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # @carneirofc/ui is a file: dependency on the deedlit.dev.ui monorepo, checked
-  # out as a sibling directory. Bump this sha together with package-lock.json
+  # @carneirofc/ui is a link: dependency on the deedlit.dev.ui monorepo, checked
+  # out as a sibling directory. Bump this sha together with pnpm-lock.yaml
   # when adopting UI changes.
   DEEDLIT_REF: 2e6f8ed56d8b36c16382fef05847c49dda2bb1ab
 
@@ -37,25 +37,31 @@ jobs:
           repository: carneirofc/deedlit.dev.ui
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev.ui
+      # Installs the pnpm version pinned by `packageManager`.
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: site/package.json
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: npm
-          cache-dependency-path: site/package-lock.json
-      - run: npm ci
-      # npm does not install dependencies of linked (file:) packages, so the
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      # pnpm does not install dependencies of linked (link:) packages, so the
       # UI's runtime deps must exist in its own tree for tsc/next to resolve.
+      # npm, not pnpm: at DEEDLIT_REF the sibling is still an npm workspace
+      # with its own package-lock.json (ADR 0011).
       # React identity is unaffected: Next's App Router uses its vendored
       # React, and next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
         run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev.ui/deedlit.dev.ui
-      - run: npm run velite
+      - run: pnpm run velite
       - name: Translation parity
         run: node scripts/check-translations.mjs
-      - run: npx prettier --check .
-      - run: npx eslint .
-      - run: npm run typecheck
+      - run: pnpm exec prettier --check .
+      - run: pnpm exec eslint .
+      - run: pnpm run typecheck
       - name: Install exiftool
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libimage-exiftool-perl
       - name: Media metadata safety-net
@@ -89,20 +95,25 @@ jobs:
           repository: carneirofc/deedlit.dev.ui
           ref: ${{ env.DEEDLIT_REF }}
           path: deedlit.dev.ui
+      # Installs the pnpm version pinned by `packageManager`.
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: site/package.json
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: npm
-          cache-dependency-path: site/package-lock.json
-      - run: npm ci
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
       # The UI sources resolve their runtime deps (radix-ui, cva, …) from
-      # their own tree, exactly as in local development. React identity is
-      # unaffected: Next's App Router uses its vendored React, and
-      # next.config.ts aliases + tsconfig paths pin the rest.
+      # their own tree, exactly as in local development (installed with npm;
+      # see the checks job). React identity is unaffected: Next's App Router
+      # uses its vendored React, and next.config.ts aliases + tsconfig paths
+      # pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
         run: npm install --omit=dev --no-audit --no-fund
         working-directory: deedlit.dev.ui/deedlit.dev.ui
-      - run: npm run build
+      - run: pnpm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

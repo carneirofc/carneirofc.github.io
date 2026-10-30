@@ -29,7 +29,7 @@ function load(name, schema) {
   } catch (error) {
     if (error.code === "ENOENT") {
       console.error(
-        `check-translations: .velite/${name} not found — run \`npm run velite\` first.`,
+        `check-translations: .velite/${name} not found — run \`pnpm run velite\` first.`,
       );
       process.exit(1);
     }
