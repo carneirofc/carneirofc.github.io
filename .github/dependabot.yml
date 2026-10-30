@@ -1,7 +1,10 @@
-# npm updates are intentionally absent: Dependabot cannot resolve the
-# file:../deedlit.dev.ui/deedlit.dev.ui dependency (the sibling repo is not
-# available in its environment), so npm update jobs always fail. npm deps are
-# updated manually; GitHub security alerts still fire for the lockfile.
+# npm updates are intentionally absent. `package-ecosystem: npm` is also the
+# ecosystem for pnpm-lock.yaml, but Dependabot cannot resolve the
+# link:../deedlit.dev.ui/deedlit.dev.ui dependency (the sibling repo is not
+# available in its environment), so its update jobs would always fail. Deps are
+# updated manually. pnpm 12 writes a two-document pnpm-lock.yaml (pnpm version
+# pinned) that GitHub's dependency graph does not read, so security alerts do
+# not fire for it either; use `pnpm audit` (ADR 0011).
 version: 2
 updates:
   - package-ecosystem: github-actions
