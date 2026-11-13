@@ -16,6 +16,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { MetaDot } from "@/components/meta-dot";
 import { JsonLd } from "@/components/json-ld";
 import { postJsonLd } from "@/lib/structured-data";
+import { ogImagePath } from "@/lib/og";
 
 export function postStaticParams(locale: Locale): { slug: string }[] {
   return getAllPosts(locale).map((post) => ({ slug: post.slug }));
@@ -30,7 +31,9 @@ export function postMetadata(locale: Locale, slug: string): Metadata {
   });
   // check-translations.mjs guarantees the other locale exists, but only point
   // hreflang at it when it really does.
-  const alternates = getTranslation(post) ? base.alternates : { canonical: post.permalink };
+  const alternates = getTranslation(post)
+    ? base.alternates
+    : { canonical: post.permalink, types: base.alternates?.types };
   return {
     ...base,
     alternates,
@@ -45,7 +48,7 @@ export function BlogPostPage({ locale, slug }: { locale: Locale; slug: string })
 
   return (
     <article className="flex flex-col gap-8">
-      <JsonLd data={postJsonLd(post)} />
+      <JsonLd data={postJsonLd(post, ogImagePath(locale, `/blog/${slug}/`))} />
       <header className="flex flex-col gap-3">
         <p className="cyber-muted text-ui-xs uppercase tracking-[0.24em]">
           <Link

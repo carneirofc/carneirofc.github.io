@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Social cards: a 1200×630 PNG per page and post (`/og/<locale>/…/card.png`),
+  rendered at build time by one route handler from the registry in
+  `src/lib/og.ts`, in the site's dark palette with Sora and IBM Plex Mono
+  (vendored WOFF, OFL, in `assets/fonts/`). `og:image` and `twitter:image` point
+  at them, and the Twitter card is now `summary_large_image`.
+- RSS 2.0 feeds per locale at `/feed.xml` and `/pt-br/feed.xml`, advertised with
+  `<link rel="alternate" type="application/rss+xml">` on every page.
+  `lastBuildDate` is the newest post's date, so an unchanged feed stays
+  byte-identical across deploys.
+- `BlogPosting` JSON-LD carries the post's card as `image`.
 - schema.org JSON-LD: `WebSite` + `Person` on the home page, a `ProfilePage`
   on About and `BlogPosting` on posts, all pointing at one `Person` `@id`
   (`src/lib/structured-data.ts`).

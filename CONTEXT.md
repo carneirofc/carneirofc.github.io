@@ -40,6 +40,8 @@ route group); Brazilian Portuguese mirrors it under `/pt-br/`.
 | `/blog/tags/[tag]/` | `/pt-br/blog/tags/[tag]/` | derived from post frontmatter               |
 | `/projects/`        | `/pt-br/projects/`        | entries live in `src/lib/i18n.ts`           |
 | `/contact/`         | `/pt-br/contact/`         | —                                           |
+| `/feed.xml`         | `/pt-br/feed.xml`         | RSS 2.0 of the locale's posts               |
+| `/og/en/…/card.png` | `/og/pt-br/…/card.png`    | social cards, registry in `src/lib/og.ts`   |
 
 Page bodies are shared: each route file is a thin wrapper that passes a
 `locale` into a component in `src/components/pages/`.
@@ -68,7 +70,13 @@ These are enforced by tooling, not by discipline. Breaking one fails the build.
   `/^[a-z0-9-]+$/`, so a tag maps 1:1 onto `/blog/tags/[tag]/`.
 - **Fonts are self-hosted.** `next/font` loads Sora and IBM Plex Mono; a postcss
   plugin strips the `fonts.gstatic.com` `@font-face` fallbacks that
-  `@carneirofc/ui` ships. Nothing is fetched from Google at runtime.
+  `@carneirofc/ui` ships. Nothing is fetched from Google at runtime. The social
+  cards need raw font files (Satori reads WOFF, not WOFF2), so static latin
+  instances live in `assets/fonts/` with their OFL licences.
+- **Every page has a social card.** `pageMetadata()` links
+  `/og/<locale><path>card.png`; `src/lib/og.ts` lists which cards exist, and the
+  `src/app/og/[...slug]` route handler renders them at build time. A new route
+  needs an entry there too, or its `og:image` is a 404.
 - **One optional runtime fetch.** The project cards' GitHub stats are the only
   client-side request (one shared TanStack Query, Zod-parsed). They are absent
   from the prerendered HTML, and the page is complete without them.

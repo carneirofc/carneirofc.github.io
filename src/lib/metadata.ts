@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { getDictionary, localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
+import { OG_SIZE, ogImagePath } from "@/lib/og";
+import { feedPath, feedTitle } from "@/lib/feed";
 
 export const SITE_URL = "https://carneirofc.github.io";
 
@@ -22,15 +24,23 @@ export function languageAlternates(path: string): Record<string, string> {
   };
 }
 
-/** Canonical + hreflang alternates for a route that exists in both locales. */
+/** Canonical + hreflang alternates for a route that exists in both locales,
+ *  plus the locale's RSS feed so readers can discover it from any page. */
 export function pageAlternates(locale: Locale, path: string): Metadata["alternates"] {
   return {
     canonical: localePath(locale, path),
     languages: languageAlternates(path),
+    types: { "application/rss+xml": [{ url: feedPath(locale), title: feedTitle(locale) }] },
   };
 }
 
 const SITE_NAME = "carneirofc.github.io";
+
+/** The page's generated social card (src/lib/og.ts), for og:image and
+ *  twitter:image. Relative URLs resolve against `metadataBase`. */
+function cardImages(locale: Locale, path: string, alt: string) {
+  return [{ url: ogImagePath(locale, path), ...OG_SIZE, alt, type: "image/png" }];
+}
 
 /** `Name — tagline`: the home page's <title> and the social-card title. */
 export function siteTitle(locale: Locale): string {
@@ -48,6 +58,7 @@ export function pageMetadata(
   path: string,
   { title, description }: { title: string; description?: string },
 ): Metadata {
+  const images = cardImages(locale, path, title);
   return {
     title,
     description,
@@ -59,11 +70,13 @@ export function pageMetadata(
       description,
       siteName: SITE_NAME,
       locale: ogLocale[locale],
+      images,
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description,
+      images,
     },
   };
 }
@@ -71,6 +84,7 @@ export function pageMetadata(
 export function buildSiteMetadata(locale: Locale): Metadata {
   const about = getAbout(locale);
   const title = siteTitle(locale);
+  const images = cardImages(locale, "/", title);
   return {
     metadataBase: new URL(SITE_URL),
     title: {
@@ -92,11 +106,13 @@ export function buildSiteMetadata(locale: Locale): Metadata {
       description: about.headline,
       siteName: SITE_NAME,
       locale: ogLocale[locale],
+      images,
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
       description: about.headline,
+      images,
     },
   };
 }
