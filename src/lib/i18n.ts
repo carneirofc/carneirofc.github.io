@@ -60,8 +60,6 @@ export const dictionarySchema = z.object({
     featuredProjects: text,
     allProjects: text,
     email: text,
-    sectionsAriaLabel: text,
-    sections: z.object({ intro: text, posts: text, projects: text }),
   }),
   about: z.object({
     subtitle: text,
@@ -105,7 +103,7 @@ export const dictionarySchema = z.object({
     linkedin: labelCta,
   }),
   notFound: z.object({ subtitle: text, title: text, description: text, home: text }),
-  footer: z.object({ rightsReserved: text }),
+  footer: z.object({ rightsReserved: text, rss: text, source: text }),
 });
 export type Dictionary = z.infer<typeof dictionarySchema>;
 
@@ -130,8 +128,6 @@ const dictionaryData: Record<Locale, Dictionary> = {
       featuredProjects: "Projects",
       allProjects: "all projects",
       email: "Email",
-      sectionsAriaLabel: "Page sections",
-      sections: { intro: "Intro", posts: "Posts", projects: "Projects" },
     },
     about: {
       subtitle: "carneirofc // about",
@@ -304,7 +300,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
       description: "There's nothing at this address. It may have moved, or never existed.",
       home: "back to home",
     },
-    footer: { rightsReserved: "All rights reserved." },
+    footer: { rightsReserved: "All rights reserved.", rss: "rss", source: "site source" },
   },
   "pt-br": {
     site: { tagline: "Engenheiro DevSecOps e de Plataforma" },
@@ -326,8 +322,6 @@ const dictionaryData: Record<Locale, Dictionary> = {
       featuredProjects: "Projetos",
       allProjects: "todos os projetos",
       email: "E-mail",
-      sectionsAriaLabel: "Seções da página",
-      sections: { intro: "Introdução", posts: "Posts", projects: "Projetos" },
     },
     about: {
       subtitle: "carneirofc // sobre",
@@ -501,7 +495,11 @@ const dictionaryData: Record<Locale, Dictionary> = {
       description: "Não há nada neste endereço. Talvez tenha mudado de lugar, ou nunca existiu.",
       home: "voltar para o início",
     },
-    footer: { rightsReserved: "Todos os direitos reservados." },
+    footer: {
+      rightsReserved: "Todos os direitos reservados.",
+      rss: "rss",
+      source: "código do site",
+    },
   },
 };
 

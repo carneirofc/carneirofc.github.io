@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Footer: a second row with the RSS feed, a link to this site's source, and
+  the language switch; the copyright line gets its `©`.
 - Social cards: a 1200×630 PNG per page and post (`/og/<locale>/…/card.png`),
   rendered at build time by one route handler from the registry in
   `src/lib/og.ts`, in the site's dark palette with Sora and IBM Plex Mono
@@ -192,6 +194,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
+- The section rail on the home page (three short sections didn't need one; it
+  floated in empty margin) and its `home.sections*` dictionary strings. About
+  keeps its rail.
 - The Alyssa card from the projects page: its repo is private, so the
   link was a 404 for visitors.
 - The cloud/container certification bullets (Docker DCA track, Amazon EKS and

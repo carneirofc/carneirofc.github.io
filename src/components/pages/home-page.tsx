@@ -6,7 +6,6 @@ import { getAllPosts } from "@/lib/posts";
 import { PostCard } from "@/components/post-card";
 import { BUTTON_ICON, ProfileIntro } from "@/components/profile-intro";
 import { ProjectCard } from "@/components/project-card";
-import { SectionNav, type SectionNavItem } from "@/components/section-nav";
 import { JsonLd } from "@/components/json-ld";
 import { homeJsonLd } from "@/lib/structured-data";
 
@@ -18,19 +17,11 @@ export function HomePage({ locale }: { locale: Locale }) {
   const latestPosts = getAllPosts(locale).slice(0, 3);
   const featuredProjects = t.projects.entries.filter((project) => project.featured);
 
-  // The posts section only renders when there are posts; so does its rail link.
-  const sections: SectionNavItem[] = [
-    { href: "#intro", label: t.home.sections.intro, icon: "home" },
-    ...(latestPosts.length > 0
-      ? [{ href: "#posts", label: t.home.sections.posts, icon: "posts" } as const]
-      : []),
-    { href: "#projects", label: t.home.sections.projects, icon: "projects" },
-  ];
-
   return (
     <div className="flex flex-col gap-12">
+      {/* No section rail here (unlike About): three short sections fit on one
+          or two screens, and the rail floated in empty margin. */}
       <JsonLd data={homeJsonLd(locale)} />
-      <SectionNav items={sections} ariaLabel={t.home.sectionsAriaLabel} />
 
       {/* The intro breathes more than the card lists below (varied rhythm). */}
       <section id="intro" className="section-anchor flex flex-col gap-6 pb-4">
