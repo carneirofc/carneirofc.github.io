@@ -209,6 +209,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   position correctly. Links are now plain anchors relying on native
   `scroll-behavior: smooth` and `scroll-margin-top`.
 
+### Security
+
+- `next` 16.4.0 → 16.4.6 (and `eslint-config-next` to match): fixes two
+  critical RCEs (GHSA-2464-fhr4-w9xw, GHSA-673q-mjm6-r5xr) and a Server Actions
+  DoS (GHSA-p3m5-59mp-jv5r). The static export ships neither the image
+  optimizer nor server functions, so the exposure was the local dev server —
+  but `next build` had also started aborting every other run with an upgrade
+  nudge. `zod` 4.6.5 → 4.6.7 (GHSA-mrhx-c7xc-m3w5).
+- Transitive fixes: `browserslist`, `baseline-browser-mapping`,
+  `brace-expansion`, `js-yaml` and `minimatch` refreshed within their ranges.
+  Two `pnpm-workspace.yaml` overrides where the parent pins a vulnerable range:
+  `velite>sharp` → ^0.35.5 (libvips/libheif/librsvg CVEs; Velite's
+  `metadata()`/`resize().webp()` calls are unchanged in 0.35) and
+  `@tailwindcss/typography>postcss-selector-parser` → ^6.1.6.
+- Accepted: `minimatch` 10 under `typescript-eslint` (GHSA-g3hv-75wg-m249,
+  moderate, fixed only in 11). Lint-time only, fed globs from this repo's own
+  config; even the latest `typescript-estree` still asks for ^10. `pnpm audit`
+  goes from 24 findings (2 critical) to this one.
+
 ## [0.3.0] - 2026-07-14
 
 ### Added
