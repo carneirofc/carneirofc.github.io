@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- A skip-to-content link as the first tab stop, and an `aria-label` on the
+  header nav.
 - Three entries on the projects page (en and pt-br): ComfyHelper (the
   image library in `deedlit.dev.ui`, with its docs), `linux-diagnostics`, and
   the Next.js template for LLM-assisted development.
@@ -116,6 +118,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- The header no longer overflows on phones: below `md` the nav takes its own
+  row (the wordmark stands in for `//home`), and the header only turns sticky
+  from `md`. The first row is sized so the floating theme toggle sits centred on
+  it, and the locale switch keeps clear of the toggle until `lg`.
+- The locale switch's accessible name now starts with its visible label
+  (`PT-BR — Ler em português`), fixing Lighthouse's label-content-name-mismatch
+  audit.
+- The separator dot between location and role no longer dangles at the end of
+  the line on narrow screens; the two stack below `sm`.
+- The "about page" link in the first post pointed at `/` (and `/pt-br/`); it
+  now points at the about page.
+- The ICALEPCS 2019 paper link downloaded the whole 75 MB proceedings PDF; it
+  now resolves the paper's DOI.
 - The deedlit.dev and `@carneirofc/ui` project cards (en and pt-br) linked to
   `carneirofc.github.io/deedlit.dev/`, which 404s since the repo was renamed
   to `deedlit.dev.ui`. Docs, Storybook and source links now use the new name.

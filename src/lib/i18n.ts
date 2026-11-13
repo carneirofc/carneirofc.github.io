@@ -37,7 +37,15 @@ export type ProjectEntry = z.infer<typeof projectEntrySchema>;
 const labelCta = z.object({ label: text, cta: text });
 
 export const dictionarySchema = z.object({
-  nav: z.object({ home: text, about: text, blog: text, projects: text, contact: text }),
+  nav: z.object({
+    home: text,
+    about: text,
+    blog: text,
+    projects: text,
+    contact: text,
+    ariaLabel: text,
+    skipToContent: text,
+  }),
   // Describes the link *to* this locale, so it is read from the target
   // locale's dictionary and stays in the language it names.
   localeSwitch: z.object({ label: text, ariaLabel: text }),
@@ -99,7 +107,15 @@ export type Dictionary = z.infer<typeof dictionarySchema>;
 
 const dictionaryData: Record<Locale, Dictionary> = {
   en: {
-    nav: { home: "home", about: "about", blog: "blog", projects: "projects", contact: "contact" },
+    nav: {
+      home: "home",
+      about: "about",
+      blog: "blog",
+      projects: "projects",
+      contact: "contact",
+      ariaLabel: "Main",
+      skipToContent: "Skip to content",
+    },
     localeSwitch: { label: "EN", ariaLabel: "Read in English" },
     home: {
       subtitle: "carneirofc // home",
@@ -284,7 +300,15 @@ const dictionaryData: Record<Locale, Dictionary> = {
     footer: { rightsReserved: "All rights reserved." },
   },
   "pt-br": {
-    nav: { home: "início", about: "sobre", blog: "blog", projects: "projetos", contact: "contato" },
+    nav: {
+      home: "início",
+      about: "sobre",
+      blog: "blog",
+      projects: "projetos",
+      contact: "contato",
+      ariaLabel: "Principal",
+      skipToContent: "Pular para o conteúdo",
+    },
     localeSwitch: { label: "PT-BR", ariaLabel: "Ler em português" },
     home: {
       subtitle: "carneirofc // início",

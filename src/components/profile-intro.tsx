@@ -29,12 +29,14 @@ export function ProfileIntro({
     <>
       <PageHeader subtitle={subtitle} title={about.name} description={about.headline} />
 
-      <div className="cyber-muted flex flex-wrap items-center gap-2 text-ui-sm">
+      {/* Stacked below sm: the role is long enough to wrap there, and a wrapped
+          row would strand the dot at the end of the first line. */}
+      <div className="cyber-muted flex flex-col gap-1 text-ui-sm sm:flex-row sm:items-center sm:gap-2">
         <span className="inline-flex items-center gap-1.5">
           <LuMapPin aria-hidden className={BUTTON_ICON} />
           {about.location}
         </span>
-        <MetaDot />
+        <MetaDot className="hidden sm:inline-block" />
         <span>{about.role}</span>
       </div>
 

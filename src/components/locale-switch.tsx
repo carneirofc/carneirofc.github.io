@@ -18,7 +18,9 @@ export function LocaleSwitch({ label, ariaLabel }: { label: string; ariaLabel: s
     <Link
       href={target.path}
       className="focus-ring cyber-muted inline-flex items-center gap-1.5 rounded-md text-ui-sm transition-colors hover:text-text"
-      aria-label={ariaLabel}
+      // The accessible name starts with the visible label (WCAG 2.5.3, label
+      // in name) so voice users can say "click PT-BR".
+      aria-label={`${label} — ${ariaLabel}`}
       hrefLang={htmlLang[target.locale]}
     >
       <LuLanguages aria-hidden className="h-3.5 w-3.5" />

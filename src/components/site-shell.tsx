@@ -1,5 +1,5 @@
 import { IBM_Plex_Mono, Sora } from "next/font/google";
-import { htmlLang, type Locale } from "@/lib/i18n";
+import { getDictionary, htmlLang, type Locale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -41,10 +41,22 @@ export function SiteShell({ locale, children }: { locale: Locale; children: Reac
       <body
         className={`${display.variable} ${mono.variable} font-(family-name:--font-display) antialiased`}
       >
+        {/* First tab stop: jump past the header nav. Visually hidden until
+            focused, then pinned over the header's top-left corner. */}
+        <a
+          href="#main"
+          className="focus-ring sr-only rounded-md focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-surface focus:px-3 focus:py-2 focus:text-ui-sm focus:text-text focus:shadow-soft"
+        >
+          {getDictionary(locale).nav.skipToContent}
+        </a>
         <Providers>
           <ThemeToggle />
           <SiteHeader locale={locale} />
-          <main className="mx-auto w-full max-w-4xl px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+          <main
+            id="main"
+            tabIndex={-1}
+            className="mx-auto w-full max-w-4xl px-4 pb-16 pt-10 outline-none sm:px-6 lg:px-8"
+          >
             {children}
           </main>
           <SiteFooter locale={locale} />
