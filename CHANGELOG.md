@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- schema.org JSON-LD: `WebSite` + `Person` on the home page, a `ProfilePage`
+  on About and `BlogPosting` on posts, all pointing at one `Person` `@id`
+  (`src/lib/structured-data.ts`).
+- `x-default` hreflang on every page and hreflang alternates in the sitemap.
+- Icons beyond the SVG: `favicon.ico` (16/32/48), a full-bleed 180px
+  `apple-icon.png`, and a `manifest.webmanifest` with 192/512px PNGs.
 - A skip-to-content link as the first tab stop, and an `aria-label` on the
   header nav.
 - Three entries on the projects page (en and pt-br): ComfyHelper (the
@@ -38,6 +44,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- `twitter:title`/`twitter:description` follow each page, like `og:*` already
+  did, instead of repeating the home page's on every route.
+- The home page title carries the role — `Cláudio Ferreira Carneiro — DevSecOps
+& Platform Engineer` — from a new `site.tagline` dictionary string.
+- About has its own meta description (`about.description`) instead of reusing
+  the home page's headline.
+- Sitemap: `lastmod` only where it is true (posts, and the newest post on the
+  pages that list them); `changefreq` dropped, since Google ignores it.
 - The repo is installed with pnpm 12 (`packageManager` pin) instead of npm;
   `pnpm-lock.yaml`, imported from `package-lock.json`, resolves the same
   versions. `@carneirofc/ui` is a `link:` dependency, so it is still a symlink

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { AboutPage } from "@/components/pages/about-page";
 import { getDictionary } from "@/lib/i18n";
-import { getAbout } from "@/lib/posts";
 import { pageMetadata } from "@/lib/metadata";
 
 const t = getDictionary("pt-br");
 
 export const metadata: Metadata = pageMetadata("pt-br", "/about/", {
   title: t.about.title,
-  description: getAbout("pt-br").headline,
+  description: t.about.description,
 });
 
 export default function Page() {

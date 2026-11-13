@@ -7,6 +7,8 @@ import { PostCard } from "@/components/post-card";
 import { BUTTON_ICON, ProfileIntro } from "@/components/profile-intro";
 import { ProjectCard } from "@/components/project-card";
 import { SectionNav, type SectionNavItem } from "@/components/section-nav";
+import { JsonLd } from "@/components/json-ld";
+import { homeJsonLd } from "@/lib/structured-data";
 
 const SECTION_LINK =
   "focus-ring cyber-muted inline-flex items-center gap-1 rounded-md text-ui-sm hover:text-text";
@@ -27,6 +29,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
   return (
     <div className="flex flex-col gap-12">
+      <JsonLd data={homeJsonLd(locale)} />
       <SectionNav items={sections} ariaLabel={t.home.sectionsAriaLabel} />
 
       {/* The intro breathes more than the card lists below (varied rhythm). */}

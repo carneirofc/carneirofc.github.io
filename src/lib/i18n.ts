@@ -37,6 +37,9 @@ export type ProjectEntry = z.infer<typeof projectEntrySchema>;
 const labelCta = z.object({ label: text, cta: text });
 
 export const dictionarySchema = z.object({
+  // Short role line for <title> and the social cards; the full role lives in
+  // content/about*.mdx.
+  site: z.object({ tagline: text }),
   nav: z.object({
     home: text,
     about: text,
@@ -63,6 +66,7 @@ export const dictionarySchema = z.object({
   about: z.object({
     subtitle: text,
     title: text,
+    description: text,
     sectionsAriaLabel: text,
     sections: z.object({ bio: text, skills: text }),
     skills: z.object({
@@ -107,6 +111,7 @@ export type Dictionary = z.infer<typeof dictionarySchema>;
 
 const dictionaryData: Record<Locale, Dictionary> = {
   en: {
+    site: { tagline: "DevSecOps & Platform Engineer" },
     nav: {
       home: "home",
       about: "about",
@@ -131,6 +136,8 @@ const dictionaryData: Record<Locale, Dictionary> = {
     about: {
       subtitle: "carneirofc // about",
       title: "About",
+      description:
+        "Experience, skills, education and publications — from particle-accelerator control systems to enterprise DevSecOps and platform engineering.",
       sectionsAriaLabel: "Page sections",
       sections: { bio: "About", skills: "Skills" },
       skills: {
@@ -300,6 +307,7 @@ const dictionaryData: Record<Locale, Dictionary> = {
     footer: { rightsReserved: "All rights reserved." },
   },
   "pt-br": {
+    site: { tagline: "Engenheiro DevSecOps e de Plataforma" },
     nav: {
       home: "início",
       about: "sobre",
@@ -324,6 +332,8 @@ const dictionaryData: Record<Locale, Dictionary> = {
     about: {
       subtitle: "carneirofc // sobre",
       title: "Sobre",
+      description:
+        "Experiência, competências, formação e publicações — de sistemas de controle de acelerador de partículas a DevSecOps e engenharia de plataforma corporativa.",
       sectionsAriaLabel: "Seções da página",
       sections: { bio: "Sobre", skills: "Competências" },
       skills: {

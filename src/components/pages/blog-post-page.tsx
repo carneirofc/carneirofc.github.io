@@ -14,6 +14,8 @@ import {
 import { MDXContent } from "@/components/mdx-content";
 import { pageMetadata } from "@/lib/metadata";
 import { MetaDot } from "@/components/meta-dot";
+import { JsonLd } from "@/components/json-ld";
+import { postJsonLd } from "@/lib/structured-data";
 
 export function postStaticParams(locale: Locale): { slug: string }[] {
   return getAllPosts(locale).map((post) => ({ slug: post.slug }));
@@ -43,6 +45,7 @@ export function BlogPostPage({ locale, slug }: { locale: Locale; slug: string })
 
   return (
     <article className="flex flex-col gap-8">
+      <JsonLd data={postJsonLd(post)} />
       <header className="flex flex-col gap-3">
         <p className="cyber-muted text-ui-xs uppercase tracking-[0.24em]">
           <Link

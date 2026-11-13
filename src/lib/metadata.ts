@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { localePath, ogLocale, type Locale } from "@/lib/i18n";
+import { getDictionary, localePath, ogLocale, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 
 export const SITE_URL = "https://carneirofc.github.io";
@@ -12,23 +12,36 @@ export const siteViewport: Viewport = {
   ],
 };
 
+/** hreflang map for a route that exists in both locales. English, at the site
+ *  root, doubles as `x-default` for every other language. */
+export function languageAlternates(path: string): Record<string, string> {
+  return {
+    en: localePath("en", path),
+    "pt-BR": localePath("pt-br", path),
+    "x-default": localePath("en", path),
+  };
+}
+
 /** Canonical + hreflang alternates for a route that exists in both locales. */
 export function pageAlternates(locale: Locale, path: string): Metadata["alternates"] {
   return {
     canonical: localePath(locale, path),
-    languages: {
-      en: localePath("en", path),
-      "pt-BR": localePath("pt-br", path),
-    },
+    languages: languageAlternates(path),
   };
 }
 
 const SITE_NAME = "carneirofc.github.io";
 
+/** `Name — tagline`: the home page's <title> and the social-card title. */
+export function siteTitle(locale: Locale): string {
+  return `${getAbout(locale).name} — ${getDictionary(locale).site.tagline}`;
+}
+
 /**
- * Title, description, alternates and a complete Open Graph block for one page.
- * Next replaces `openGraph` wholesale rather than merging it with the layout's,
- * so every page has to send its own — otherwise it inherits the home page's url.
+ * Title, description, alternates and complete Open Graph and Twitter blocks for
+ * one page. Next replaces `openGraph` and `twitter` wholesale rather than
+ * merging them with the layout's, so every page has to send its own —
+ * otherwise it inherits the home page's url and title.
  */
 export function pageMetadata(
   locale: Locale,
@@ -47,15 +60,21 @@ export function pageMetadata(
       siteName: SITE_NAME,
       locale: ogLocale[locale],
     },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
 
 export function buildSiteMetadata(locale: Locale): Metadata {
   const about = getAbout(locale);
+  const title = siteTitle(locale);
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: `${about.name} | carneirofc`,
+      default: title,
       template: "%s | carneirofc",
     },
     description: about.headline,
@@ -69,14 +88,14 @@ export function buildSiteMetadata(locale: Locale): Metadata {
     openGraph: {
       type: "website",
       url: localePath(locale, "/"),
-      title: `${about.name} — ${about.role}`,
+      title,
       description: about.headline,
       siteName: SITE_NAME,
       locale: ogLocale[locale],
     },
     twitter: {
       card: "summary",
-      title: `${about.name} — ${about.role}`,
+      title,
       description: about.headline,
     },
   };

@@ -5,6 +5,8 @@ import { getDictionary, type Locale } from "@/lib/i18n";
 import { getAbout } from "@/lib/posts";
 import { MDXContent } from "@/components/mdx-content";
 import { SectionNav, type SectionNavItem } from "@/components/section-nav";
+import { JsonLd } from "@/components/json-ld";
+import { aboutJsonLd } from "@/lib/structured-data";
 
 const SKILL_GROUPS = ["languages", "web", "platform", "devsecops", "cloud", "data_ai"] as const;
 // Roomier than the default chip so the skills read comfortably.
@@ -21,6 +23,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
 
   return (
     <div className="flex flex-col gap-12">
+      <JsonLd data={aboutJsonLd(locale)} />
       <SectionNav items={sections} ariaLabel={t.about.sectionsAriaLabel} />
 
       {/* The bio breathes more than the skills panel below (varied rhythm). */}
