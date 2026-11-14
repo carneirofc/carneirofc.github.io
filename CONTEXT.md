@@ -22,6 +22,7 @@ each choice — including the alternatives that lost — is in
 | Data types    | Zod schemas + `z.infer`, parsed at boundaries       | [0008](./docs/adr/0008-zod-at-data-boundaries.md)              |
 | Client data   | TanStack Query, GitHub repo stats only              | [0009](./docs/adr/0009-tanstack-query-for-github-stats.md)     |
 | Packages      | pnpm; UI as a `link:` dep, scripts allow-listed     | [0011](./docs/adr/0011-pnpm-with-linked-ui-sibling.md)         |
+| UI deps in CI | pnpm, from the sibling's own lockfile               | [0012](./docs/adr/0012-ui-sibling-deps-with-pnpm.md)           |
 
 Build order is always **Velite first, Next second** (`pnpm run build`): the app
 imports `#site/content` → `.velite/`, which does not exist until Velite runs.
@@ -96,8 +97,9 @@ content, in `content/`.
 
 - **The UI dependency needs a sibling checkout.** `@carneirofc/ui` is
   `link:../deedlit.dev.ui/deedlit.dev.ui`; CI clones `deedlit.dev.ui` at the
-  `DEEDLIT_REF` sha pinned in `deploy.yml`. Adopting UI changes means bumping
-  that sha; `pnpm-lock.yaml` only records the link. See ADRs 0003, 0010, 0011.
+  `DEEDLIT_REF` sha pinned in `deploy.yml` and installs the UI's runtime deps
+  from that checkout's `pnpm-lock.yaml`. Adopting UI changes means bumping that
+  sha; `pnpm-lock.yaml` here only records the link. See ADRs 0003, 0010, 0011, 0012.
 - **Dependabot cannot bump dependencies here.** It can't resolve the `link:`
   dep, so updates are manual. Security _alerts_ don't fire either: GitHub's
   dependency graph skips pnpm 12's two-document lockfile, which pinning the pnpm

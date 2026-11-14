@@ -56,6 +56,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The pnpm migration is complete: CI installs `@carneirofc/ui`'s runtime deps
+  with pnpm from the sibling's own lockfile (`pnpm install --frozen-lockfile
+--prod --filter @carneirofc/ui` at the sibling root) instead of `npm install`,
+  and the pnpm store cache keys on both lockfiles. ADR 0012.
+- `DEEDLIT_REF` → `9de92a3` (deedlit.dev.ui `master`): the UI's pnpm
+  migration, motion that respects reduced-motion, consistent hover/press/focus
+  and interaction tokens, the effects-settings provider, and a `cn()` fix that
+  keeps `text-ui-*` sizes next to text colours.
 - `twitter:title`/`twitter:description` follow each page, like `og:*` already
   did, instead of repeating the home page's on every route.
 - The home page title carries the role — `Cláudio Ferreira Carneiro — DevSecOps

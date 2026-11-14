@@ -18,9 +18,9 @@ concurrency:
 
 env:
   # @carneirofc/ui is a link: dependency on the deedlit.dev.ui monorepo, checked
-  # out as a sibling directory. Bump this sha together with pnpm-lock.yaml
-  # when adopting UI changes.
-  DEEDLIT_REF: 2e6f8ed56d8b36c16382fef05847c49dda2bb1ab
+  # out as a sibling directory. Bump this sha to adopt UI changes; this repo's
+  # pnpm-lock.yaml only records the link, so it doesn't change (ADR 0011).
+  DEEDLIT_REF: 9de92a3ad5afa0946b1d6135e5f324cd4ab08e0b
 
 jobs:
   checks:
@@ -45,17 +45,20 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          cache-dependency-path: site/pnpm-lock.yaml
+          cache-dependency-path: |
+            site/pnpm-lock.yaml
+            deedlit.dev.ui/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       # pnpm does not install dependencies of linked (link:) packages, so the
       # UI's runtime deps must exist in its own tree for tsc/next to resolve.
-      # npm, not pnpm: at DEEDLIT_REF the sibling is still an npm workspace
-      # with its own package-lock.json (ADR 0011).
+      # Installed from the sibling's own pnpm-lock.yaml, only the UI package's
+      # production deps; pnpm switches to the version pinned in the sibling's
+      # `packageManager` by itself (ADR 0012).
       # React identity is unaffected: Next's App Router uses its vendored
       # React, and next.config.ts aliases + tsconfig paths pin the rest.
       - name: Install @carneirofc/ui runtime dependencies
-        run: npm install --omit=dev --no-audit --no-fund
-        working-directory: deedlit.dev.ui/deedlit.dev.ui
+        run: pnpm install --frozen-lockfile --prod --filter @carneirofc/ui
+        working-directory: deedlit.dev.ui
       - run: pnpm run velite
       - name: Translation parity
         run: node scripts/check-translations.mjs
@@ -103,16 +106,15 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          cache-dependency-path: site/pnpm-lock.yaml
+          cache-dependency-path: |
+            site/pnpm-lock.yaml
+            deedlit.dev.ui/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       # The UI sources resolve their runtime deps (radix-ui, cva, …) from
-      # their own tree, exactly as in local development (installed with npm;
-      # see the checks job). React identity is unaffected: Next's App Router
-      # uses its vendored React, and next.config.ts aliases + tsconfig paths
-      # pin the rest.
+      # their own tree, exactly as in local development (see the checks job).
       - name: Install @carneirofc/ui runtime dependencies
-        run: npm install --omit=dev --no-audit --no-fund
-        working-directory: deedlit.dev.ui/deedlit.dev.ui
+        run: pnpm install --frozen-lockfile --prod --filter @carneirofc/ui
+        working-directory: deedlit.dev.ui
       - run: pnpm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5

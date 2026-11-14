@@ -24,6 +24,9 @@ piece was chosen.
       └── deedlit.dev.ui/
   ```
 
+  Run `pnpm install` once in the sibling too: the UI source resolves its
+  runtime deps (`radix-ui`, `cva`, …) from its own tree.
+
 - **[exiftool](https://exiftool.org/)** — required by the pre-commit hook that
   strips metadata from images/videos (`pacman -S perl-image-exiftool`,
   `apt install libimage-exiftool-perl`, `brew install exiftool`).
@@ -86,9 +89,11 @@ still carries GPS/device/timestamp tags.
 3. **deploy** — gated on both; builds and publishes `out/` to GitHub Pages.
 
 CI clones `deedlit.dev.ui` as a sibling directory, pinned to the `DEEDLIT_REF`
-sha in `deploy.yml`. **To adopt UI changes:** pull `deedlit.dev.ui` and update
-`DEEDLIT_REF` to the new sha. `pnpm-lock.yaml` only records the link, so it does
-not change (ADR 0011).
+sha in `deploy.yml`, and installs the UI's runtime deps from the sibling's own
+`pnpm-lock.yaml` (`pnpm install --frozen-lockfile --prod --filter
+@carneirofc/ui`, ADR 0012). **To adopt UI changes:** pull `deedlit.dev.ui` and
+update `DEEDLIT_REF` to the new sha. `pnpm-lock.yaml` here only records the
+link, so it does not change (ADR 0011).
 
 `codeql.yml` (SAST) and Dependabot (GitHub Actions updates only — Dependabot
 cannot resolve the sibling `link:` dependency, so dependency bumps are manual)

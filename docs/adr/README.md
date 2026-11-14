@@ -20,3 +20,4 @@ for why it is that way.
 | [0009](./0009-tanstack-query-for-github-stats.md)     | TanStack Query for live GitHub stats             | Accepted                              |
 | [0010](./0010-ui-sibling-renamed-deedlit-dev-ui.md)   | Sibling checkout renamed to `deedlit.dev.ui`     | Accepted — supersedes 0003's paths    |
 | [0011](./0011-pnpm-with-linked-ui-sibling.md)         | pnpm, with the UI as a `link:` dependency        | Accepted — supersedes 0003/0010's npm |
+| [0012](./0012-ui-sibling-deps-with-pnpm.md)           | The UI sibling's runtime deps via pnpm           | Accepted — supersedes 0011's npm step |
